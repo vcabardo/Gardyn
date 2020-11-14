@@ -15,13 +15,8 @@ function signUpUser() {
     var email = document.getElementById('inputEmail').value;
     var password = document.getElementById('inputPassword').value;
     var userName = document.getElementById('inputUser').value;
-    var switchVal = document.getElementById("inputSwitch").value;
 
-    //checking if switch code input is in valid format
-    if (!validSwitch(switchVal)) {
-        alert("Incorrect SwitchCode format Ex: 1234-5678-9876");
-        return false;
-    }
+
     //Inserting data into auth database
     firebase.auth().createUserWithEmailAndPassword(email, password).then(function() {
         firebase.auth().onAuthStateChanged(function(user) {
@@ -34,7 +29,6 @@ function signUpUser() {
             //Inserting data into RTDB to be accessed by other pages
         firebase.database().ref('Users/' + userName).set({
             Username: userName,
-            SwitchCode: switchVal,
             Collected: ""
         }).then(function() {
             document.location.href = 'home.html'
@@ -97,12 +91,3 @@ function signOutUser() {
     });
 }
 
-function validSwitch(switchValue) {
-    //define switch value: 1234-5678-9876
-    //Regular expression to check for correct switch code format
-    let regEx = /[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/;
-    if (regEx.test(switchValue)) {
-        return true;
-    }
-    return false;
-}

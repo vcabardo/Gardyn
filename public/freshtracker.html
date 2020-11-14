@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Gardyn</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <link href="stylesheets/style.css" rel="stylesheet">
+
+  <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
+  <link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css'>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+	  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
+
+    <script src="authentication.js"></script>
+    <script src="getFirebaseInfo.js"></script>
+</head>
+
+<style>
+
+  body{
+    background-color: aquamarine;
+  }
+ .main-todo-input {
+     background: #fff;
+     padding: 0 120px 0 0;
+     border-radius: 1px;
+     margin-top: 100px;
+     box-shadow: 0px 0px 0px 6px rgba(255, 255, 255, 0.3)
+ }
+
+ .fl-wrap {
+     float: left;
+     width: 100%;
+     position: relative
+ }
+
+ .main-todo-input:before {
+     content: '';
+     position: absolute;
+     bottom: -40px;
+     width: 50px;
+     height: 1px;
+     background: rgba(255, 255, 255, 0.41);
+     left: 50%;
+     margin-left: -25px
+ }
+
+ .main-todo-input-item {
+     float: left;
+     width: 100%;
+     box-sizing: border-box;
+     border-right: 1px solid #eee;
+     height: 50px;
+     position: relative
+ }
+
+ .main-todo-input-item input:first-child {
+     border-radius: 100%
+ }
+
+ .main-todo-input-item input {
+     float: left;
+     border: none;
+     width: 100%;
+     height: 50px;
+     padding-left: 20px
+ }
+
+ .main-search-button {
+     background: #4DB7FE
+ }
+
+ .main-search-button {
+     position: absolute;
+     right: 0px;
+     height: 50px;
+     width: 120px;
+     color: #fff;
+     top: 0;
+     border: none;
+     border-top-right-radius: 0px;
+     border-bottom-right-radius: 0px;
+     cursor: pointer
+ }
+
+ .main-todo-input-wrap {
+     max-width: 500px;
+     margin: 20px auto;
+     position: relative
+ }
+
+ :focus {
+     outline: 0
+ }
+
+ @media only screen and (max-width: 768px) {
+     .main-todo-input {
+         background: rgba(255, 255, 255, 0.2);
+         padding: 14px 20px 10px;
+         border-radius: 10px;
+         box-shadow: 0px 0px 0px 10px rgba(255, 255, 255, 0.0)
+     }
+
+     .main-todo-input-item {
+         width: 100%;
+         border: 1px solid #eee;
+         height: 50px;
+         border: none;
+         margin-bottom: 10px
+     }
+
+     .main-todo-input-item input {
+         border-radius: 6px !important;
+         background: #fff
+     }
+
+     .main-search-button {
+         position: relative;
+         float: left;
+         width: 100%;
+         border-radius: 6px
+     }
+ }
+
+ .remove {
+     float: right;
+     color: #757575 !important;
+     font-size: 14px
+ }
+
+ #list-items {
+     padding-left: 20px;
+     padding-top: 15px
+ }
+
+ ul {
+     padding: 0;
+     text-align: left;
+     list-style: none
+ }
+
+ .todo-text {
+     color: #757575;
+     margin-left: 10px
+ }
+
+ .strike {
+     color: blue
+ }
+
+ .todo-listing {
+     padding: 0px 29px 0 0;
+     margin-top: 54px !important
+ }
+
+
+</style>
+<body>
+    <!-- Load the header using jQuery. Inspiration: https://medium.com/@AmyScript/how-to-reduce-reuse-and-recycle-your-code-389e6742e4ac-->
+    <script>
+      $(document).ready(function() {
+        $('#header').load('reusableheader.html');
+      });
+    </script>
+
+<script>
+  var config = {
+      apiKey: " AIzaSyCAMDvc-qvif4fJTuGuHbUmvj1NoN8CXBU",
+      authDomin: "nookslookup.firebaseapp.com",
+      databaseURL: "https://nookslookup.firebaseio.com/",
+      storageBucket: "nookslookup.appspot.com"
+  };
+
+  if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+  }
+  </script>
+   <div id="header"></div>
+
+
+<!-- Saves list locally -->
+  <script>
+    $(document).ready(function () {
+      $('#list-items').html(localStorage.getItem('listItems'));
+      $('.add-items').click(function(event) {
+        event.preventDefault();
+        var item = $('#todo-list-item').val();
+        if(item){
+          $('#list-items').append("<li><input class='checkbox' type='checkbox' /> <span class='todo-text'>" + item + "</span><a class='remove text-right'><i class='fa fa-trash'></i></a><hr> </li>");
+          localStorage.setItem('listItems', $('#list-items').html());
+          $('#todo-list-item').val("");
+        }
+      });
+
+      $(document).on('change', '.checkbox', function(){
+        if($(this).attr('checked')){
+          $(this).removeAttr('checked');
+        }
+        else{
+          $(this).attr('checked', 'checked');
+        }
+        $(this).parent().toggleClass('completed');
+          localStorage.setItem('listItems', $('#list-items').html());
+      });
+
+      $(document).on('click', '.remove', function(){
+        $(this).parent().remove();
+        localStorage.setItem('listItems', $('#list-items').html());
+      });
+
+    });
+  </script>
+
+
+<div class="container-fluid"></div>
+   
+
+    <div class="container-fluid">
+        <script src="//code.jquery.com/jquery-3.1.0.slim.min.js"></script>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-todo-input-wrap">
+                <div class="main-todo-input fl-wrap">
+                    <div class="main-todo-input-item"> <input type="text" id="todo-list-item" placeholder="What did you purchase today?"> </div> <button class="add-items main-search-button">ADD</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-todo-input-wrap">
+                <div class="main-todo-input fl-wrap todo-listing">
+                    <ul id="list-items"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+    <div class="fixed">
+    </div>
+
+  </body>
+
+  <footer>
+    <div class="container-fluid-padding">
+      <div class="row text-center">
+        <div class="col-md-4">
+          <hr class="light">
+          <p>Vensan Cabardo</p>
+          <p>Kami Otero De Owens</p>
+          <p>Jared Van Natta</p>
+        </div>
+        <div class="col-md-4">
+          <hr class="light">
+          <h5>Copyright Information</h5>
+          <hr class="light">
+          <p>Go Green.</p>
+        </div>
+        <div class="col-md-4">
+          <hr class="light">
+          <p>Do it!</p>
+          <p>Saving the planet one human at a time.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  </html>
