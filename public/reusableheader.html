@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nook's Look Up</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link href="stylesheets/style.css" rel="stylesheet">
+    <!-- Using BootStrap: https://getbootstrap.com/docs/ -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- <link rel = "stylesheet" type = "text/css" href = "stylesheets/style.css"> -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title></title>
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
+    <script src="authentication.js"></script>
+
+</head>
+
+<body>
+    <!-- Template for using BootStrap navbar taken from
+    https://www.w3schools.com/bootstrap/bootstrap_navbar.asp -->
+    <!-- NAVIGATION BAR AND GRAPHIC -->
+    <nav class="navbar navbar-light bg-light sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-header" href="#"><img src="stylesheets/logo2.png" class="img-fluid" alt="Responsive image"></a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm">
+                <div class="landing-text">
+                  <div id="date" style="font-size: 30px, text-align: center;" ></div>
+                  <script>  var date = new Date();
+                            document.getElementById("date").innerHTML = date;
+                  </script>
+
+                  <div id="welcome"></div>
+                  <script type="text/javascript" style="font-size: 30px;">
+                  firebase.auth().onAuthStateChanged(function(user) {
+                    if (user) {
+                      document.getElementById("welcome").innerHTML = "Welcome " + user.displayName + "!";
+                    }
+                  });
+                  </script>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="home.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="bugs.html">Bugs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="fish.html">Fish</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="facenook.html">FaceNook</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="resources.html">Resources</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="houseware.html">Houseware</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="islands.html">Islands</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="villagers.html">Villagers</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="wallandfloor.html">Wallpaper and Flooring</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="signOutUser()">Sign Out</a>
+                </li>
+            </ul>
+          </div>
+<figure>
+  <div class="fixed-wrap">
+    <div id="fixed">
+    </div>
+  </div>
+</figure>
+
+</body>
+
+</html>

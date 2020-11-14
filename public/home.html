@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Nook's Look Up</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <link href="stylesheets/style.css" rel="stylesheet">
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+	  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
+
+    <script src="authentication.js"></script>
+    <script src="getFirebaseInfo.js"></script>
+
+
+</head>
+<body>
+    <!-- Load the header using jQuery. Inspiration: https://medium.com/@AmyScript/how-to-reduce-reuse-and-recycle-your-code-389e6742e4ac-->
+
+   <script>
+        $(document).ready(function() {
+          $('#header').load('reusableheader.html');
+        });
+    </script>
+
+    <script type="text/javascript">
+    var config = {
+        apiKey: " AIzaSyCAMDvc-qvif4fJTuGuHbUmvj1NoN8CXBU",
+        authDomin: "nookslookup.firebaseapp.com",
+        databaseURL: "https://nookslookup.firebaseio.com/",
+        storageBucket: "nookslookup.appspot.com"
+    };
+
+    if (!firebase.apps.length) {
+        firebase.initializeApp(config);
+    }
+    </script>
+
+    <div id="header"></div>
+
+    <!-- Display date and a welcome message for the currently logged in user -->
+    <div id="home">
+
+    </div>
+    <h1>Click the following buttons to see what is available to you!</h1>
+    <h3>Northern</h3>
+    <button onclick="getFishNBugs(1, 'Northern')">January</button>
+    <button onclick="getFishNBugs(2, 'Northern')">February</button>
+    <button onclick="getFishNBugs(3, 'Northern')">March</button>
+    <button onclick="getFishNBugs(4, 'Northern')">April</button>
+    <button onclick="getFishNBugs(5, 'Northern')">May</button>
+    <button onclick="getFishNBugs(6, 'Northern')">June</button>
+    <button onclick="getFishNBugs(7, 'Northern')">July</button>
+    <button onclick="getFishNBugs(8, 'Northern')">August</button>
+    <button onclick="getFishNBugs(9, 'Northern')">September</button>
+    <button onclick="getFishNBugs(10, 'Northern')">October</button>
+    <button onclick="getFishNBugs(11, 'Northern')">November</button>
+    <button onclick="getFishNBugs(12, 'Northern')">December</button>
+    <button onclick="getFishNBugs(365, 'Northern')">Year-Round</button>
+    <h3>Southern</h3>
+    <button onclick="getFishNBugs(1, 'Southern')">January</button>
+    <button onclick="getFishNBugs(2, 'Southern')">February</button>
+    <button onclick="getFishNBugs(3, 'Southern')">March</button>
+    <button onclick="getFishNBugs(4, 'Southern')">April</button>
+    <button onclick="getFishNBugs(5, 'Southern')">May</button>
+    <button onclick="getFishNBugs(6, 'Southern')">June</button>
+    <button onclick="getFishNBugs(7, 'Southern')">July</button>
+    <button onclick="getFishNBugs(8, 'Southern')">August</button>
+    <button onclick="getFishNBugs(9, 'Southern')">September</button>
+    <button onclick="getFishNBugs(10, 'Southern')">October</button>
+    <button onclick="getFishNBugs(11, 'Southern')">November</button>
+    <button onclick="getFishNBugs(12, 'Southern')">December</button>
+    <button onclick="getFishNBugs(365, 'Southern')">Year-Round</button>
+    <br>
+    <br>
+    <button onclick="window.location.reload();">Clear</button>
+
+    <div class="container-fluid padding">
+      <div class="row">
+          <div class="col-md-6">
+            <div id="checklist-bugs" class='card'>
+              <div class="card-header">Available Bugs</div>
+              <div class="card-body Bugs"></div>
+            </div>
+          </div>
+
+            <div class="col-md-6">
+              <div id="checklist-fish" class='card'>
+                <div class="card-header">Available Fish</div>
+                <div class="card-body Fish"></div>
+              </div>
+            </div>
+      </div>
+    </div>
+
+    <hr class="my-4">
+          <div class="padding">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-6">
+                  <img src="stylesheets/fnlg.png">
+                </div>
+          <div class="col-sm-6 text-center">
+            <h2>Introducing FaceNook.</h2>
+            <p class="lead">FaceNook is a great way for fellow islanders to meet each other, exchange Switch codes, and enjoy paradise
+              the way it was meant to be enjoyed, together.
+            </p>
+            <a href="facenook.html" class="btn btn-dark btn-md">Explore</a>
+          </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="fixed">
+    </div>
+
+  </body>
+  <footer>
+    <div class="container-fluid-padding">
+      <div class="row text-center">
+        <div class="col-md-4">
+          <hr class="light">
+          <p>Vensan Cabardo</p>
+          <p>Kami Otero De Owens</p>
+          <p>Orion Moreno</p>
+        </div>
+        <div class="col-md-4">
+          <hr class="light">
+          <h5>Copyright Information</h5>
+          <hr class="light">
+          <p>All references to Animal Crossing or related franchise IP is owned by Nintendo.</p>
+          <p>Nintendo properties are trademarks of Nintendo, and are being used for educational purposes only.</p>
+          <p>Nook's Lookup - Forever. </p>
+        </div>
+        <div class="col-md-4">
+          <hr class="light">
+          <p>Kevin Hindman</p>
+          <p>Jared Van Natta</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  </html>
