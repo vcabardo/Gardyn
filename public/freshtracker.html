@@ -34,7 +34,7 @@
      padding: 0 120px 0 0;
      border-radius: 1px;
      margin-top: 100px;
-     box-shadow: 0px 0px 0px 6px rgba(255, 255, 255, 0.3)
+     box-shadow: 0px 0px 0px 6px rgba(255, 255, 255, 0.3);
  }
 
  .fl-wrap {
@@ -45,8 +45,8 @@
 
  .main-todo-input:before {
      content: '';
-     position: absolute;
-     bottom: -40px;
+     position: fixed;
+     bottom: 40px;
      width: 50px;
      height: 1px;
      background: rgba(255, 255, 255, 0.41);
@@ -60,7 +60,7 @@
      box-sizing: border-box;
      border-right: 1px solid #eee;
      height: 50px;
-     position: relative
+     position: relative;
  }
 
  .main-todo-input-item input:first-child {
@@ -165,26 +165,20 @@
 
 </style>
 <body>
-    <!-- Load the header using jQuery. Inspiration: https://medium.com/@AmyScript/how-to-reduce-reuse-and-recycle-your-code-389e6742e4ac-->
-    <script>
-      $(document).ready(function() {
-        $('#header').load('reusableheader.html');
-      });
-    </script>
+
 
 <script>
   var config = {
-      apiKey: " AIzaSyCAMDvc-qvif4fJTuGuHbUmvj1NoN8CXBU",
-      authDomin: "nookslookup.firebaseapp.com",
-      databaseURL: "https://nookslookup.firebaseio.com/",
-      storageBucket: "nookslookup.appspot.com"
+    apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
+    authDomin: "gardynapp.firebaseapp.com",
+    databaseURL: "https://gardynapp.firebaseio.com/",
+    storageBucket: "gardynapp.appspot.com"
   };
 
   if (!firebase.apps.length) {
       firebase.initializeApp(config);
   }
   </script>
-   <div id="header"></div>
 
 
 <!-- Saves list locally -->
@@ -221,10 +215,39 @@
   </script>
 
 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="index.html">Gardyn</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="login.html">Log In</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="freshtracker.html">FreshTracker</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="signup.html">Sign Up</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" onclick="signOutUser()">Sign Out</a>
+      </li>
+    </ul>
+    <span class="navbar-text">
+      Go Green, Keep Clean!
+    </span>
+  </div>
+</nav>
+
 <div class="container-fluid"></div>
    
 
-    <div class="container-fluid">
+    <div class="container-fluid" style="background-color: #4DB7FE;">
         <script src="//code.jquery.com/jquery-3.1.0.slim.min.js"></script>
     <div class="row">
         <div class="col-md-12">
@@ -245,6 +268,8 @@
         </div>
     </div>
   </div>
+
+  <div style="background-color: #4DB7FE; padding-top: 50px;"></div>
 
     <div class="fixed">
     </div>

@@ -31,7 +31,7 @@ function signUpUser() {
             Username: userName,
             Collected: ""
         }).then(function() {
-            document.location.href = 'home.html'
+            document.location.href = 'index.html'
         });
 
     }).catch(function(error) {
@@ -44,10 +44,10 @@ function signUpUser() {
 //This function signs in a user upon pressing sign in button
 function signInUser() {
     var config = {
-        apiKey: " AIzaSyCAMDvc-qvif4fJTuGuHbUmvj1NoN8CXBU",
-        authDomin: "nookslookup.firebaseapp.com",
-        databaseURL: "https://nookslookup.firebaseio.com/",
-        storageBucket: "nookslookup.appspot.com"
+        apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
+        authDomin: "gardynapp.firebaseapp.com",
+        databaseURL: "https://gardynapp.firebaseio.com/",
+        storageBucket: "gardynapp.appspot.com"
     };
 
     if (!firebase.apps.length) {
@@ -58,7 +58,7 @@ function signInUser() {
     var password = document.getElementById('signinPassword').value;
 
     firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
-        document.location.href = 'home.html'
+        document.location.href = 'index.html'
         var currentUser = firebase.auth().currentUser;
         //if user data is incorrect, we output error message
     }).catch(function(error) {
@@ -70,10 +70,10 @@ function signInUser() {
 //This function will sign out a user upon pressing sign out button from hamburger menu
 function signOutUser() {
     var config = {
-        apiKey: " AIzaSyCAMDvc-qvif4fJTuGuHbUmvj1NoN8CXBU",
-        authDomin: "nookslookup.firebaseapp.com",
-        databaseURL: "https://nookslookup.firebaseio.com/",
-        storageBucket: "nookslookup.appspot.com"
+        apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
+        authDomin: "gardynapp.firebaseapp.com",
+        databaseURL: "https://gardynapp.firebaseio.com/",
+        storageBucket: "gardynapp.appspot.com"
     };
 
     if (!firebase.apps.length) {

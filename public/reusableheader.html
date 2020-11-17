@@ -12,8 +12,6 @@
     <!-- Using BootStrap: https://getbootstrap.com/docs/ -->
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <!-- <link rel = "stylesheet" type = "text/css" href = "stylesheets/style.css"> -->
-
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title></title>
 
@@ -25,53 +23,61 @@
 </head>
 
 <body>
-    <!-- Template for using BootStrap navbar taken from
-    https://www.w3schools.com/bootstrap/bootstrap_navbar.asp -->
-    <!-- NAVIGATION BAR AND GRAPHIC -->
-    <nav class="navbar navbar-light bg-light sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-header" href="#"><img src="img/logo2leaf.JPG" class="img-fluid" alt="Responsive image"></a>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-              <span class="navbar-toggler-icon"></span>
-            </button>
+
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="index.html">Gardyn</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="login.html">Log In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="freshtracker.html">FreshTracker</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="signup.html">Sign Up</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" onclick="signOutUser()">Sign Out</a>
+        </li>
+      </ul>
+      <span class="navbar-text">
+        Go Green, Keep Clean!
+      </span>
+    </div>
+  </nav>
+
+<!-- TODO: fix centering issue, but name and date do work. 
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <div class="landing-text">
+            <div id="date" style="font-size: 30px; text-align: center;" ></div>
+            <script>  var date = new Date();
+                      document.getElementById("date").innerHTML = date;
+            </script>
+
+            <div id="welcome"></div>
+            <script type="text/javascript" style="font-size: 30px;">
+            firebase.auth().onAuthStateChanged(function(user) {
+              if (user) {
+                document.getElementById("welcome").innerHTML = "Welcome " + user.displayName + "!";
+              }
+            });
+            </script>
           </div>
-
-          <div class="container">
-            <div class="row">
-              <div class="col-sm">
-                <div class="landing-text">
-                  <div id="date" style="font-size: 30px, text-align: center;" ></div>
-                  <script>  var date = new Date();
-                            document.getElementById("date").innerHTML = date;
-                  </script>
-
-                  <div id="welcome"></div>
-                  <script type="text/javascript" style="font-size: 30px;">
-                  firebase.auth().onAuthStateChanged(function(user) {
-                    if (user) {
-                      document.getElementById("welcome").innerHTML = "Welcome " + user.displayName + "!";
-                    }
-                  });
-                  </script>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="home.html">Home</a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="freshtracker.html">FreshTracker</a>
-              </li>
-                <li class="nav-item">
-                    <a class="nav-link" onclick="signOutUser()">Sign Out</a>
-                </li>
-            </ul>
-          </div>
+        </div>
+      </div>
+    </div>
+-->
 <figure>
   <div class="fixed-wrap">
     <div id="fixed">
