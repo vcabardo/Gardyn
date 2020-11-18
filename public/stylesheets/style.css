@@ -21,11 +21,15 @@ html, body {
 }
 
 a:link {
+<<<<<<< Updated upstream
   color: #74c0ca;
+=======
+  color: #ffffff;
+>>>>>>> Stashed changes
 }
 
 a:visited {
-  color: #53868d;
+  color: #64d473;
 }
 
 a:hover {
