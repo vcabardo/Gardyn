@@ -22,10 +22,12 @@ html, body {
 
 a:link {
   color: #ffffff;
+  color: #74c0ca;
+  color: #ffffff;
 }
 
 a:visited {
-  color: #53868d;
+  color: #64d473;
 }
 
 a:hover {
