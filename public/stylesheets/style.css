@@ -6,7 +6,7 @@
 html, body {
   height: 100%;
   width: 100%;
-  font-family: montserat,sans-serif;
+  font-family: 'montserat',sans-serif;
   font-weight: 400;
   font-style: normal;
   color: #222;
@@ -21,7 +21,7 @@ html, body {
 }
 
 a:link {
-  color: #74c0ca;
+  color: #D5C8C8;
 }
 
 a:visited {
@@ -29,12 +29,12 @@ a:visited {
 }
 
 a:hover {
-  color: aquamarine;
+  color: #6D7C6F;
 }
 
 .navbar {
   padding: .16rem;
-  font-family: montserrat, sans-serif;
+  font-family: 'montserrat', sans-serif;
   font-size: xx-large;
 }
 .navbar-nav li {
@@ -80,7 +80,7 @@ a:hover {
 
 #home {
   background: url(img/zerowaste.png) no-repeat center;
-  font-family: montserrat, sans-serif;
+  font-family: 'montserrat', sans-serif;
   display: table;
   height: 100%;
   position: relative;
@@ -94,7 +94,7 @@ a:hover {
   display: table-cell;
   text-align: center;
   vertical-align: top;
-  font-family: 'Acme', sans-serif;
+  font-family: 'montserrat', sans-serif;
 }
 
 .landing-text h1 {
@@ -103,15 +103,15 @@ a:hover {
 }
 
 .container {
-  font-family: montserrat, sans-serif;
+  font-family: 'montserrat', sans-serif;
 }
 
 .btn-primary {
-  background-color: #103A2C;
+  background-color: #D5C8C8;
   border: 1px solid #000000;
 }
 .btn-primary:hover {
-  background-color: #2B454A;
+  background-color: #D5C8C8;
   border: 1px solid #2B454A;
 }
 
@@ -133,7 +133,7 @@ a:hover {
 }
 
 .list-group-item {
-  font-family: montserrat, sans-serif;
+  font-family: 'montserrat', sans-serif;
   color: rgb(0, 0, 0);
 }
 
@@ -149,13 +149,13 @@ background-color: linen;
 }
 
 .card-header {
-  font-family: montserrat, sans-serif;
+  font-family: 'montserrat', sans-serif;
     font-size: x-large;
     background-color: lightblue;
 
 }
 .card-body {
-  font-family: montserrat, sans-serif;
+  font-family: 'montserrat', sans-serif;
   background-color: rgb(184, 236, 184);
   font-size: larger;
   width: 100%;
@@ -170,7 +170,7 @@ background-color: linen;
 
 
 .resources1 {
-  font-family: montserrat, sans-serif;
+  font-family: 'montserrat', sans-serif;
   padding: 100px 100px;
   text-align: center;
 }
