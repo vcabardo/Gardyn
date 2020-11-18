@@ -1,10 +1,14 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+@import url("https://use.typekit.net/yyy2rjq.css");
+
 
 html, body {
   height: 100%;
   width: 100%;
-  font-family: 'Acme', sans-serif;
+  font-family: montserat,sans-serif;
+  font-weight: 400;
+  font-style: normal;
   color: #222;
 }
 
@@ -30,7 +34,7 @@ a:hover {
 
 .navbar {
   padding: .16rem;
-  font-family: 'Acme', sans-serif;
+  font-family: montserrat, sans-serif;
   font-size: xx-large;
 }
 .navbar-nav li {
@@ -76,7 +80,7 @@ a:hover {
 
 #home {
   background: url(img/zerowaste.png) no-repeat center;
-  font-family: 'Acme', sans-serif;
+  font-family: montserrat, sans-serif;
   display: table;
   height: 100%;
   position: relative;
@@ -99,16 +103,16 @@ a:hover {
 }
 
 .container {
-  font-family: 'Acme', sans-serif;
+  font-family: montserrat, sans-serif;
 }
 
 .btn-primary {
-  background-color: #58bbae;
+  background-color: #103A2C;
   border: 1px solid #000000;
 }
 .btn-primary:hover {
-  background-color: #74c0ca;
-  border: 1px solid #74c0ca;
+  background-color: #2B454A;
+  border: 1px solid #2B454A;
 }
 
 .jumbotron {
@@ -129,8 +133,8 @@ a:hover {
 }
 
 .list-group-item {
-  font-family: 'Acme', sans-serif;
-  color: #222;
+  font-family: montserrat, sans-serif;
+  color: rgb(0, 0, 0);
 }
 
 .card-header:first-child {
@@ -145,13 +149,13 @@ background-color: linen;
 }
 
 .card-header {
-  font-family: 'Acme', sans-serif;
+  font-family: montserrat, sans-serif;
     font-size: x-large;
     background-color: lightblue;
 
 }
 .card-body {
-  font-family: 'Acme', sans-serif;
+  font-family: montserrat, sans-serif;
   background-color: rgb(184, 236, 184);
   font-size: larger;
   width: 100%;
@@ -166,7 +170,7 @@ background-color: linen;
 
 
 .resources1 {
-  font-family: 'Acme', sans-serif;
+  font-family: montserrat, sans-serif;
   padding: 100px 100px;
   text-align: center;
 }
