@@ -73,24 +73,24 @@
           var pNotes = child.val().productInfo;
             if(pN != undefined){
               var para = document.createElement("p");
-              var node = document.createTextNode("Product Name: " + pN + 
+              var node = document.createTextNode("Product Name: " + pN +
                                                 " --- Product Category: " + chooseCategory(pC) +
                                                 " --- Purchase Date: " + pP +
-                                                " --- Experation Date: " + pE + 
-                                                " --- Notes " + pNotes 
-              
+                                                " --- Expiration Date: " + pE + 
+                                                " --- Notes " + pNotes
+
               );
               para.appendChild(node);
               var element = document.getElementById("d1");
               element.appendChild(para);
-              var btn = document.createElement("BUTTON");   
+              var btn = document.createElement("BUTTON");
               btn.innerHTML = "Remove";
-              btn.onclick = function(){  
+              btn.onclick = function(){
                     let dref = db.ref('addItem/' + pN);
-                    dref.remove()  
-                    location.reload(); 
-              }; 
-              element.appendChild(btn);    
+                    dref.remove()
+                    location.reload();
+              };
+              element.appendChild(btn);
           }//end if
         });
       });
