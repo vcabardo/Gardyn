@@ -12,7 +12,6 @@
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
     <link href="stylesheets/style.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 
 
@@ -64,36 +63,23 @@
                         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" onclick="signInUser()">Sign in</button>
                         <hr class="my-4">
 
-                        <a href='signup.html'>Don't have an account? Click here to sign up</a>
+                        <a href='signup.html' style="color: black; font-size: 15px;">Don't have an account? Click here to sign up!</a>
                         <br>
-                        <a href='index.html'>Don't want an account? Login as Guest</a>
+                        <a href='index.html' style="color: black; font-size: 15px;">Don't want an account? Login as a Guest!</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-</body>
-<footer>
-    <div class="container-fluid-padding">
-        <div class="row text-center">
-            <div class="col-md-4">
-                <hr class="light">
-                <p>Vensan Cabardo</p>
-                <p>Kami Otero De Owens</p>
-                <p>Jared Van Natta</p>
-            </div>
-            <div class="col-md-4">
-                <hr class="light">
-                <h5>Copyright Information</h5>
-                <hr class="light">
-                <p>Go Green!</p>
-            </div>
-            <div class="col-md-4">
-                <hr class="light">
-                <p>Seriously, do it.</p>
-            </div>
-        </div>
-    </div>
 
+
+    <div id="footer"></div>
+    <script>
+      $(document).ready(function () {
+        $('#footer').load('reusablefooter.html');
+      });
+    </script>
+
+</body>
 </html>
