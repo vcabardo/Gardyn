@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gardyn</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link href="stylesheets/style.css" rel="stylesheet">
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+
+    <script src="authentication.js"></script>
+    <script src="getFirebaseInfo.js"></script>
+
+</head>
+
+<body>
+    <!-- Load the header using jQuery. Inspiration: https://medium.com/@AmyScript/how-to-reduce-reuse-and-recycle-your-code-389e6742e4ac-->
+    <script>
+        $(document).ready(function () {
+            $('#header').load('reusableheader.html');
+        });
+    </script>
+
+    <div id="header"></div>
+
+    <script>
+        function writeUserData() {
+
+            var pName = document.getElementById("productName").value;
+            var pCat = document.getElementById("productCategory").value;
+            var pPurDate = document.getElementById("datePurchased").value;
+            var pExpDate = document.getElementById("dateExpire").value;
+            var pInfo = document.getElementById("productInfo").value;
+
+            console.log(pName);
+            console.log(pInfo);
+            
+            var config = {
+                apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
+                authDomin: "gardynapp.firebaseapp.com",
+                databaseURL: "https://gardynapp.firebaseio.com/",
+                storageBucket: "gardynapp.appspot.com"
+            };
+
+            if (!firebase.apps.length) {
+                firebase.initializeApp(config);
+            }
+
+            firebase.database().ref('addItem/' + pName).set({
+                productName: pName,
+                productCategory: pCat,
+                productPurchaseDate: pPurDate,
+                productExperationDate: pExpDate,
+                productInfo: pInfo
+            });
+        }
+    </script>
+
+    <!-- Default form contact -->
+    <form class="text-center border border-light p-5" action="#!">
+
+        <p class="h4 mb-4">Add An Item</p>
+
+        <!-- Name -->
+        <input type="text" id="productName" class="form-control mb-4" placeholder="Product Name">
+
+        <!-- Subject -->
+        <label>Product Category</label>
+        <select class="browser-default custom-select mb-4" id="productCategory">
+            <option value="" disabled>Choose option</option>
+            <option value="1" selected>Fruits & Veggies</option>
+            <option value="2">Meat & Protein</option>
+            <option value="3">Breads & Cereals</option>
+            <option value="4">Milk & Dairy</option>
+            <option value="5">Junk Food</option>
+            <option value="6">Misc.</option>
+        </select>
+
+        <!-- Date -->
+        <div class="form-group"> <!-- Date input -->
+            <label class="control-label" for="date">Date Purchased</label>
+            <input class="form-control" id="datePurchased" name="date" placeholder="MM/DD/YYYY" type="text"/>
+        </div>
+        <div class="form-group"> <!-- Date input -->
+            <label class="control-label" for="date">Projected Experation Date</label>
+            <input class="form-control" id="dateExpire" name="date" placeholder="MM/DD/YYYY" type="text"/>
+        </div>
+        <script>
+            $(document).ready(function(){
+              var date_input=$('input[name="date"]'); //our date input has the name "date"
+              var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+              var options={
+                format: 'mm/dd/yyyy',
+                container: container,
+                todayHighlight: true,
+                autoclose: true,
+              };
+              date_input.datepicker(options);
+            })
+        </script>
+
+        <!-- Message -->
+        <div class="form-group">
+            <label class="control-label">Notes</label>
+            <textarea class="form-control rounded-0" id="productInfo" rows="3" placeholder="Notes..."></textarea>
+        </div>
+
+        <!-- Send button -->
+        <button class="btn btn-info btn-block" type="submit" onclick="writeUserData()">Add</button>
+
+
+    </form>
+
+
+
+
+</body>
+<footer>
+    <div class="container-fluid-padding">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <hr class="light">
+                <p>Vensan Cabardo</p>
+                <p>Kami Otero De Owens</p>
+                <p>Jared Van Natta</p>
+            </div>
+            <div class="col-md-4">
+                <hr class="light">
+                <h5>Copyright Information</h5>
+                <hr class="light">
+                <p>Go Green.</p>
+            </div>
+            <div class="col-md-4">
+                <hr class="light">
+                <p>Do it!</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</html>

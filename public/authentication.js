@@ -41,6 +41,7 @@ function signUpUser() {
         alert(errorMessage);
     });
 }
+
 //This function signs in a user upon pressing sign in button
 function signInUser() {
     var config = {
