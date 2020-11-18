@@ -40,7 +40,7 @@
     </script>
 
     <div id="header"></div>
-    
+
     <script>
         function writeUserData() {
 
@@ -49,6 +49,9 @@
             var pPurDate = document.getElementById("datePurchased").value;
             var pExpDate = document.getElementById("dateExpire").value;
             var pInfo = document.getElementById("productInfo").value;
+
+            console.log(pName);
+            console.log(pInfo);
             
             var config = {
                 apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
@@ -94,11 +97,11 @@
         <!-- Date -->
         <div class="form-group"> <!-- Date input -->
             <label class="control-label" for="date">Date Purchased</label>
-            <input class="form-control" id="datePurchased" name="date" placeholder="MM/DD/YYY" type="text"/>
+            <input class="form-control" id="datePurchased" name="date" placeholder="MM/DD/YYYY" type="text"/>
         </div>
         <div class="form-group"> <!-- Date input -->
             <label class="control-label" for="date">Projected Experation Date</label>
-            <input class="form-control" id="dateExpire" name="date" placeholder="MM/DD/YYY" type="text"/>
+            <input class="form-control" id="dateExpire" name="date" placeholder="MM/DD/YYYY" type="text"/>
         </div>
         <script>
             $(document).ready(function(){
