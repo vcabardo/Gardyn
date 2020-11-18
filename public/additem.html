@@ -40,6 +40,36 @@
     </script>
 
     <div id="header"></div>
+    
+    <script>
+        function writeUserData() {
+
+            var pName = document.getElementById("productName").value;
+            var pCat = document.getElementById("productCategory").value;
+            var pPurDate = document.getElementById("datePurchased").value;
+            var pExpDate = document.getElementById("dateExpire").value;
+            var pInfo = document.getElementById("productInfo").value;
+            
+            var config = {
+                apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
+                authDomin: "gardynapp.firebaseapp.com",
+                databaseURL: "https://gardynapp.firebaseio.com/",
+                storageBucket: "gardynapp.appspot.com"
+            };
+
+            if (!firebase.apps.length) {
+                firebase.initializeApp(config);
+            }
+
+            firebase.database().ref('addItem/' + pName).set({
+                productName: pName,
+                productCategory: pCat,
+                productPurchaseDate: pPurDate,
+                productExperationDate: pExpDate,
+                productInfo: pInfo
+            });
+        }
+    </script>
 
     <!-- Default form contact -->
     <form class="text-center border border-light p-5" action="#!">
@@ -84,7 +114,6 @@
             })
         </script>
 
-
         <!-- Message -->
         <div class="form-group">
             <label class="control-label">Notes</label>
@@ -97,35 +126,7 @@
 
     </form>
 
-    <script>
-        function writeUserData() {
 
-            var pName = document.getElementById("productName").value;
-            var pCat = document.getElementById("productCategory").value;
-            var pPurDate = document.getElementById("datePurchased").value;
-            var pExpDate = document.getElementById("dateExpire").value;
-            var pInfo = document.getElementById("productInfo").value;
-            
-            var config = {
-                apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
-                authDomin: "gardynapp.firebaseapp.com",
-                databaseURL: "https://gardynapp.firebaseio.com/",
-                storageBucket: "gardynapp.appspot.com"
-            };
-
-            if (!firebase.apps.length) {
-                firebase.initializeApp(config);
-            }
-
-            firebase.database().ref('addItem/' + pName).set({
-                productName: pName,
-                productCategory: pCat,
-                productPurchaseDate: pPurDate,
-                productExperationDate: pExpDate,
-                productInfo: pInfo
-            });
-        }
-    </script>
 
 
 </body>
