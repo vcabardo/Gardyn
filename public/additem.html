@@ -59,6 +59,14 @@
             console.log(pName);
             console.log(pInfo);
 
+            var config = {
+                apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
+                authDomin: "gardynapp.firebaseapp.com",
+                databaseURL: "https://gardynapp.firebaseio.com/",
+                storageBucket: "gardynapp.appspot.com"
+            };
+            firebase.initializeApp(config);
+
             firebase.database().ref('addItem/' + pName).set({
                 productName: pName,
                 productCategory: pCat,
@@ -125,30 +133,14 @@
     </form>
 
 
-
+    
+    <div id="footer"></div>
+    <script>
+      $(document).ready(function () {
+        $('#footer').load('reusablefooter.html');
+      });
+    </script>
 
 </body>
-<footer>
-    <div class="container-fluid-padding">
-        <div class="row text-center">
-            <div class="col-md-4">
-                <hr class="light">
-                <p>Vensan Cabardo</p>
-                <p>Kami Otero De Owens</p>
-                <p>Jared Van Natta</p>
-            </div>
-            <div class="col-md-4">
-                <hr class="light">
-                <h5>Copyright Information</h5>
-                <hr class="light">
-                <p>Go Green.</p>
-            </div>
-            <div class="col-md-4">
-                <hr class="light">
-                <p>Do it!</p>
-            </div>
-        </div>
-    </div>
-</footer>
 
 </html>
