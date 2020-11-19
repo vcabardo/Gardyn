@@ -30,11 +30,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
-
-    <script src="authentication.js"></script>
-    <script src="app.js"></script>
-
-
 </head>
 
 <body>
@@ -48,6 +43,19 @@
       });
     </script>
 
+    <script type="text/javascript">
+      var config = {
+        apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
+        authDomin: "gardynapp.firebaseapp.com",
+        databaseURL: "https://gardynapp.firebaseio.com/",
+        storageBucket: "gardynapp.appspot.com"
+      };
+      if (!firebase.apps.length) {
+        firebase.initializeApp(config);
+      }
+
+    </script>
+
     <script>
         function writeUserData() {
             var pName = document.getElementById("productName").value;
@@ -59,13 +67,9 @@
             console.log(pName);
             console.log(pInfo);
 
-            var config = {
-                apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
-                authDomin: "gardynapp.firebaseapp.com",
-                databaseURL: "https://gardynapp.firebaseio.com/",
-                storageBucket: "gardynapp.appspot.com"
-            };
-            firebase.initializeApp(config);
+            if (!firebase.apps.length) {
+        firebase.initializeApp(config);
+      }
 
             firebase.database().ref('addItem/' + pName).set({
                 productName: pName,
@@ -74,15 +78,11 @@
                 productExperationDate: pExpDate,
                 productInfo: pInfo
             });
-
-           // if(confirm('Successful Message')){
-          //      window.location.reload();  
-          //  }
         }
     </script>
 
     <!-- Default form contact -->
-    <form class="text-center border border-light p-5" action="#!">
+    <form class="text-center border border-light p-5" id="myForm" action="#!">
 
         <p class="h4 mb-4">Add An Item</p>
 
@@ -131,9 +131,18 @@
         </div>
 
         <!-- Send button -->
-        <button class="btn btn-info btn-block" type="button" onclick="writeUserData()">Add</button>
+        <button class="btn btn-info btn-block" type="button" onclick="writeUserData();">Add</button>
 
-
+        <script>
+          function resetForm(){
+            document.getElementById("myForm").reset(); 
+            location.reload();
+          }
+        </script>
+        <br>
+        <button class="btn btn-info btn-block" type="button" onclick="resetForm();">Clear Form</button>
+        <br>
+        <button class="btn btn-info btn-block" type="button" onclick="location.href='freshtracker.html';">Go to Freshtracker!</button>
     </form>
 
 
