@@ -37,13 +37,13 @@
           <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="login.html">Log In</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="additem.html">Add Item</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="freshtracker.html">FreshTracker</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="login.html">Log In</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="signup.html">Sign Up</a>
@@ -53,34 +53,21 @@
         </li>
       </ul>
       <span class="navbar-text">
-        Go Green, Keep Clean!
-      </span>
-    </div>
-  </nav>
-
-<!-- TODO: fix centering issue, but name and date do work. 
-    <div class="container">
-      <div class="row">
-        <div class="col-sm">
-          <div class="landing-text">
-            <div id="date" style="font-size: 30px; text-align: center;" ></div>
-            <script>  var date = new Date();
-                      document.getElementById("date").innerHTML = date;
-            </script>
-
-            <div id="welcome"></div>
+        <div id="welcome"></div>
             <script type="text/javascript" style="font-size: 30px;">
             firebase.auth().onAuthStateChanged(function(user) {
               if (user) {
                 document.getElementById("welcome").innerHTML = "Welcome " + user.displayName + "!";
               }
+              else{
+                document.getElementById("welcome").innerHTML = "Welcome Guest!";
+              }
             });
             </script>
-          </div>
-        </div>
-      </div>
+      </span>
     </div>
--->
+  </nav>
+
 <figure>
   <div class="fixed-wrap">
     <div id="fixed">

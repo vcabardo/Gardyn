@@ -21,25 +21,40 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.0.0/firebaseui.js"></script>
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-
-
-    <script src="authentication.js"></script>
-    <script src="getFirebaseInfo.js"></script>
 
 </head>
 
 <body>
     <!-- Load the header using jQuery. Inspiration: https://medium.com/@AmyScript/how-to-reduce-reuse-and-recycle-your-code-389e6742e4ac-->
-    <script>
-        $(document).ready(function () {
-            $('#header').load('reusableheader.html');
-        });
-    </script>
+    
 
     <div id="header"></div>
+    <script>
+      $(document).ready(function () {
+        $('#header').load('reusableheader.html');
+      });
+    </script>
+
+    <script type="text/javascript">
+      var config = {
+        apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
+        authDomin: "gardynapp.firebaseapp.com",
+        databaseURL: "https://gardynapp.firebaseio.com/",
+        storageBucket: "gardynapp.appspot.com"
+      };
+      if (!firebase.apps.length) {
+        firebase.initializeApp(config);
+      }
+
+    </script>
 
     <script>
         function writeUserData() {
@@ -52,16 +67,9 @@
             console.log(pName);
             console.log(pInfo);
 
-            var config = {
-                apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
-                authDomin: "gardynapp.firebaseapp.com",
-                databaseURL: "https://gardynapp.firebaseio.com/",
-                storageBucket: "gardynapp.appspot.com"
-            };
-
             if (!firebase.apps.length) {
-                firebase.initializeApp(config);
-            }
+        firebase.initializeApp(config);
+      }
 
             firebase.database().ref('addItem/' + pName).set({
                 productName: pName,
@@ -74,7 +82,7 @@
     </script>
 
     <!-- Default form contact -->
-    <form class="text-center border border-light p-5" action="#!">
+    <form class="text-center border border-light p-5" id="myForm" action="#!">
 
         <p class="h4 mb-4">Add An Item</p>
 
@@ -123,36 +131,29 @@
         </div>
 
         <!-- Send button -->
-        <button class="btn btn-info btn-block" type="button" onclick="writeUserData()">Add</button>
+        <button class="btn btn-info btn-block" type="button" onclick="writeUserData();">Add</button>
 
-
+        <script>
+          function resetForm(){
+            document.getElementById("myForm").reset(); 
+            location.reload();
+          }
+        </script>
+        <br>
+        <button class="btn btn-info btn-block" type="button" onclick="resetForm();">Clear Form</button>
+        <br>
+        <button class="btn btn-info btn-block" type="button" onclick="location.href='freshtracker.html';">Go to Freshtracker!</button>
     </form>
 
 
-
+    
+    <div id="footer"></div>
+    <script>
+      $(document).ready(function () {
+        $('#footer').load('reusablefooter.html');
+      });
+    </script>
 
 </body>
-<footer>
-    <div class="container-fluid-padding">
-        <div class="row text-center">
-            <div class="col-md-4">
-                <hr class="light">
-                <p>Vensan Cabardo</p>
-                <p>Kami Otero De Owens</p>
-                <p>Jared Van Natta</p>
-            </div>
-            <div class="col-md-4">
-                <hr class="light">
-                <h5>Copyright Information</h5>
-                <hr class="light">
-                <p>Go Green.</p>
-            </div>
-            <div class="col-md-4">
-                <hr class="light">
-                <p>Do it!</p>
-            </div>
-        </div>
-    </div>
-</footer>
 
 </html>

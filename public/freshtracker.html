@@ -67,10 +67,10 @@
 
       ref.on("value", function (snapshot) {
         snapshot.forEach((child) => {
+          var pE = child.val().productExperationDate;
           var pN = child.val().productName;
           var pC = child.val().productCategory;
           var pP = child.val().productPurchaseDate;
-          var pE = child.val().productExperationDate;
           var pNotes = child.val().productInfo;
 
             if(pN != undefined){
@@ -176,31 +176,13 @@
   </div>
 
 
+  <div id="footer"></div>
+  <script>
+    $(document).ready(function () {
+      $('#footer').load('reusablefooter.html');
+    });
+  </script>
 
 </body>
-
-<footer>
-  <div class="container-fluid-padding">
-    <div class="row text-center">
-      <div class="col-md-4">
-        <hr class="light">
-        <p>Vensan Cabardo</p>
-        <p>Kami Otero De Owens</p>
-        <p>Jared Van Natta</p>
-      </div>
-      <div class="col-md-4">
-        <hr class="light">
-        <h5>Copyright Information</h5>
-        <hr class="light">
-        <p>Go Green.</p>
-      </div>
-      <div class="col-md-4">
-        <hr class="light">
-        <p>Do it!</p>
-        <p>Saving the planet one human at a time.</p>
-      </div>
-    </div>
-  </div>
-</footer>
 
 </html>
