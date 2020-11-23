@@ -64,7 +64,6 @@
       var db = firebase.database();
       var ref = db.ref(childName);
 
-
       ref.on("value", function (snapshot) {
         snapshot.forEach((child) => {
           var pE = child.val().productExperationDate;
@@ -74,7 +73,6 @@
           var pNotes = child.val().productInfo;
 
             if(pN != undefined){
-
               var currentDate = new Date();
               var expirationDate = new Date(
                 parseInt(pE.substring(6, 10)),
@@ -103,9 +101,9 @@
               var progressLabel = document.createTextNode(timeUntilExpiration + " / " + totalTime + " Days Left");
               progressBar.appendChild(progressLabel);
 
-              if((timeUntilExpiration / totalTime) < 0.33) {
+              if((timeUntilExpiration / totalTime) <= 0.33) {
                 progressBar.classList.add("bg-danger");
-              } else if ((timeUntilExpiration / totalTime) < 0.66) {
+              } else if ((timeUntilExpiration / totalTime) <= 0.7) {
                 progressBar.classList.add("bg-warning");
               } else if ((timeUntilExpiration / totalTime) < 1) {
                 progressBar.classList.add("bg-success");
@@ -120,9 +118,6 @@
               cardHeader.appendChild(name);
               progress.appendChild(progressBar);
               cardHeader.appendChild(progress);
-
-
-
 
               var cardBody = document.createElement("div");
               cardHeader.classList.add("card-body");
@@ -139,12 +134,6 @@
 
               cardBody.appendChild(node);
 
-              card.appendChild(cardHeader);
-              card.appendChild(cardBody);
-              card.appendChild(cardFooter);
-
-              var element = document.getElementById("d1");
-              element.appendChild(card);
               var btn = document.createElement("BUTTON");
               btn.innerHTML = "Remove";
               btn.onclick = function(){
@@ -153,7 +142,18 @@
                     location.reload();
               };
 
-              element.appendChild(btn);
+              cardFooter.appendChild(btn);
+
+              card.appendChild(cardHeader);
+              card.appendChild(cardBody);
+              card.appendChild(cardFooter);
+
+              var entry = document.createElement("div");
+              entry.classList.add("col-lg");
+              entry.appendChild(card);
+
+              var element = document.getElementById("d1");
+              element.appendChild(entry);
           }//end if
         });
       });
@@ -169,12 +169,13 @@
   </script>
 
 
-  <div id="d1">
-    <script>
-      getAllElementsOfChild("addItem/")
-    </script>
+  <div class="container">
+    <div id="d1" class="row">
+      <script>
+        getAllElementsOfChild("addItem/")
+      </script>
+    </div>
   </div>
-
 
   <div id="footer"></div>
   <script>
