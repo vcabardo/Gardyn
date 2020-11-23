@@ -47,6 +47,7 @@
       else if (input == 6) return "Misc.";
       else return "null";
     }
+
     function getAllElementsOfChild(childName) {
 
       var config = {
@@ -71,18 +72,79 @@
           var pP = child.val().productPurchaseDate;
           var pE = child.val().productExperationDate;
           var pNotes = child.val().productInfo;
+
             if(pN != undefined){
-              var para = document.createElement("p");
-              var node = document.createTextNode("Product Name: " + pN +
-                                                " --- Product Category: " + chooseCategory(pC) +
+
+              var currentDate = new Date();
+              var expirationDate = new Date(
+                parseInt(pE.substring(6, 10)),
+                parseInt(pE.substring(0, 2)) - 1,
+                parseInt(pE.substring(3, 5)));
+
+              var purchaseDate = new Date(
+                parseInt(pP.substring(6, 10)),
+                parseInt(pP.substring(0, 2)) - 1,
+                parseInt(pP.substring(3, 5)));
+
+              const DAY_IN_MILLI = 1000 * 60 * 60 * 24
+              var timeUntilExpiration = Math.floor(Math.abs(expirationDate - currentDate) / DAY_IN_MILLI);
+              var totalTime = Math.floor(Math.abs(expirationDate - purchaseDate) / DAY_IN_MILLI);
+
+              var progress = document.createElement("div");
+              progress.classList.add("progress");
+
+              var progressBar = document.createElement("div");
+              progressBar.classList.add("progress-bar");
+              progressBar.setAttribute("role", "progressbar");
+              progressBar.setAttribute("aria-valuemin", 0);
+              progressBar.setAttribute("aria-valuemax", totalTime);
+              progressBar.setAttribute("aria-valuenow", 50);
+              progressBar.setAttribute('style','width:'+ ((timeUntilExpiration / totalTime) * 100) +'%');
+              var progressLabel = document.createTextNode(timeUntilExpiration + " / " + totalTime + " Days Left");
+              progressBar.appendChild(progressLabel);
+
+              if((timeUntilExpiration / totalTime) < 0.33) {
+                progressBar.classList.add("bg-danger");
+              } else if ((timeUntilExpiration / totalTime) < 0.66) {
+                progressBar.classList.add("bg-warning");
+              } else if ((timeUntilExpiration / totalTime) < 1) {
+                progressBar.classList.add("bg-success");
+              }
+
+              var card = document.createElement("div");
+              card.classList.add("card");
+
+              var cardHeader = document.createElement("div");
+              cardHeader.classList.add("card-header");
+              var name = document.createTextNode(pN);
+              cardHeader.appendChild(name);
+              progress.appendChild(progressBar);
+              cardHeader.appendChild(progress);
+
+
+
+
+              var cardBody = document.createElement("div");
+              cardHeader.classList.add("card-body");
+
+              var cardFooter = document.createElement("div");
+              cardHeader.classList.add("card-footer");
+
+              var node = document.createTextNode( "Product Category: " + chooseCategory(pC) +
                                                 " --- Purchase Date: " + pP +
-                                                " --- Expiration Date: " + pE + 
+                                                " --- Expiration Date: " + pE +
                                                 " --- Notes " + pNotes
 
               );
-              para.appendChild(node);
+
+              cardBody.appendChild(node);
+
+              card.appendChild(cardHeader);
+              card.appendChild(cardBody);
+              card.appendChild(cardFooter);
+
               var element = document.getElementById("d1");
-              element.appendChild(para);
+              element.appendChild(card);
               var btn = document.createElement("BUTTON");
               btn.innerHTML = "Remove";
               btn.onclick = function(){
@@ -90,6 +152,7 @@
                     dref.remove()
                     location.reload();
               };
+
               element.appendChild(btn);
           }//end if
         });
