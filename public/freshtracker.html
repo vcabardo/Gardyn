@@ -24,7 +24,7 @@
   <script src="authentication.js"></script>
 </head>
 
-<body>
+<body class="bg-dark">
 
   <div id="header"></div>
   <script>
@@ -64,6 +64,7 @@
       var db = firebase.database();
       var ref = db.ref(childName);
 
+      //TODO: Access the fresh tracker on a user basis
       ref.on("value", function (snapshot) {
         snapshot.forEach((child) => {
           var pE = child.val().productExperationDate;
@@ -111,6 +112,7 @@
 
               var card = document.createElement("div");
               card.classList.add("card");
+              card.classList.add("bg-secondary");
 
               var cardHeader = document.createElement("div");
               cardHeader.classList.add("card-header");
@@ -118,31 +120,43 @@
               cardHeader.appendChild(name);
               progress.appendChild(progressBar);
               cardHeader.appendChild(progress);
+              cardHeader.classList.add("bg-secondary");
+              card.classList.add("text-light");
 
               var cardBody = document.createElement("div");
-              cardHeader.classList.add("card-body");
+              cardBody.classList.add("card-body");
+              cardBody.classList.add("bg-secondary");
+              cardBody.classList.add("text-light");
 
               var cardFooter = document.createElement("div");
-              cardHeader.classList.add("card-footer");
+              cardFooter.classList.add("card-footer");
 
               var node = document.createTextNode( "Product Category: " + chooseCategory(pC) +
-                                                " --- Purchase Date: " + pP +
-                                                " --- Expiration Date: " + pE +
-                                                " --- Notes " + pNotes
+                                                "\nPurchase Date: " + pP +
+                                                "\nExpiration Date: " + pE +
+                                                "\nNotes: " + pNotes
 
               );
 
               cardBody.appendChild(node);
 
-              var btn = document.createElement("BUTTON");
-              btn.innerHTML = "Remove";
-              btn.onclick = function(){
-                    let dref = db.ref('addItem/' + pN);
-                    dref.remove()
-                    location.reload();
+              //TODO: Access the freshtracker for a particular user and mark
+              //entries as thrown away or used
+              var usedButton = document.createElement("BUTTON");
+              usedButton.innerHTML = "Used";
+              usedButton.onclick = function(){
+
               };
 
-              cardFooter.appendChild(btn);
+              var throwawayButton = document.createElement("BUTTON");
+              throwawayButton.innerHTML = "Thrown Away";
+              throwawayButton.onclick = function(){
+
+              };
+
+              //TODO: space buttons evenly and style buttons
+              cardFooter.appendChild(usedButton);
+              cardFooter.appendChild(throwawayButton);
 
               card.appendChild(cardHeader);
               card.appendChild(cardBody);
@@ -150,6 +164,7 @@
 
               var entry = document.createElement("div");
               entry.classList.add("col-lg-6");
+              entry.classList.add("my-sm-3");
               entry.appendChild(card);
 
               var element = document.getElementById("d1");
@@ -168,6 +183,7 @@
     }
   </script>
 
+  <h1 class="display-4 text-light text-center">FreshTracker</h1>
 
   <div class="container">
     <div id="d1" class="row">

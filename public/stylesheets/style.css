@@ -12,7 +12,7 @@ html, body {
   color: #222;
   margin: 0px;
   padding: 0px;
-  overflow-x: hidden; 
+  overflow-x: hidden;
 }
 
 .table {
@@ -180,7 +180,9 @@ background-color: linen;
   text-align: center;
 }
 
-
+.opacity-low {
+  opacity: .4;
+}
 
 
 /* body {

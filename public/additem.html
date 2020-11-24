@@ -32,9 +32,9 @@
 
 </head>
 
-<body>
+<body class="bg-dark">
     <!-- Load the header using jQuery. Inspiration: https://medium.com/@AmyScript/how-to-reduce-reuse-and-recycle-your-code-389e6742e4ac-->
-    
+
 
     <div id="header"></div>
     <script>
@@ -81,11 +81,10 @@
         }
     </script>
 
+    <h1 class="display-4 text-light text-center">Add Item</h1>
+
     <!-- Default form contact -->
-    <form class="text-center border border-light p-5" id="myForm" action="#!">
-
-        <p class="h4 mb-4">Add An Item</p>
-
+    <form class="container text-center text-light" id="myForm" action="#!">
         <!-- Name -->
         <input type="text" id="productName" class="form-control mb-4" placeholder="Product Name">
 
@@ -107,7 +106,7 @@
             <input class="form-control" id="datePurchased" name="date" placeholder="MM/DD/YYYY" type="text"/>
         </div>
         <div class="form-group"> <!-- Date input -->
-            <label class="control-label" for="date">Projected Experation Date</label>
+            <label class="control-label" for="date">Projected Expiration Date</label>
             <input class="form-control" id="dateExpire" name="date" placeholder="MM/DD/YYYY" type="text"/>
         </div>
         <script>
@@ -135,7 +134,7 @@
 
         <script>
           function resetForm(){
-            document.getElementById("myForm").reset(); 
+            document.getElementById("myForm").reset();
             location.reload();
           }
         </script>
@@ -146,7 +145,7 @@
     </form>
 
 
-    
+
     <div id="footer"></div>
     <script>
       $(document).ready(function () {
