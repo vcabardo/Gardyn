@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gardyn</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link href="stylesheets/style.css" rel="stylesheet">
+
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
+    <link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css'>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
+</head>
+
+<body class="bg-dark">
+    <!-- Load the header using jQuery. Inspiration: https://medium.com/@AmyScript/how-to-reduce-reuse-and-recycle-your-code-389e6742e4ac-->
+
+    <div id="header"></div>
+    <script>
+      $(document).ready(function () {
+        $('#header').load('reusableheader.html');
+      });
+    </script>
+
+    <script type="text/javascript">
+      var config = {
+        apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
+        authDomin: "gardynapp.firebaseapp.com",
+        databaseURL: "https://gardynapp.firebaseio.com/",
+        storageBucket: "gardynapp.appspot.com"
+      };
+
+      if (!firebase.apps.length) {
+        firebase.initializeApp(config);
+      }
+    </script>
+
+    <h1 class="display-4 text-light text-center">Search</h1>
+
+    <div class="container">
+      <div id="d1" class="row"></div>
+    </div>
+
+    <!-- Button trigger modal -->
+    <p class="text-light text-center">Don't see your food on the list? </p>
+    <button type="button" class="btn btn-info btn-block col" data-toggle="modal" data-target="#formModal">
+      Add Food Item
+    </button>
+    <button class="btn btn-info btn-block col" type="button" onclick="location.href='freshtracker.html';">Go to Freshtracker!</button>
+
+    <!-- https://getbootstrap.com/docs/4.0/components/modal/ -->
+    <div class="modal" id="formModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add Food Item</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- Default form contact -->
+            <form class="container text-center text-light" id="myForm" action="#!">
+                <!-- Name -->
+                <input type="text" id="productName" class="form-control mb-4" placeholder="Product Name">
+
+                <!-- Subject -->
+                <label>Product Category</label>
+                <select class="browser-default custom-select mb-4" id="productCategory">
+                    <option value="" disabled>Choose option</option>
+                    <option value="1" selected>Fruits & Veggies</option>
+                    <option value="2">Meat & Protein</option>
+                    <option value="3">Breads & Cereals</option>
+                    <option value="4">Milk & Dairy</option>
+                    <option value="5">Junk Food</option>
+                    <option value="6">Misc.</option>
+                </select>
+
+                <!-- Date -->
+                <div class="form-group"> <!-- Date input -->
+                    <label class="control-label" for="date">Date Purchased</label>
+                    <input class="form-control" id="datePurchased" name="date" placeholder="MM/DD/YYYY" type="text"/>
+                </div>
+                <div class="form-group"> <!-- Date input -->
+                    <label class="control-label" for="date">Projected Expiration Date</label>
+                    <input class="form-control" id="dateExpire" name="date" placeholder="MM/DD/YYYY" type="text"/>
+                </div>
+                <script>
+                    $(document).ready(function(){
+                      var date_input=$('input[name="date"]'); //our date input has the name "date"
+                      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+                      var options={
+                        format: 'mm/dd/yyyy',
+                        container: container,
+                        todayHighlight: true,
+                        autoclose: true,
+                      };
+                      date_input.datepicker(options);
+                    })
+                </script>
+
+                <!-- Message -->
+                <div class="form-group">
+                    <label class="control-label">Notes</label>
+                    <textarea class="form-control rounded-0" id="productInfo" rows="3" placeholder="Notes..."></textarea>
+                </div>
+
+                <!-- Send button -->
+                <button class="btn btn-info btn-block" type="button" onclick="writeUserData();">Add</button>
+
+                <script>
+                  function resetForm(){
+                    document.getElementById("myForm").reset();
+                    location.reload();
+                  }
+                </script>
+                <br>
+                <button class="btn btn-info btn-block" type="button" onclick="resetForm();">Clear Form</button>
+                <br>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="footer"></div>
+    <script>
+      $(document).ready(function () {
+        $('#footer').load('reusablefooter.html');
+      });
+    </script>
+
+    <script src="search.js"></script>
+</body>
+</html>
