@@ -5,182 +5,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gardyn</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <!-- JQuery Reusable Header Functionality -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-  <link href="stylesheets/style.css" rel="stylesheet">
-
-  <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
-  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
-  <link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css'>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-
-  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
-
-  <script src="authentication.js"></script>
+  
+  <!-- Our modifications -->
+  <link href="/stylesheets/style.css" rel="stylesheet">
+  
 </head>
 
 <body class="bg-dark">
 
   <div id="header"></div>
-  <script>
-    $(document).ready(function () {
-      $('#header').load('reusableheader.html');
-    });
-  </script>
-
-  <script>
-
-    //Populate the DOM with a dynamic list of Bootstrap card elements,
-    //with data taken from the RTDB
-    function chooseCategory(input){
-      if(input == 1) return "Fruits & Veggies";
-      else if (input == 2) return "Meat & Protein";
-      else if (input == 3) return "Breads & Cereals";
-      else if (input == 4) return "Milk & Dairy";
-      else if (input == 5) return "Junk Food";
-      else if (input == 6) return "Misc.";
-      else return "null";
-    }
-
-    function getAllElementsOfChild(childName) {
-
-      var config = {
-        apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
-        authDomin: "gardynapp.firebaseapp.com",
-        databaseURL: "https://gardynapp.firebaseio.com/",
-        storageBucket: "gardynapp.appspot.com"
-      };
-
-      if (!firebase.apps.length) {
-        firebase.initializeApp(config);
-      }
-
-      var db = firebase.database();
-      var ref = db.ref(childName);
-
-      //TODO: Access the fresh tracker on a user basis
-      ref.on("value", function (snapshot) {
-        snapshot.forEach((child) => {
-          var pE = child.val().productExperationDate;
-          var pN = child.val().productName;
-          var pC = child.val().productCategory;
-          var pP = child.val().productPurchaseDate;
-          var pNotes = child.val().productInfo;
-
-            if(pN != undefined){
-              var currentDate = new Date();
-              var expirationDate = new Date(
-                parseInt(pE.substring(6, 10)),
-                parseInt(pE.substring(0, 2)) - 1,
-                parseInt(pE.substring(3, 5)));
-
-              var purchaseDate = new Date(
-                parseInt(pP.substring(6, 10)),
-                parseInt(pP.substring(0, 2)) - 1,
-                parseInt(pP.substring(3, 5)));
-
-              const DAY_IN_MILLI = 1000 * 60 * 60 * 24
-              var timeUntilExpiration = Math.floor(Math.abs(expirationDate - currentDate) / DAY_IN_MILLI);
-              var totalTime = Math.floor(Math.abs(expirationDate - purchaseDate) / DAY_IN_MILLI);
-
-              var progress = document.createElement("div");
-              progress.classList.add("progress");
-
-              var progressBar = document.createElement("div");
-              progressBar.classList.add("progress-bar");
-              progressBar.setAttribute("role", "progressbar");
-              progressBar.setAttribute("aria-valuemin", 0);
-              progressBar.setAttribute("aria-valuemax", totalTime);
-              progressBar.setAttribute("aria-valuenow", 50);
-              progressBar.setAttribute('style','width:'+ ((timeUntilExpiration / totalTime) * 100) +'%');
-              var progressLabel = document.createTextNode(timeUntilExpiration + " / " + totalTime + " Days Left");
-              progressBar.appendChild(progressLabel);
-
-              if((timeUntilExpiration / totalTime) <= 0.33) {
-                progressBar.classList.add("bg-danger");
-              } else if ((timeUntilExpiration / totalTime) <= 0.7) {
-                progressBar.classList.add("bg-warning");
-              } else if ((timeUntilExpiration / totalTime) < 1) {
-                progressBar.classList.add("bg-success");
-              }
-
-              var card = document.createElement("div");
-              card.classList.add("card");
-              card.classList.add("bg-secondary");
-
-              var cardHeader = document.createElement("div");
-              cardHeader.classList.add("card-header");
-              var name = document.createTextNode(pN);
-              cardHeader.appendChild(name);
-              progress.appendChild(progressBar);
-              cardHeader.appendChild(progress);
-              cardHeader.classList.add("bg-secondary");
-              card.classList.add("text-light");
-
-              var cardBody = document.createElement("div");
-              cardBody.classList.add("card-body");
-              cardBody.classList.add("bg-secondary");
-              cardBody.classList.add("text-light");
-
-              var cardFooter = document.createElement("div");
-              cardFooter.classList.add("card-footer");
-
-              var node = document.createTextNode( "Product Category: " + chooseCategory(pC) +
-                                                "\nPurchase Date: " + pP +
-                                                "\nExpiration Date: " + pE +
-                                                "\nNotes: " + pNotes
-
-              );
-
-              cardBody.appendChild(node);
-
-              //TODO: Access the freshtracker for a particular user and mark
-              //entries as thrown away or used
-              var usedButton = document.createElement("BUTTON");
-              usedButton.innerHTML = "Use";
-              usedButton.onclick = function(){
-
-              };
-
-              var throwawayButton = document.createElement("BUTTON");
-              throwawayButton.innerHTML = "Thrown Away";
-              throwawayButton.onclick = function(){
-
-              };
-
-              //TODO: space buttons evenly and style buttons
-              cardFooter.appendChild(usedButton);
-              cardFooter.appendChild(throwawayButton);
-
-              card.appendChild(cardHeader);
-              card.appendChild(cardBody);
-              card.appendChild(cardFooter);
-
-              var entry = document.createElement("div");
-              entry.classList.add("col-lg-6");
-              entry.classList.add("my-sm-3");
-              entry.appendChild(card);
-
-              var element = document.getElementById("d1");
-              element.appendChild(entry);
-          }//end if
-        });
-      });
-
-      // Attach an asynchronous callback to read the data at our posts reference
-      ref.on("value", function (snapshot) {
-        console.log(snapshot.val());
-      }, function (errorObject) {
-        console.log("The read failed: " + errorObject.code);
-      });
-
-    }
-  </script>
 
   <h1 class="display-4 text-light text-center">FreshTracker</h1>
 
@@ -192,13 +31,73 @@
     </div>
   </div>
 
+  <div class="container" style="background-color: gray;">
+      <div class="row">
+        <div id="thrownaway"> 
+            <h2>Thrown Away: 
+              <script>
+              document.write(thrownAway);
+              </script>
+              </h2>
+        </div>
+      </div>
+      <div class="row">
+        <div id="used">
+            <h2>Used:             
+              <script>
+              document.write(usedUp);
+              </script>
+            </h2>
+        </div>
+      </div>
+  </div>
+
+
   <div id="footer"></div>
-  <script>
-    $(document).ready(function () {
-      $('#footer').load('reusablefooter.html');
-    });
-  </script>
+
+
+
+  <!-- Bootstrap -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+  <!-- For Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
+
+  <!-- Initialize Firebase -->
+  <script src="/js/init-firebase.js"></script>
+
+  <!-- Our Javascript -->
+  <script src="/js/authentication.js"></script>
+  <script src="/js/getFirebaseInfo.js"></script>
+  <script src="/js/freshtracker.js"></script>
+
+    <!-- In HTML script -->
+    <script>
+      var config = {
+        apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
+        authDomin: "gardynapp.firebaseapp.com",
+        databaseURL: "https://gardynapp.firebaseio.com/",
+        storageBucket: "gardynapp.appspot.com"
+      };
+  
+      if (!firebase.apps.length) {
+        firebase.initializeApp(config);
+      }
+  
+      $(document).ready(function () {
+        $('#header').load('reusableheader.html');
+      });
+  
+      $(document).ready(function () {
+        $('#footer').load('reusablefooter.html');
+      });
+  
+    </script>
+
 
 </body>
-
 </html>

@@ -4,24 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Gardyn</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-  <link href="stylesheets/style.css" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-  <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
-  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
-  <link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css'>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-
-    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
-	  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
-
-    <script src="authentication.js"></script>
-    <script src="getFirebaseInfo.js"></script>
+  <!-- JQuery Reusable Header Functionality -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  <!-- Our modifications -->
+  <link href="/stylesheets/style.css" rel="stylesheet">
+  
 </head>
 
 <style>
@@ -262,29 +253,48 @@
     <div class="fixed">
     </div>
 
-  </body>
 
-  <footer>
-    <div class="container-fluid-padding">
-      <div class="row text-center">
-        <div class="col-md-4">
-          <hr class="light">
-          <p>Vensan Cabardo</p>
-          <p>Kami Otero De Owens</p>
-          <p>Jared Van Natta</p>
-        </div>
-        <div class="col-md-4">
-          <hr class="light">
-          <h5>Copyright Information</h5>
-          <hr class="light">
-          <p>Go Green.</p>
-        </div>
-        <div class="col-md-4">
-          <hr class="light">
-          <p>Do it!</p>
-          <p>Saving the planet one human at a time.</p>
-        </div>
-      </div>
-    </div>
-  </footer>
+
+      <!-- Bootstrap -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+  <!-- For Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
+
+  <!-- Initialize Firebase -->
+  <script src="/js/init-firebase.js"></script>
+
+  <!-- Our Javascript -->
+  <script src="/js/authentication.js"></script>
+  <script src="/js/getFirebaseInfo.js"></script>
+  <script src="/js/freshtracker.js"></script>
+
+    <!-- In HTML script -->
+    <script>
+      var config = {
+        apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
+        authDomin: "gardynapp.firebaseapp.com",
+        databaseURL: "https://gardynapp.firebaseio.com/",
+        storageBucket: "gardynapp.appspot.com"
+      };
+  
+      if (!firebase.apps.length) {
+        firebase.initializeApp(config);
+      }
+  
+      $(document).ready(function () {
+        $('#header').load('reusableheader.html');
+      });
+  
+      $(document).ready(function () {
+        $('#footer').load('reusablefooter.html');
+      });
+  
+    </script>
+
+  </body>
   </html>

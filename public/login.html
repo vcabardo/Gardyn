@@ -5,39 +5,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gardyn</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- JQuery Reusable Header Functionality -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-    <link href="stylesheets/style.css" rel="stylesheet">
-
-    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-
-
-    <!-- Needed to use Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-database.js"></script>
-
-    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-analytics.js"></script>
-
-    <!-- Add Firebase products that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
-
-    <script src="authentication.js"></script>
+    
+    <!-- Our modifications -->
+    <link href="/stylesheets/style.css" rel="stylesheet">
 
 </head>
 
 <body>
 
     <!-- Load the header using jQuery. Inspiration: https://medium.com/@AmyScript/how-to-reduce-reuse-and-recycle-your-code-389e6742e4ac-->
-    <script>
-        $(document).ready(function() {
-            $('#header').load('reusableheader.html');
-        });
-    </script>
 
     <div class="jumbotron img-fluid">
         <img href='#' src="img/zerowaste.jpg">
@@ -75,11 +56,52 @@
 
 
     <div id="footer"></div>
+
+
+
+
+
+
+
+  <!-- Bootstrap -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+  <!-- For Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
+
+  <!-- Initialize Firebase -->
+  <script src="/js/init-firebase.js"></script>
+
+  <!-- Our Javascript -->
+  <script src="/js/authentication.js"></script>
+  <script src="/js/getFirebaseInfo.js"></script>
+  <script src="/js/freshtracker.js"></script>
+
+    <!-- In HTML script -->
     <script>
+      var config = {
+        apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
+        authDomin: "gardynapp.firebaseapp.com",
+        databaseURL: "https://gardynapp.firebaseio.com/",
+        storageBucket: "gardynapp.appspot.com"
+      };
+  
+      if (!firebase.apps.length) {
+        firebase.initializeApp(config);
+      }
+  
+      $(document).ready(function () {
+        $('#header').load('reusableheader.html');
+      });
+  
       $(document).ready(function () {
         $('#footer').load('reusablefooter.html');
       });
+  
     </script>
-
 </body>
 </html>

@@ -1,3 +1,8 @@
+function writeandreset(){
+  writeUserData()
+  resetForm();
+}
+
 function writeUserData() {
     var pName = document.getElementById("productName").value;
     var pCat = document.getElementById("productCategory").value;
@@ -16,14 +21,27 @@ function writeUserData() {
       firebase.initializeApp(config);
 
 
-    firebase.database().ref('addItem/' + pName).set({
+      firebase.database().ref('addItem/' + pName).set({
         productName: pName,
         productCategory: pCat,
         productPurchaseDate: pPurDate,
         productExperationDate: pExpDate,
         productInfo: pInfo
-    });
+      }, (error) => {
+        if (error) {
+          console.log("Error: Did not insert into database.");
+        } else {
+          resetForm();
+        }
+      });
+
+    
+  }
 }
+
+function resetForm(){
+  document.getElementById("myForm").reset();
+  location.reload();
 }
 
 //Populate the DOM with a dynamic list of Bootstrap card elements,

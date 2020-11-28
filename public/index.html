@@ -5,92 +5,61 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gardyn</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <!-- JQuery Reusable Header Functionality -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-  <link href="stylesheets/style.css" rel="stylesheet">
+  
+  <!-- Our modifications -->
+  <link href="/stylesheets/style.css" rel="stylesheet">
 
-  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
+<!-- IN HTML Modifications -->
+<style>
+  .btn-circle.btn-xl {
+      width: 180px;
+      height: 150px;
+      border-radius: 35px;
+      font-size: 24px;
+      text-align: center;
+  }
 
-
-  <script src="authentication.js"></script>
-  <script src="getFirebaseInfo.js"></script>
-
-<style type="text/css">
-        .btn-circle.btn-xl {
-            width: 180px;
-            height: 150px;
-            border-radius: 35px;
-            font-size: 24px;
-            text-align: center;
-        }
-
-        .counter
-{
-    background-color: #eaecf0;
-    text-align: center;
-}
-.counterPadding
-{
-    margin-top: 70px;
-    margin-bottom: 70px;
-}
-.counter-count
-{
-    font-size: 18px;
-    background-color: #00b3e7;
-    border-radius: 50%;
-    position: relative;
-    color: #ffffff;
-    text-align: center;
-    line-height: 92px;
-    width: 92px;
-    height: 92px;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    display: inline-block;
-}
-
-.counterText
-{
-    font-size: 24px;
-    color: #000000;
-    line-height: 34px;
-}
-    </style>
-
-
+  .counter{
+      background-color: #eaecf0;
+      text-align: center;
+  }
+  .counterPadding{
+      margin-top: 70px;
+      margin-bottom: 70px;
+  }
+  .counter-count{
+      font-size: 18px;
+      background-color: #00b3e7;
+      border-radius: 50%;
+      position: relative;
+      color: #ffffff;
+      text-align: center;
+      line-height: 92px;
+      width: 92px;
+      height: 92px;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%;
+      display: inline-block;
+  }
+  .counterText{
+      font-size: 24px;
+      color: #000000;
+      line-height: 34px;
+  }
 </style>
 
 </head>
 
 <body class="bg-dark">
   <!-- Load the header using jQuery. Inspiration: https://medium.com/@AmyScript/how-to-reduce-reuse-and-recycle-your-code-389e6742e4ac-->
-
-  <script>
-    $(document).ready(function () {
-      $('#header').load('reusableheader.html');
-    });
-  </script>
-
-  <script type="text/javascript">
-    var config = {
-      apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
-      authDomin: "gardynapp.firebaseapp.com",
-      databaseURL: "https://gardynapp.firebaseio.com/",
-      storageBucket: "gardynapp.appspot.com"
-    };
-
-    if (!firebase.apps.length) {
-      firebase.initializeApp(config);
-    }
-  </script>
 
   <div id="header"></div>
 
@@ -118,7 +87,6 @@
     </a>
   </div>
 
-
   <hr class="my-4">
 
   <div class="container text-light">
@@ -135,7 +103,6 @@
       </div>
     </div>
   </div>
-
 
   <hr class="my-4">
 
@@ -176,31 +143,72 @@
       <p class="text-light">Learn more: <a class="text-muted" href="https://www.rts.com/resources/guides/food-waste-america/">https://www.rts.com/resources/guides/food-waste-america/</a></p>
   </div>
 
-  <script>
-
-    $('.counter-count').each(function () {
-      $(this).prop('Counter',0).animate({
-          Counter: $(this).text()
-      }, {
-          duration: 7000,
-          easing: 'swing',
-          step: function (now) {
-              $(this).text(Math.ceil(now));
-          }
-      });
-  });
-
-  </script>
-
-
   <div id="footer"></div>
-  <script>
-    $(document).ready(function () {
-      $('#footer').load('reusablefooter.html');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Bootstrap -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+  <!-- For Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
+
+  <!-- Initialize Firebase -->
+  <script src="/js/init-firebase.js"></script>
+
+  <!-- Our Javascript -->
+  <script src="/js/authentication.js"></script>
+  <script src="/js/getFirebaseInfo.js"></script>
+
+    <!-- In HTML script -->
+    <script>
+      var config = {
+        apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
+        authDomin: "gardynapp.firebaseapp.com",
+        databaseURL: "https://gardynapp.firebaseio.com/",
+        storageBucket: "gardynapp.appspot.com"
+      };
+  
+      if (!firebase.apps.length) {
+        firebase.initializeApp(config);
+      }
+  
+      $(document).ready(function () {
+        $('#header').load('reusableheader.html');
+      });
+  
+      $(document).ready(function () {
+        $('#footer').load('reusablefooter.html');
+      });
+  
+      $('.counter-count').each(function () {
+        $(this).prop('Counter',0).animate({
+            Counter: $(this).text()
+        }, {
+            duration: 7000,
+            easing: 'swing',
+            step: function (now) {
+                $(this).text(Math.ceil(now));
+            }
+        });
     });
-  </script>
+    </script>
 
 
 </body>
-
 </html>
