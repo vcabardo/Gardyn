@@ -1,8 +1,7 @@
-var usedUp = 0;
-var thrownAway = 0;
 
 //Populate the DOM with a dynamic list of Bootstrap card elements,
 //with data taken from the RTDB
+
 function chooseCategory(input) {
   if (input == 1) return "Fruits & Veggies";
   else if (input == 2) return "Meat & Protein";
@@ -13,7 +12,7 @@ function chooseCategory(input) {
   else return "null";
 }
 
-function getAllElementsOfChild(childName) {
+function getAllElementsOfChildFT(childName) {
 
   var config = {
     apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
@@ -100,7 +99,6 @@ function getAllElementsOfChild(childName) {
           "\nPurchase Date: " + pP +
           "\nExpiration Date: " + pE +
           "\nNotes: " + pNotes
-
         );
 
         cardBody.appendChild(node);
@@ -110,19 +108,17 @@ function getAllElementsOfChild(childName) {
         var usedButton = document.createElement("BUTTON");
         usedButton.innerHTML = "Use";
         usedButton.onclick = function () {
-          usedUp = usedUp + 1;
-          let dref = db.ref('addItem/' + pN);
-          dref.remove()
-          location.reload();
+             //let dref = db.ref('addItem/' + pN);
+             //dref.remove()
+             //location.reload();
         };
 
         var throwawayButton = document.createElement("BUTTON");
         throwawayButton.innerHTML = "Thrown Away";
         throwawayButton.onclick = function () {
-          thrownAway = thrownAway + 1;
-          let dref = db.ref('addItem/' + pN);
-          dref.remove()
-          location.reload();
+             //let dref = db.ref('addItem/' + pN);
+             //dref.remove()
+             //location.reload();
         };
 
         //TODO: space buttons evenly and style buttons

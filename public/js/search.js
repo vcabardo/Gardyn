@@ -1,7 +1,4 @@
-function writeandreset(){
-  writeUserData()
-  resetForm();
-}
+
 
 function writeUserData() {
     var pName = document.getElementById("productName").value;
