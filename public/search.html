@@ -7,8 +7,8 @@
   <title>Gardyn</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+
 
   <!-- Our modifications -->
   <link href="/stylesheets/style.css" rel="stylesheet">
@@ -73,7 +73,6 @@
               <input class="form-control" id="dateExpire" name="date" placeholder="MM/DD/YYYY" type="text" />
             </div>
 
-
             <!-- Message -->
             <div class="form-group">
               <label class="control-label">Notes</label>
@@ -97,12 +96,12 @@
 
 
 
+
   <!-- JQuery Reusable Header Functionality -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 
   <!-- Bootstrap -->
-
-  <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
@@ -141,17 +140,21 @@
     });
 
 
-    $(document).ready(function () {
-      var date_input = $('input[name="date"]'); //our date input has the name "date"
-      var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
-      var options = {
-        format: 'mm/dd/yyyy',
-        container: container,
-        todayHighlight: true,
-        autoclose: true,
-      };
-      date_input.datepicker(options);
-    })
+    function dateHelper(){
+      $(document).ready(function () {
+                var date_input = $('input[name="date"]'); //our date input has the name "date"
+                var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+                var options = {
+                  format: 'mm/dd/yyyy',
+                  container: container,
+                  todayHighlight: true,
+                  autoclose: true,
+                };
+                date_input.datepicker(options);
+              })
+    }
+
+
   </script>
 
 </body>

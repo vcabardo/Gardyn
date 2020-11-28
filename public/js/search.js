@@ -1,6 +1,7 @@
 
 
 function writeUserData() {
+
     var pName = document.getElementById("productName").value;
     var pCat = document.getElementById("productCategory").value;
     var pPurDate = document.getElementById("datePurchased").value;
@@ -16,7 +17,7 @@ function writeUserData() {
 
     if (!firebase.apps.length) {
       firebase.initializeApp(config);
-
+    }
 
       firebase.database().ref('addItem/' + pName).set({
         productName: pName,
@@ -28,12 +29,11 @@ function writeUserData() {
         if (error) {
           console.log("Error: Did not insert into database.");
         } else {
+          console.log("Success");
           resetForm();
         }
       });
-
     
-  }
 }
 
 function resetForm(){

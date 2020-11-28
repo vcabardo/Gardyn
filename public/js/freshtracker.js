@@ -1,4 +1,4 @@
-
+console.log("Here???");
 //Populate the DOM with a dynamic list of Bootstrap card elements,
 //with data taken from the RTDB
 
@@ -148,3 +148,5 @@ function getAllElementsOfChildFT(childName) {
   });
 
 }
+
+getAllElementsOfChildFT("addItem/");
