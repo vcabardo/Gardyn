@@ -7,13 +7,9 @@
     <title>Gardyn</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 
-    <!-- JQuery Reusable Header Functionality -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-    
     <!-- Our modifications -->
     <link href="/stylesheets/style.css" rel="stylesheet">
 
@@ -33,12 +29,14 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Sign Up</h5>
                         <div class="form-label-group">
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address"
+                                required autofocus>
                             <label for="inputEmail"></label>
                         </div>
 
                         <div class="form-label-group">
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                            <input type="password" id="inputPassword" class="form-control" placeholder="Password"
+                                required>
                             <label for="inputPassword"></label>
                         </div>
 
@@ -47,7 +45,8 @@
                             <label for="inputUsername"></label>
                         </div>
 
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" onclick="signUpUser()">Sign Up</button>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"
+                            onclick="signUpUser()">Sign Up</button>
                         <hr class="my-4">
                     </div>
                 </div>
@@ -60,47 +59,48 @@
 
 
 
+    <!-- JQuery Reusable Header Functionality -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
-         <!-- Bootstrap -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <!-- For Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
 
-  <!-- For Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
+    <!-- Initialize Firebase -->
+    <script src="/js/init-firebase.js"></script>
 
-  <!-- Initialize Firebase -->
-  <script src="/js/init-firebase.js"></script>
+    <!-- Our Javascript -->
+    <script src="/js/authentication.js"></script>
 
-  <!-- Our Javascript -->
-  <script src="/js/authentication.js"></script>
-  <script src="/js/getFirebaseInfo.js"></script>
-
-      <!-- In HTML script -->
-      <script>
+    <!-- In HTML script -->
+    <script>
         var config = {
-          apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
-          authDomin: "gardynapp.firebaseapp.com",
-          databaseURL: "https://gardynapp.firebaseio.com/",
-          storageBucket: "gardynapp.appspot.com"
+            apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
+            authDomin: "gardynapp.firebaseapp.com",
+            databaseURL: "https://gardynapp.firebaseio.com/",
+            storageBucket: "gardynapp.appspot.com"
         };
-    
+
         if (!firebase.apps.length) {
-          firebase.initializeApp(config);
+            firebase.initializeApp(config);
         }
-    
+
         $(document).ready(function () {
-          $('#header').load('reusableheader.html');
+            $('#header').load('reusableheader.html');
         });
-    
+
         $(document).ready(function () {
-          $('#footer').load('reusablefooter.html');
+            $('#footer').load('reusablefooter.html');
         });
-    
-      </script>
+    </script>
 
 
 </body>
+
 </html>

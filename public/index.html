@@ -9,31 +9,30 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-    <!-- JQuery Reusable Header Functionality -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  
   <!-- Our modifications -->
   <link href="/stylesheets/style.css" rel="stylesheet">
 
-<!-- IN HTML Modifications -->
-<style>
-  .btn-circle.btn-xl {
+  <!-- IN HTML Modifications -->
+  <style>
+    .btn-circle.btn-xl {
       width: 180px;
       height: 150px;
       border-radius: 35px;
       font-size: 24px;
       text-align: center;
-  }
+    }
 
-  .counter{
+    .counter {
       background-color: #eaecf0;
       text-align: center;
-  }
-  .counterPadding{
+    }
+
+    .counterPadding {
       margin-top: 70px;
       margin-bottom: 70px;
-  }
-  .counter-count{
+    }
+
+    .counter-count {
       font-size: 18px;
       background-color: #00b3e7;
       border-radius: 50%;
@@ -48,13 +47,14 @@
       -ms-border-radius: 50%;
       -o-border-radius: 50%;
       display: inline-block;
-  }
-  .counterText{
+    }
+
+    .counterText {
       font-size: 24px;
       color: #000000;
       line-height: 34px;
-  }
-</style>
+    }
+  </style>
 
 </head>
 
@@ -99,7 +99,8 @@
       <div class="col text-center">
         <h3>Step 2:</h3>
         <h5>View your FreshTracker:</h5>
-        <button type="button" class="btn btn-primary btn-circle btn-xl"><a href="freshtracker.html">FreshTracker</a></button>
+        <button type="button" class="btn btn-primary btn-circle btn-xl"><a
+            href="freshtracker.html">FreshTracker</a></button>
       </div>
     </div>
   </div>
@@ -108,39 +109,41 @@
 
   <!-- https://bootsnipp.com/snippets/5K6WW -->
   <div class="counter bg-dark">
-      <div class="container">
-          <div class="row">
-              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                  <div class="counterPadding">
-                      <p class="counter-count">80</p>
-                      <p class="counterText text-light">BILLION pounds of food thrown away in the US every year</p>
-                  </div>
-              </div>
-
-              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                  <div class="counterPadding">
-                      <p class="counter-count">1600</p>
-                      <p class="counterText text-light">dollars of produce THROWN AWAY by an average family of four each year</p>
-                  </div>
-              </div>
-
-              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                  <div class="counterPadding">
-                      <p class="counter-count">219</p>
-                      <p class="counterText text-light">pounds thrown awar PER PERSON</p>
-                  </div>
-              </div>
-
-              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                  <div class="counterPadding">
-                      <p class="counter-count">40</p>
-                      <p class="counterText text-light">percent of the US food supply WASTED each year</p>
-                  </div>
-              </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+          <div class="counterPadding">
+            <p class="counter-count">80</p>
+            <p class="counterText text-light">BILLION pounds of food thrown away in the US every year</p>
           </div>
-      </div>
+        </div>
 
-      <p class="text-light">Learn more: <a class="text-muted" href="https://www.rts.com/resources/guides/food-waste-america/">https://www.rts.com/resources/guides/food-waste-america/</a></p>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+          <div class="counterPadding">
+            <p class="counter-count">1600</p>
+            <p class="counterText text-light">dollars of produce THROWN AWAY by an average family of four each year</p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+          <div class="counterPadding">
+            <p class="counter-count">219</p>
+            <p class="counterText text-light">pounds thrown awar PER PERSON</p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+          <div class="counterPadding">
+            <p class="counter-count">40</p>
+            <p class="counterText text-light">percent of the US food supply WASTED each year</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="text-light">Learn more: <a class="text-muted"
+        href="https://www.rts.com/resources/guides/food-waste-america/">https://www.rts.com/resources/guides/food-waste-america/</a>
+    </p>
   </div>
 
   <div id="footer"></div>
@@ -157,7 +160,8 @@
 
 
 
-
+  <!-- JQuery Reusable Header Functionality -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <!-- Bootstrap -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -173,41 +177,41 @@
 
   <!-- Our Javascript -->
   <script src="/js/authentication.js"></script>
-  <script src="/js/getFirebaseInfo.js"></script>
 
-    <!-- In HTML script -->
-    <script>
-      var config = {
-        apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
-        authDomin: "gardynapp.firebaseapp.com",
-        databaseURL: "https://gardynapp.firebaseio.com/",
-        storageBucket: "gardynapp.appspot.com"
-      };
-  
-      if (!firebase.apps.length) {
-        firebase.initializeApp(config);
-      }
-  
-      $(document).ready(function () {
-        $('#header').load("/reusableheader.html");
-      });
-  
-      $(document).ready(function () {
-        $('#footer').load("/reusablefooter.html");
-      });
-  
-      $('.counter-count').each(function () {
-        $(this).prop('Counter',0).animate({
-            Counter: $(this).text()
-        }, {
-            duration: 7000,
-            easing: 'swing',
-            step: function (now) {
-                $(this).text(Math.ceil(now));
-            }
-        });
+  <!-- In HTML script -->
+  <script>
+    var config = {
+      apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
+      authDomin: "gardynapp.firebaseapp.com",
+      databaseURL: "https://gardynapp.firebaseio.com/",
+      storageBucket: "gardynapp.appspot.com"
+    };
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+    }
+
+    $(document).ready(function () {
+      $('#header').load("/reusableheader.html");
     });
-    </script>
+
+    $(document).ready(function () {
+      $('#footer').load("/reusablefooter.html");
+    });
+
+    //for counters
+    $('.counter-count').each(function () {
+      $(this).prop('Counter', 0).animate({
+        Counter: $(this).text()
+      }, {
+        duration: 7000,
+        easing: 'swing',
+        step: function (now) {
+          $(this).text(Math.ceil(now));
+        }
+      });
+    });
+  </script>
 
 
 </body>

@@ -8,9 +8,6 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-    <!-- JQuery Reusable Header Functionality -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    
     <!-- Our modifications -->
     <link href="/stylesheets/style.css" rel="stylesheet">
 
@@ -19,6 +16,7 @@
 <body>
 
     <!-- Load the header using jQuery. Inspiration: https://medium.com/@AmyScript/how-to-reduce-reuse-and-recycle-your-code-389e6742e4ac-->
+    <div id="header"></div>
 
     <div class="jumbotron img-fluid">
         <img href='#' src="img/zerowaste.jpg">
@@ -62,7 +60,10 @@
 
 
 
-
+    
+    <!-- JQuery Reusable Header Functionality -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
   <!-- Bootstrap -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -78,8 +79,6 @@
 
   <!-- Our Javascript -->
   <script src="/js/authentication.js"></script>
-  <script src="/js/getFirebaseInfo.js"></script>
-  <script src="/js/freshtracker.js"></script>
 
     <!-- In HTML script -->
     <script>
