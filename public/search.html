@@ -7,7 +7,9 @@
   <title>Gardyn</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 
   <!-- Our modifications -->
@@ -140,21 +142,17 @@
     });
 
 
-    function dateHelper(){
-      $(document).ready(function () {
-                var date_input = $('input[name="date"]'); //our date input has the name "date"
-                var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
-                var options = {
-                  format: 'mm/dd/yyyy',
-                  container: container,
-                  todayHighlight: true,
-                  autoclose: true,
-                };
-                date_input.datepicker(options);
-              })
-    }
-
-
+    $(document).ready(function () {
+      var date_input = $('input[name="date"]'); //our date input has the name "date"
+      var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+      var options = {
+        format: 'mm/dd/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    })
   </script>
 
 </body>

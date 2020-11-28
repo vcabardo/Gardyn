@@ -1,4 +1,3 @@
-console.log("Here???");
 //Populate the DOM with a dynamic list of Bootstrap card elements,
 //with data taken from the RTDB
 
@@ -108,17 +107,17 @@ function getAllElementsOfChildFT(childName) {
         var usedButton = document.createElement("BUTTON");
         usedButton.innerHTML = "Use";
         usedButton.onclick = function () {
-             //let dref = db.ref('addItem/' + pN);
-             //dref.remove()
-             //location.reload();
+             let dref = db.ref('addItem/' + pN);
+             dref.remove()
+             location.reload();
         };
 
         var throwawayButton = document.createElement("BUTTON");
         throwawayButton.innerHTML = "Thrown Away";
         throwawayButton.onclick = function () {
-             //let dref = db.ref('addItem/' + pN);
-             //dref.remove()
-             //location.reload();
+             let dref = db.ref('addItem/' + pN);
+             dref.remove()
+             location.reload();
         };
 
         //TODO: space buttons evenly and style buttons
