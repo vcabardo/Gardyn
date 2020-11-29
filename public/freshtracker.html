@@ -8,9 +8,9 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  
+
   <!-- Our modifications -->
-  <link href="/stylesheets/style.css" rel="stylesheet">
+  <link href="/public/stylesheets/style.css" rel="stylesheet">
 </head>
 
 <body class="bg-dark">
@@ -47,8 +47,8 @@
   <script src="/js/init-firebase.js"></script>
 
   <!-- Our Javascript -->
-  <script src="/js/authentication.js"></script>
-  <script src="/js/freshtracker.js"></script>
+  <script src="/public/js/authentication.js"></script>
+  <script src="/public/js/freshtracker.js"></script>
 
     <!-- In HTML script -->
     <script>
@@ -58,19 +58,19 @@
         databaseURL: "https://gardynapp.firebaseio.com/",
         storageBucket: "gardynapp.appspot.com"
       };
-  
+
       if (!firebase.apps.length) {
         firebase.initializeApp(config);
       }
-  
+
       $(document).ready(function () {
         $('#header').load("reusableheader.html");
       });
-  
+
       $(document).ready(function () {
         $('#footer').load('reusablefooter.html');
       });
-  
+
     </script>
 
 

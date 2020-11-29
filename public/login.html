@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <!-- Our modifications -->
-    <link href="/stylesheets/style.css" rel="stylesheet">
+    <link href="/public/stylesheets/style.css" rel="stylesheet">
 
 </head>
 
@@ -60,10 +60,10 @@
 
 
 
-    
+
     <!-- JQuery Reusable Header Functionality -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    
+
   <!-- Bootstrap -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -75,10 +75,10 @@
   <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
 
   <!-- Initialize Firebase -->
-  <script src="/js/init-firebase.js"></script>
+  <script src="/public/js/init-firebase.js"></script>
 
   <!-- Our Javascript -->
-  <script src="/js/authentication.js"></script>
+  <script src="/public/js/authentication.js"></script>
 
     <!-- In HTML script -->
     <script>
@@ -88,19 +88,19 @@
         databaseURL: "https://gardynapp.firebaseio.com/",
         storageBucket: "gardynapp.appspot.com"
       };
-  
+
       if (!firebase.apps.length) {
         firebase.initializeApp(config);
       }
-  
+
       $(document).ready(function () {
         $('#header').load('reusableheader.html');
       });
-  
+
       $(document).ready(function () {
         $('#footer').load('reusablefooter.html');
       });
-  
+
     </script>
 </body>
 </html>
