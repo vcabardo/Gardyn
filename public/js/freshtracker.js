@@ -100,14 +100,18 @@ function getAllElementsOfChildFT(childName) {
               expirationDateDiv.appendChild(expirationDateNode);
               cardBody.appendChild(expirationDateDiv);
 
+
               //TODO: Access the freshtracker for a particular user and mark
               //entries as thrown away or used - add to stat page
               var usedButton = document.createElement("BUTTON");
               usedButton.innerHTML = "Use";
-              usedButton.onclick = function () {
-                   let dref = db.ref('addItem/' + pN);
-                   dref.remove()
-                   location.reload();
+              usedButton.setAttribute("data-toggle", "modal");
+              usedButton.setAttribute("data-target", "#useItemModal");
+
+              usedButton.onclick = function() {
+                document.getElementById("productNameUse").value = pN;
+                document.getElementById("dateUsed").value = getFormattedDate(currentDate); 
+                document.getElementById("useConfirm").setAttribute("onclick", "useItem(\"" + pN + "\", \"" + getFormattedDate(currentDate) + "\");");
               };
 
               usedButton.classList.add("col-sm-6");
@@ -116,12 +120,14 @@ function getAllElementsOfChildFT(childName) {
 
               var throwawayButton = document.createElement("BUTTON");
               throwawayButton.innerHTML = "Thrown Away";
-              throwawayButton.onclick = function () {
-                   let dref = db.ref('addItem/' + pN);
-                   dref.remove()
-                   location.reload();
-              };
+              throwawayButton.setAttribute("data-toggle", "modal");
+              throwawayButton.setAttribute("data-target", "#throwAwayModal");
 
+              throwawayButton.onclick = function() {
+                document.getElementById("productNameThrowAway").value = pN;
+                document.getElementById("dateThrownAway").value = getFormattedDate(currentDate); 
+                document.getElementById("throwAwayConfirm").setAttribute("onclick", "throwAwayItem(\"" + pN + "\", \"" + getFormattedDate(currentDate) + "\");");
+                };
               throwawayButton.classList.add("col-sm-6");
               throwawayButton.classList.add("btn");
               throwawayButton.classList.add("btn-light");
@@ -157,6 +163,19 @@ function getAllElementsOfChildFT(childName) {
     console.log("The read failed: " + errorObject.code);
   });
 
+}
+
+// https://stackoverflow.com/questions/11591854/format-date-to-mm-dd-yyyy-in-javascript
+function getFormattedDate(date) {
+  var year = date.getFullYear();
+
+  var month = (1 + date.getMonth()).toString();
+  month = month.length > 1 ? month : '0' + month;
+
+  var day = date.getDate().toString();
+  day = day.length > 1 ? day : '0' + day;
+  
+  return month + '/' + day + '/' + year;
 }
 
 function writeUserData() {
@@ -198,6 +217,54 @@ function writeUserData() {
         // No user is signed in.
       }
     });
+}
+
+function useItem(name, date) {
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      firebase.database().ref('Users/' + user.displayName + '/Collected/' + name).remove();
+      firebase.database().ref('Users/' + user.displayName + '/Stats/Used/' + name).set({
+        Name: name,
+        Date: date
+      }, (error) => {
+        if (error) {
+          console.log("Error: Did not insert into database.");
+        } else {
+          console.log("Success");
+          resetForm();
+        }
+      });
+    } else {
+      // No user is signed in.
+    }
+  });
+}
+
+function throwAwayItem(name, date) {
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      firebase.database().ref('Users/' + user.displayName + '/Collected/' + name).remove();
+      firebase.database().ref('Users/' + user.displayName + '/Stats/ThrownAway/' + name).set({
+        Name: name,
+        Date: date
+      }, (error) => {
+        if (error) {
+          console.log("Error: Did not insert into database.");
+        } else {
+          console.log("Success");
+          resetForm();
+        }
+      });
+    } else {
+      // No user is signed in.
+    }
+  });
+}
+
+function resetForm(){
+  location.reload();
 }
 
 getAllElementsOfChildFT("addItem/");

@@ -25,6 +25,78 @@
     </div>
   </div>
 
+    <!-- https://getbootstrap.com/docs/4.0/components/modal/ -->
+  <div class="modal" id="useItemModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Use Item</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Default form contact -->
+          <form class="container text-center text-light" id="myForm" action="#!">
+            <!-- Name -->
+            <label for="name">Name</label>
+            <input type="text" id="productNameUse" class="form-control mb-4" placeholder="Product Name">
+
+            <!-- Date -->
+            <div class="form-group">
+              <!-- Date input -->
+              <label class="control-label" for="date">Date Used</label>
+              <input class="form-control" id="dateUsed" name="date" placeholder="MM/DD/YYYY" type="text" />
+            </div>
+
+            <!-- Send button -->
+            <button id="useConfirm" class="btn btn-info btn-block" type="button">Confirm</button>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+      <!-- https://getbootstrap.com/docs/4.0/components/modal/ -->
+      <div class="modal" id="throwAwayModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Throw Away Item</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!-- Default form contact -->
+              <form class="container text-center text-light" id="myForm" action="#!">
+                <!-- Name -->
+                <label for="name">Name</label>
+                <input type="text" id="productNameThrowAway" class="form-control mb-4" placeholder="Product Name">
+    
+                <!-- Date -->
+                <div class="form-group">
+                  <!-- Date input -->
+                  <label class="control-label" for="date">Date Thrown Away</label>
+                  <input class="form-control" id="dateThrownAway" name="date" placeholder="MM/DD/YYYY" type="text" />
+                </div>
+    
+                <!-- Send button -->
+                <button id="throwAwayConfirm" class="btn btn-info btn-block" type="button">Confirm</button>
+    
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
   <div id="footer"></div>
 
 
