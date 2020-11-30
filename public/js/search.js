@@ -1,7 +1,4 @@
-
-
 function writeUserData() {
-
     var pName = document.getElementById("productName").value;
     var pCat = document.getElementById("productCategory").value;
     var pPurDate = document.getElementById("datePurchased").value;
@@ -19,21 +16,41 @@ function writeUserData() {
       firebase.initializeApp(config);
     }
 
-      firebase.database().ref('addItem/' + pName).set({
-        productName: pName,
-        productCategory: pCat,
-        productPurchaseDate: pPurDate,
-        productExperationDate: pExpDate,
-        productInfo: pInfo
-      }, (error) => {
-        if (error) {
-          console.log("Error: Did not insert into database.");
-        } else {
-          console.log("Success");
-          resetForm();
-        }
-      });
-    
+    firebase.database().ref('AllItems').push({
+      Name: pName,
+      ShelfLife: 5
+    }, (error) => {
+      if (error) {
+        console.log("Error: Did not insert into database.");
+      } else {
+        console.log("Success");
+        resetForm();
+      }
+    });
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        firebase.database().ref('Users/' + user.displayName + '/Collected/' + pName).set({
+          productName: pName,
+          productCategory: pCat,
+          productPurchaseDate: pPurDate,
+          productExperationDate: pExpDate,
+          productInfo: pInfo
+        }, (error) => {
+          if (error) {
+            console.log("Error: Did not insert into database.");
+          } else {
+            console.log("Success");
+            resetForm();
+          }
+        });
+      } else {
+        // No user is signed in.
+      }
+    });
+
+
 }
 
 function resetForm(){
@@ -53,8 +70,7 @@ function chooseCategory(input){
   else return "null";
 }
 
-function getAllElementsOfChild(childName) {
-
+function getAllElementsOfChild_myList(childName, id) {
   var config = {
     apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
     authDomin: "gardynapp.firebaseapp.com",
@@ -69,7 +85,6 @@ function getAllElementsOfChild(childName) {
   var db = firebase.database();
   var ref = db.ref(childName);
 
-  //TODO: Access the fresh tracker on a user basis
   ref.on("value", function (snapshot) {
     snapshot.forEach((child) => {
       var pE = child.val().productExperationDate;
@@ -86,7 +101,24 @@ function getAllElementsOfChild(childName) {
           var cardHeader = document.createElement("div");
           cardHeader.classList.add("card-header");
           var name = document.createTextNode(pN);
+
+          var addButton = document.createElement("BUTTON");
+          addButton.innerHTML = "+";
+          addButton.onclick = function () {
+            //TODO: set a listener to add the entry to the users list
+            //TODO: style button
+          };
+
+          var removeButton = document.createElement("BUTTON");
+          removeButton.innerHTML = "-";
+          removeButton.onclick = function () {
+            //TODO: set a listener to remove the entry from the users list
+            //TODO: style button
+          };
+
           cardHeader.appendChild(name);
+          cardHeader.appendChild(addButton);
+          cardHeader.appendChild(removeButton);
           cardHeader.classList.add("bg-secondary");
           card.classList.add("text-light");
 
@@ -103,11 +135,11 @@ function getAllElementsOfChild(childName) {
           card.appendChild(cardBody);
 
           var entry = document.createElement("div");
-          entry.classList.add("col-lg-6");
+          entry.classList.add("col-12");
           entry.classList.add("my-sm-3");
           entry.appendChild(card);
 
-          var element = document.getElementById("d1");
+          var element = document.getElementById(id);
           element.appendChild(entry);
       }//end if
     });
@@ -119,7 +151,89 @@ function getAllElementsOfChild(childName) {
   }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
   });
-
 }
 
-getAllElementsOfChild("addItem/");
+function getAllElementsOfChild_search(childName, id) {
+  var config = {
+    apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
+    authDomin: "gardynapp.firebaseapp.com",
+    databaseURL: "https://gardynapp.firebaseio.com/",
+    storageBucket: "gardynapp.appspot.com"
+  };
+
+  if (!firebase.apps.length) {
+    firebase.initializeApp(config);
+  }
+
+  var db = firebase.database();
+  var ref = db.ref(childName);
+
+  ref.on("value", function (snapshot) {
+    snapshot.forEach((child) => {
+      var name = child.val().Name;
+      var shelfLife = child.val().ShelfLife;
+
+        if(name != undefined){
+          var card = document.createElement("div");
+          card.classList.add("card");
+          card.classList.add("bg-secondary");
+
+          var cardHeader = document.createElement("div");
+          cardHeader.classList.add("card-header");
+          var nameText = document.createTextNode(name);
+          var addButton = document.createElement("BUTTON");
+          addButton.innerHTML = "+";
+          addButton.onclick = function () {
+            //TODO: set a listener to add the entry to the users list
+            //TODO: style button
+          };
+
+          cardHeader.appendChild(addButton);
+          cardHeader.appendChild(nameText);
+
+          cardHeader.classList.add("bg-secondary");
+          card.classList.add("text-light");
+
+          var cardBody = document.createElement("div");
+          cardBody.classList.add("card-body");
+          cardBody.classList.add("bg-secondary");
+          cardBody.classList.add("text-light");
+
+          var node = document.createTextNode( "Shelf Life: " + shelfLife + " Days");
+
+          cardBody.appendChild(node);
+
+          card.appendChild(cardHeader);
+          card.appendChild(cardBody);
+
+          var entry = document.createElement("div");
+          entry.classList.add("col-lg-6");
+          entry.classList.add("my-sm-3");
+          entry.appendChild(card);
+
+          var element = document.getElementById(id);
+          element.appendChild(entry);
+      }//end if
+    });
+  });
+
+  // Attach an asynchronous callback to read the data at our posts reference
+  ref.on("value", function (snapshot) {
+    console.log(snapshot.val());
+  }, function (errorObject) {
+    console.log("The read failed: " + errorObject.code);
+  });
+}
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    getAllElementsOfChild_myList('Users/' + user.displayName + '/Collected/', "d1");
+  } else {
+    // No user is signed in.
+  }
+});
+
+//TODO: Write the function for searching the list
+
+getAllElementsOfChild_search("AllItems/", "allitems");

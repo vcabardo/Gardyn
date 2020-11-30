@@ -20,20 +20,37 @@
   <!-- Load the header using jQuery. Inspiration: https://medium.com/@AmyScript/how-to-reduce-reuse-and-recycle-your-code-389e6742e4ac-->
 
   <div id="header"></div>
-
-  <h1 class="display-4 text-light text-center">Search</h1>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-info btn-block col" data-toggle="modal" data-target="#formModal">
+    Don't see your food on the list? Add A Food Item
+  </button>
 
   <div class="container">
-    <div id="d1" class="row"></div>
-  </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <h4 class="display-4 text-light text-center">Search</h4>
 
-  <!-- Button trigger modal -->
-  <p class="text-light text-center">Don't see your food on the list? </p>
-  <button type="button" class="btn btn-info btn-block col" data-toggle="modal" data-target="#formModal">
-    Add Food Item
-  </button>
-  <button class="btn btn-info btn-block col" type="button" onclick="location.href='freshtracker.html';">Go to
-    Freshtracker!</button>
+        <!-- <div class="input-group">
+          <input class="form-control py-2" type="search" value="Search for a food item" id="example-search-input">
+          <span class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button">
+                <i class="fa fa-search"></i>
+            </button>
+          </span>
+        </div> -->
+
+        <div id="allitems" class="row"></div>
+      </div>
+
+      <div class="col-lg-6">
+        <h4 class="display-4 text-light text-center">My List</h4>
+        <div class="container">
+          <div id="d1" class="row">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- https://getbootstrap.com/docs/4.0/components/modal/ -->
   <div class="modal" id="formModal" tabindex="-1" role="dialog">
