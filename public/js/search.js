@@ -221,6 +221,17 @@ firebase.auth().onAuthStateChanged(function(user) {
     getAllElementsOfChild_myList('Users/' + user.displayName + '/Collected/', "d1");
   } else {
     // No user is signed in.
+    document.getElementById("d1").innerHTML = "";
+    document.getElementById("d1").innerHTML = "";
+    var messageDiv = document.createElement("div");
+    messageDiv.classList.add("text-white");
+    messageDiv.classList.add("col");
+    var messageDivChild = document.createElement("div");
+    messageDiv.classList.add("text-center");
+    var messageNode = document.createTextNode("Please sign into an account to add items to your list");
+    messageDivChild.appendChild(messageNode);
+    messageDiv.appendChild(messageDivChild);
+    document.getElementById("d1").appendChild(messageDiv);
   }
 });
 

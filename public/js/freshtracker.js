@@ -110,7 +110,7 @@ function getAllElementsOfChildFT(childName) {
 
               usedButton.onclick = function() {
                 document.getElementById("productNameUse").value = pN;
-                document.getElementById("dateUsed").value = getFormattedDate(currentDate); 
+                document.getElementById("dateUsed").value = getFormattedDate(currentDate);
                 document.getElementById("useConfirm").setAttribute("onclick", "useItem(\"" + pN + "\", \"" + getFormattedDate(currentDate) + "\");");
               };
 
@@ -125,7 +125,7 @@ function getAllElementsOfChildFT(childName) {
 
               throwawayButton.onclick = function() {
                 document.getElementById("productNameThrowAway").value = pN;
-                document.getElementById("dateThrownAway").value = getFormattedDate(currentDate); 
+                document.getElementById("dateThrownAway").value = getFormattedDate(currentDate);
                 document.getElementById("throwAwayConfirm").setAttribute("onclick", "throwAwayItem(\"" + pN + "\", \"" + getFormattedDate(currentDate) + "\");");
                 };
               throwawayButton.classList.add("col-sm-6");
@@ -152,7 +152,16 @@ function getAllElementsOfChildFT(childName) {
       });
 
     } else {
-      // No user is signed in.
+      document.getElementById("d1").innerHTML = "";
+      var messageDiv = document.createElement("div");
+      messageDiv.classList.add("text-white");
+      messageDiv.classList.add("col");
+      var messageDivChild = document.createElement("div");
+      messageDiv.classList.add("text-center");
+      var messageNode = document.createTextNode("Please sign into an account to add items to your list");
+      messageDivChild.appendChild(messageNode);
+      messageDiv.appendChild(messageDivChild);
+      document.getElementById("d1").appendChild(messageDiv);
     }
   });
 
@@ -174,7 +183,7 @@ function getFormattedDate(date) {
 
   var day = date.getDate().toString();
   day = day.length > 1 ? day : '0' + day;
-  
+
   return month + '/' + day + '/' + year;
 }
 

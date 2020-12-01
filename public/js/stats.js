@@ -73,6 +73,19 @@ firebase.auth().onAuthStateChanged(function(user) {
     getAllElementsOfChild('Users/' + user.displayName + '/Stats/Used/', "d1");
     getAllElementsOfChild('Users/' + user.displayName + '/Stats/ThrownAway/', "d2");
   } else {
-    // No user is signed in.
+    document.getElementById("d1").innerHTML = "";
+    document.getElementById("d2").innerHTML = "";
+    var messageDiv = document.createElement("div");
+    messageDiv.classList.add("text-white");
+    messageDiv.classList.add("col");
+    var messageDivChild = document.createElement("div");
+    messageDiv.classList.add("text-center");
+    var messageNode = document.createTextNode("Please sign into an account to see your statistics");
+    messageDivChild.appendChild(messageNode);
+    messageDiv.appendChild(messageDivChild);
+    document.getElementById("d1").classList.remove("col-md-6");
+    document.getElementById("d2").classList.remove("col-md-6");
+    document.getElementById("d1").classList.add("col");
+    document.getElementById("d1").appendChild(messageDiv);
   }
 });
