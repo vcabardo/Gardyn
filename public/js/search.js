@@ -16,18 +16,6 @@ function writeUserData() {
       firebase.initializeApp(config);
     }
 
-    firebase.database().ref('AllItems').push({
-      Name: pName,
-      ShelfLife: 5
-    }, (error) => {
-      if (error) {
-        console.log("Error: Did not insert into database.");
-      } else {
-        console.log("Success");
-        resetForm();
-      }
-    });
-
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
@@ -183,9 +171,11 @@ function getAllElementsOfChild_search(childName, id) {
           var nameText = document.createTextNode(name);
           var addButton = document.createElement("BUTTON");
           addButton.innerHTML = "+";
-          addButton.onclick = function () {
-            //TODO: set a listener to add the entry to the users list
-            //TODO: style button
+          addButton.setAttribute("data-toggle", "modal");
+          addButton.setAttribute("data-target", "#formModal");
+
+          addButton.onclick = function() {
+            document.getElementById("productName").value = name;
           };
 
           cardHeader.appendChild(addButton);
@@ -233,6 +223,19 @@ firebase.auth().onAuthStateChanged(function(user) {
     // No user is signed in.
   }
 });
+
+// https://stackoverflow.com/questions/11591854/format-date-to-mm-dd-yyyy-in-javascript
+function getFormattedDate(date) {
+  var year = date.getFullYear();
+
+  var month = (1 + date.getMonth()).toString();
+  month = month.length > 1 ? month : '0' + month;
+
+  var day = date.getDate().toString();
+  day = day.length > 1 ? day : '0' + day;
+
+  return month + '/' + day + '/' + year;
+}
 
 //TODO: Write the function for searching the list
 
