@@ -59,7 +59,7 @@ function signInUser() {
     var password = document.getElementById('signinPassword').value;
 
     firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
-        document.location.href = 'index.html'
+        document.location.href = 'index.html';
         var currentUser = firebase.auth().currentUser;
         //if user data is incorrect, we output error message
     }).catch(function(error) {
@@ -92,3 +92,12 @@ function signOutUser() {
     });
 }
 
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    document.getElementById("loginlinks").style.display = "none";
+    document.getElementById("signoutlink").style.display = "block";
+  } else {
+    document.getElementById("loginlinks").style.display = "block";
+    document.getElementById("signoutlink").style.display = "none";
+  }
+});

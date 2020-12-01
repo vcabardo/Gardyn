@@ -15,15 +15,21 @@
         <li class="nav-item">
           <a class="nav-link" href="freshtracker.html">FreshTracker</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="login.html">Log In</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="signup.html">Sign Up</a>
-        </li>
-        <li class="nav-item">
+
+        <li id="signoutlink" class="nav-item">
           <a class="nav-link" onclick="signOutUser()">Sign Out</a>
         </li>
+
+        <li id="loginlinks" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Log In / Sign Up
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="login.html">Log In</a>
+            <a class="dropdown-item" href="signup.html">Sign Up</a>
+          </div>
+      </li>
+
       </ul>
       <span class="navbar-text">
         <div id="welcome"></div>
@@ -40,3 +46,5 @@
       </span>
     </div>
   </nav>
+
+  <script src="/public/js/authentication.js"></script>
