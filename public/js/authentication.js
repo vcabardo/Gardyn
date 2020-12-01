@@ -31,7 +31,7 @@ function signUpUser() {
             Username: userName,
             Collected: ""
         }).then(function() {
-            document.location.href = 'index.html'
+            document.location.href = 'index.html';
         });
 
     }).catch(function(error) {

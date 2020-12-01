@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gardyn</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+  <!-- Our modifications -->
+  <link href="/public/stylesheets/style.css" rel="stylesheet">
+</head>
+
+<body class="bg-dark">
+  <!-- Load the header using jQuery. Inspiration: https://medium.com/@AmyScript/how-to-reduce-reuse-and-recycle-your-code-389e6742e4ac-->
+
+  <div id="header"></div>
+
+  <h4 class="display-4 text-light text-center">My Stats</h4>
+
+  <div class="container">
+    <div class="row">
+
+      <div id="d1" class="col-md-6">
+        <h6 class="display-6 text-light text-center">Used</h6>
+        <!-- Javascript should add here -->
+      </div>
+
+      <div id="d2" class="col-md-6">
+        <h6 class="display-6 text-light text-center">Thrown Away</h6>
+        <!-- Javascript should add here -->
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="container">
+
+  </div>
+
+  <div id="footer"></div>
+
+  <!-- JQuery Reusable Header Functionality -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+  <!-- Bootstrap -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+  <!-- For Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
+
+  <!-- Initialize Firebase -->
+  <script src="/public/js/init-firebase.js"></script>
+
+  <!-- Our Javascript -->
+  <script src="/public/js/authentication.js"></script>
+  <script src="/public/js/stats.js"></script>
+
+  <!-- In HTML script -->
+  <script>
+    var config = {
+      apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
+      authDomin: "gardynapp.firebaseapp.com",
+      databaseURL: "https://gardynapp.firebaseio.com/",
+      storageBucket: "gardynapp.appspot.com"
+    };
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+    }
+
+    $(document).ready(function () {
+      $('#header').load('reusableheader.html');
+    });
+
+    $(document).ready(function () {
+      $('#footer').load('reusablefooter.html');
+    });
+
+
+    $(document).ready(function () {
+      var date_input = $('input[name="date"]'); //our date input has the name "date"
+      var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+      var options = {
+        format: 'mm/dd/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    })
+  </script>
+
+</body>
+
+</html>
