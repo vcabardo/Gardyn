@@ -184,6 +184,16 @@ background-color: linen;
   opacity: .4;
 }
 
+.card {
+  position: relative;
+  overflow: hidden;
+  overflow-y: hidden;
+}
+
+img.card-img-top {
+  /* filter: blur(5px); */
+}
+
 
 /* body {
   padding: 50px;

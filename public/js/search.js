@@ -88,7 +88,11 @@ function getAllElementsOfChild_myList(childName, id) {
 
           var cardHeader = document.createElement("div");
           cardHeader.classList.add("card-header");
-          var name = document.createTextNode(pN);
+          cardHeader.classList.add("row");
+          var nameDiv = document.createElement("div")
+          nameDiv.classList.add("col-lg-10");
+          var nameText = document.createTextNode(pN);
+          nameDiv.appendChild(nameText);
 
           var addButton = document.createElement("BUTTON");
           addButton.innerHTML = "+";
@@ -96,6 +100,9 @@ function getAllElementsOfChild_myList(childName, id) {
             //TODO: set a listener to add the entry to the users list
             //TODO: style button
           };
+          addButton.classList.add("btn");
+          addButton.classList.add("btn-outline-light");
+          addButton.classList.add("col-lg-1");
 
           var removeButton = document.createElement("BUTTON");
           removeButton.innerHTML = "-";
@@ -103,8 +110,11 @@ function getAllElementsOfChild_myList(childName, id) {
             //TODO: set a listener to remove the entry from the users list
             //TODO: style button
           };
+          removeButton.classList.add("btn");
+          removeButton.classList.add("btn-outline-light");
+          removeButton.classList.add("col-lg-1");
 
-          cardHeader.appendChild(name);
+          cardHeader.appendChild(nameDiv);
           cardHeader.appendChild(addButton);
           cardHeader.appendChild(removeButton);
           cardHeader.classList.add("bg-secondary");
@@ -166,20 +176,40 @@ function getAllElementsOfChild_search(childName, id) {
           card.classList.add("card");
           card.classList.add("bg-secondary");
 
+          var cardImage = document.createElement("img");
+          cardImage.classList.add("card-img-top");
+          cardImage.setAttribute("src", "/public/img/" + name + ".jpg");
+
           var cardHeader = document.createElement("div");
           cardHeader.classList.add("card-header");
+          cardHeader.classList.add("row");
+
+          var nameDiv = document.createElement("div")
+          nameDiv.classList.add("col-md-10");
           var nameText = document.createTextNode(name);
+          nameDiv.appendChild(nameText);
           var addButton = document.createElement("BUTTON");
           addButton.innerHTML = "+";
           addButton.setAttribute("data-toggle", "modal");
           addButton.setAttribute("data-target", "#formModal");
+          addButton.classList.add("btn");
+          addButton.classList.add("btn-outline-light");
 
           addButton.onclick = function() {
             document.getElementById("productName").value = name;
-          };
+            firebase.auth().onAuthStateChanged(function(user) {
+              if (user) {
 
+              } else {
+                alert("Please sign in to use this feature");
+                document.getElementById("formModal").style.display = "none";
+              }
+            });
+          };
+          addButton.classList.add("col-md-2");
+
+          cardHeader.appendChild(nameDiv);
           cardHeader.appendChild(addButton);
-          cardHeader.appendChild(nameText);
 
           cardHeader.classList.add("bg-secondary");
           card.classList.add("text-light");
@@ -193,6 +223,7 @@ function getAllElementsOfChild_search(childName, id) {
 
           cardBody.appendChild(node);
 
+          card.appendChild(cardImage);
           card.appendChild(cardHeader);
           card.appendChild(cardBody);
 
