@@ -86,11 +86,15 @@ function getAllElementsOfChild_myList(childName, id) {
           card.classList.add("card");
           card.style.backgroundColor = "#b3614b";
 
+          var cardImage = document.createElement("img");
+          cardImage.classList.add("card-img-top");
+          cardImage.setAttribute("src", "./img/" + pN + ".jpg");
+
           var cardHeader = document.createElement("div");
           cardHeader.classList.add("card-header");
           cardHeader.classList.add("row");
           var nameDiv = document.createElement("div")
-          nameDiv.classList.add("col-lg-10");
+          nameDiv.classList.add("col-sm-8");
           var nameText = document.createTextNode(pN);
           nameDiv.appendChild(nameText);
 
@@ -102,7 +106,7 @@ function getAllElementsOfChild_myList(childName, id) {
           };
           addButton.classList.add("btn");
           addButton.classList.add("btn-outline-light");
-          addButton.classList.add("col-lg-1");
+          addButton.classList.add("col-sm-2");
 
           var removeButton = document.createElement("BUTTON");
           removeButton.innerHTML = "-";
@@ -112,7 +116,7 @@ function getAllElementsOfChild_myList(childName, id) {
           };
           removeButton.classList.add("btn");
           removeButton.classList.add("btn-outline-light");
-          removeButton.classList.add("col-lg-1");
+          removeButton.classList.add("col-sm-2");
 
           cardHeader.appendChild(nameDiv);
           cardHeader.appendChild(addButton);
@@ -129,6 +133,7 @@ function getAllElementsOfChild_myList(childName, id) {
 
           cardBody.appendChild(node);
 
+          card.appendChild(cardImage);
           card.appendChild(cardHeader);
           card.appendChild(cardBody);
 
@@ -229,7 +234,7 @@ function getAllElementsOfChild_search(childName, id) {
           card.appendChild(cardBody);
 
           var entry = document.createElement("div");
-          entry.classList.add("col-lg-6");
+          entry.classList.add("col-sm-6");
           entry.classList.add("my-sm-3");
           entry.appendChild(card);
 
