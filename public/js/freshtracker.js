@@ -88,6 +88,7 @@ function getAllElementsOfChildFT(childName) {
               progress.appendChild(progressBar);
               cardBody.appendChild(progress);
 
+
               var cardFooter = document.createElement("div");
               cardFooter.classList.add("card-footer");
               cardFooter.classList.add("container");
@@ -98,6 +99,11 @@ function getAllElementsOfChildFT(childName) {
               expirationDateDiv.appendChild(expirationDateNode);
               cardBody.appendChild(expirationDateDiv);
 
+              //adding notes
+              var userNotes = document.createTextNode(pNotes);
+              var notesTitle = document.createTextNode("My Notes: ");
+              cardBody.appendChild(notesTitle);
+              cardBody.appendChild(userNotes);
 
               //TODO: Access the freshtracker for a particular user and mark
               //entries as thrown away or used - add to stat page
