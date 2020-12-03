@@ -23,7 +23,7 @@
     }
 
     .counter {
-      background-color: #eaecf0;
+      background-color: #54755b;
       text-align: center;
     }
 
@@ -34,7 +34,7 @@
 
     .counter-count {
       font-size: 18px;
-      background-color: #00b3e7;
+      background-color: #b3614b;
       border-radius: 50%;
       position: relative;
       color: #ffffff;
@@ -60,9 +60,9 @@
 
 <body class="bg-dark">
   <!-- Load the header using jQuery. Inspiration: https://medium.com/@AmyScript/how-to-reduce-reuse-and-recycle-your-code-389e6742e4ac-->
-
+  <div class="background"></div>
   <div id="header"></div>
-
+<!--
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -85,7 +85,7 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
-  </div>
+  </div> -->
 
   <hr class="my-4">
 
@@ -94,13 +94,12 @@
       <div class="col text-center">
         <h3>Step 1:</h3>
         <h5>Add items to your FreshTracker:</h5>
-        <button type="button" class="btn btn-primary btn-circle btn-xl"><a href="search.html">Add Item</a></button>
+        <button type="button" class="btn btn-circle btn-xl text-light" style="background-color: #b3614b" onclick="window.location.href='search.html';">Add Item</button>
       </div>
       <div class="col text-center">
         <h3>Step 2:</h3>
         <h5>View your FreshTracker:</h5>
-        <button type="button" class="btn btn-primary btn-circle btn-xl"><a
-            href="freshtracker.html">FreshTracker</a></button>
+        <button type="button" class="btn btn-circle btn-xl text-light" style="background-color: #b3614b" onclick="window.location.href='freshtracker.html';">FreshTracker</button>
       </div>
     </div>
   </div>
@@ -108,7 +107,7 @@
   <hr class="my-4">
 
   <!-- https://bootsnipp.com/snippets/5K6WW -->
-  <div class="counter bg-dark">
+  <div class="counter">
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -141,7 +140,7 @@
       </div>
     </div>
 
-    <p class="text-light">Learn more: <a class="text-muted"
+    <p class="text-light" style="margin:0px;">Learn more: <a class="text-muted"
         href="https://www.rts.com/resources/guides/food-waste-america/">https://www.rts.com/resources/guides/food-waste-america/</a>
     </p>
   </div>

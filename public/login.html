@@ -14,7 +14,7 @@
 </head>
 
 <body class="bg-dark">
-
+    <div class="background"></div>
     <!-- Load the header using jQuery. Inspiration: https://medium.com/@AmyScript/how-to-reduce-reuse-and-recycle-your-code-389e6742e4ac-->
     <div id="header"></div>
 
@@ -23,11 +23,11 @@
     </div> -->
 
     <!-- Sign in Box for users -->
-    <div class="container bg-dark">
+    <div class="container">
         <div class="row">
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div class="card card-signin my-5">
-                    <div class="card-body">
+                    <div class="card-body text-light" style="background-color: #4f734f">
                         <h5 class="card-title text-center">Log In</h5>
                         <div class="form-label-group">
                             <input type="email" id="signinEmail" class="form-control" placeholder="Email address" required autofocus>
@@ -39,12 +39,12 @@
                             <label for="inputPassword"></label>
                         </div>
 
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" onclick="signInUser()">Sign in</button>
+                        <button class="btn btn-lg btn-success btn-block text-uppercase" type="submit" onclick="signInUser()">Sign in</button>
                         <hr class="my-4">
 
-                        <a href='signup.html' style="color: black; font-size: 15px;">Don't have an account? Click here to sign up!</a>
+                        <a href='signup.html' style="color: white; font-size: 15px;">Don't have an account? Click here to sign up!</a>
                         <br>
-                        <a href='index.html' style="color: black; font-size: 15px;">Don't want an account? Login as a Guest!</a>
+                        <a href='index.html' style="color: white; font-size: 15px;">Don't want an account? Login as a Guest!</a>
                     </div>
                 </div>
             </div>

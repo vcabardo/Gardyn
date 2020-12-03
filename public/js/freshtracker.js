@@ -72,26 +72,24 @@ function getAllElementsOfChildFT(childName) {
 
               var card = document.createElement("div");
               card.classList.add("card");
-              card.classList.add("bg-secondary");
+              card.style.backgroundColor = "#b3614b";
 
               var cardHeader = document.createElement("div");
               cardHeader.classList.add("card-header");
               var name = document.createTextNode(pN);
               cardHeader.appendChild(name);
-              cardHeader.classList.add("bg-secondary");
+              cardHeader.style.backgroundColor = "#b3614b";
               card.classList.add("text-light");
 
               var cardBody = document.createElement("div");
               cardBody.classList.add("card-body");
-              cardBody.classList.add("bg-secondary");
               cardBody.classList.add("text-light");
-
+              cardBody.style.backgroundColor = "#b3614b";
               progress.appendChild(progressBar);
               cardBody.appendChild(progress);
 
               var cardFooter = document.createElement("div");
               cardFooter.classList.add("card-footer");
-              cardFooter.classList.add("bg-secondary");
               cardFooter.classList.add("container");
 
               var expirationDateDiv = document.createElement("div");

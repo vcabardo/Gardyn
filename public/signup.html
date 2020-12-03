@@ -17,8 +17,9 @@
 </head>
 
 <body class="bg-dark">
+    <div class="background"></div>
     <div id="header"></div>
-    <div class="jumbotron text-center">
+    <div class="text-center text-light">
         <h1>Welcome New User!</h1>
     </div>
     <!-- Sign up Box for users -->
@@ -26,8 +27,8 @@
         <div class="row">
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div class="card card-signin my-5">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Sign Up</h5>
+                    <div class="card-body"  style="background-color: #4f734f">
+                        <h5 class="card-title text-center text-light">Sign Up</h5>
                         <div class="form-label-group">
                             <input type="email" id="inputEmail" class="form-control" placeholder="Email address"
                                 required autofocus>
@@ -45,7 +46,7 @@
                             <label for="inputUsername"></label>
                         </div>
 
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"
+                        <button class="btn btn-lg btn-success btn-block text-uppercase" type="submit"
                             onclick="signUpUser()">Sign Up</button>
                         <hr class="my-4">
                     </div>

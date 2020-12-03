@@ -174,7 +174,8 @@ function getAllElementsOfChild_search(childName, id) {
         if(name != undefined){
           var card = document.createElement("div");
           card.classList.add("card");
-          card.classList.add("bg-secondary");
+          // card.classList.add("bg-secondary");
+          card.style.backgroundColor = "#b3614b";
 
           var cardImage = document.createElement("img");
           cardImage.classList.add("card-img-top");
@@ -183,6 +184,7 @@ function getAllElementsOfChild_search(childName, id) {
           var cardHeader = document.createElement("div");
           cardHeader.classList.add("card-header");
           cardHeader.classList.add("row");
+          cardHeader.style.backgroundColor = "#b3614b";
 
           var nameDiv = document.createElement("div")
           nameDiv.classList.add("col-md-10");
@@ -211,13 +213,12 @@ function getAllElementsOfChild_search(childName, id) {
           cardHeader.appendChild(nameDiv);
           cardHeader.appendChild(addButton);
 
-          cardHeader.classList.add("bg-secondary");
           card.classList.add("text-light");
 
           var cardBody = document.createElement("div");
           cardBody.classList.add("card-body");
-          cardBody.classList.add("bg-secondary");
           cardBody.classList.add("text-light");
+          cardBody.style.backgroundColor = "#b3614b";
 
           var node = document.createTextNode( "Shelf Life: " + shelfLife + " Days");
 

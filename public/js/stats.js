@@ -30,13 +30,13 @@ function getAllElementsOfChild(childName, divName) {
               cardHeader.classList.add("card-header");
               var nameNode = document.createTextNode(name);
               cardHeader.appendChild(nameNode);
-              cardHeader.classList.add("bg-secondary");
-              card.classList.add("text-light");
+              cardHeader.classList.add("text-light");
+              cardHeader.style.backgroundColor = "#b3614b";
 
               var cardBody = document.createElement("div");
               cardBody.classList.add("card-body");
-              cardBody.classList.add("bg-secondary");
               cardBody.classList.add("text-light");
+              cardBody.style.backgroundColor = "#b3614b";
 
               var dateNode = document.createTextNode("Date: " + date);
               cardBody.appendChild(dateNode);
