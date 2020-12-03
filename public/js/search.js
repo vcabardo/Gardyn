@@ -178,7 +178,7 @@ function getAllElementsOfChild_search(childName, id) {
 
           var cardImage = document.createElement("img");
           cardImage.classList.add("card-img-top");
-          cardImage.setAttribute("src", "/public/img/" + name + ".jpg");
+          cardImage.setAttribute("src", "./img/" + name + ".jpg");
 
           var cardHeader = document.createElement("div");
           cardHeader.classList.add("card-header");
