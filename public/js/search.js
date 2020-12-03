@@ -84,7 +84,7 @@ function getAllElementsOfChild_myList(childName, id) {
         if(pN != undefined){
           var card = document.createElement("div");
           card.classList.add("card");
-          card.classList.add("bg-secondary");
+          card.style.backgroundColor = "#b3614b";
 
           var cardHeader = document.createElement("div");
           cardHeader.classList.add("card-header");
@@ -117,12 +117,12 @@ function getAllElementsOfChild_myList(childName, id) {
           cardHeader.appendChild(nameDiv);
           cardHeader.appendChild(addButton);
           cardHeader.appendChild(removeButton);
-          cardHeader.classList.add("bg-secondary");
+          cardHeader.style.backgroundColor = "#b3614b";
           card.classList.add("text-light");
 
           var cardBody = document.createElement("div");
           cardBody.classList.add("card-body");
-          cardBody.classList.add("bg-secondary");
+          cardBody.style.backgroundColor = "#b3614b";
           cardBody.classList.add("text-light");
 
           var node = document.createTextNode( "Product Category: " + chooseCategory(pC));
