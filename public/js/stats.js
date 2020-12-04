@@ -28,9 +28,9 @@ function getAllElementsOfChild(childName, divName) {
 
               var cardHeader = document.createElement("div");
               cardHeader.classList.add("card-header");
+              cardHeader.classList.add("text-light");
               var nameNode = document.createTextNode(name);
               cardHeader.appendChild(nameNode);
-              cardHeader.classList.add("text-light");
               cardHeader.style.backgroundColor = "#b3614b";
 
               var cardBody = document.createElement("div");

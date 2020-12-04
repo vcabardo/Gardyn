@@ -74,12 +74,21 @@ function getAllElementsOfChildFT(childName) {
               card.classList.add("card");
               card.style.backgroundColor = "#b3614b";
 
+              var cardImage = document.createElement("img");
+              cardImage.classList.add("card-img-top");
+              cardImage.setAttribute("src", "./img/" + pN + ".jpg");
+
               var cardHeader = document.createElement("div");
               cardHeader.classList.add("card-header");
-              var name = document.createTextNode(pN);
-              cardHeader.appendChild(name);
+              cardHeader.classList.add("row");
               cardHeader.style.backgroundColor = "#b3614b";
-              card.classList.add("text-light");
+
+              var nameDiv = document.createElement("div")
+              nameDiv.classList.add("col-md-10");
+              nameDiv.classList.add("text-light");
+              var nameText = document.createTextNode(pN);
+              nameDiv.appendChild(nameText);
+              cardHeader.appendChild(nameDiv);
 
               var cardBody = document.createElement("div");
               cardBody.classList.add("card-body");
@@ -140,12 +149,13 @@ function getAllElementsOfChildFT(childName) {
               cardFooter.appendChild(usedButton);
               cardFooter.appendChild(throwawayButton);
 
+              card.appendChild(cardImage);
               card.appendChild(cardHeader);
               card.appendChild(cardBody);
               card.appendChild(cardFooter);
 
               var entry = document.createElement("div");
-              entry.classList.add("col-lg-6");
+              entry.classList.add("col-sm-6");
               entry.classList.add("my-sm-3");
               entry.appendChild(card);
 
