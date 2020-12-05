@@ -14,6 +14,16 @@
 
   <!-- Our modifications -->
   <link href="stylesheets/style.css" rel="stylesheet">
+
+  <style>
+    #addYourOwn{
+      text-align: center;
+      height: 50px;
+      color: #ffffff;
+      text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+      font-size: 2em;
+    }
+  </style>
 </head>
 
 <body class="bg-dark">
@@ -32,14 +42,17 @@
       <div class="col-lg-8">
         <h4 class="display-4 text-light text-center">Search</h4>
 
-        <div class="input-group">
+        <!-- <div class="input-group">
           <input class="form-control py-2" type="search" value="Search for a food item" id="example-search-input">
           <span class="input-group-append">
             <button class="btn btn-outline-secondary" type="button">
               <i class="fa fa-search"></i>
             </button>
           </span>
-        </div>
+        </div> -->
+
+        <br>
+        <div id="addYourOwn"></div>
 
         <div id="allitems" class="row"></div>
       </div>
@@ -69,7 +82,7 @@
                 <input type="text" id="productName" class="form-control mb-4" placeholder="Product Name">
 
                 <!-- Subject -->
-                <label>Product Category</label>
+                <label style="color: black;">Product Category</label>
                 <select class="browser-default custom-select mb-4" id="productCategory">
                   <option value="" disabled>Choose option</option>
                   <option value="1" selected>Fruits & Veggies</option>
@@ -83,18 +96,18 @@
                 <!-- Date -->
                 <div class="form-group">
                   <!-- Date input -->
-                  <label class="control-label" for="date">Date Purchased</label>
+                  <label class="control-label" style="color: black;" for="date">Date Purchased</label>
                   <input class="form-control" id="datePurchased" name="date" placeholder="MM/DD/YYYY" type="text" />
                 </div>
                 <div class="form-group">
                   <!-- Date input -->
-                  <label class="control-label" for="date">Projected Expiration Date</label>
+                  <label class="control-label" style="color: black;" for="date">Projected Expiration Date</label>
                   <input class="form-control" id="dateExpire" name="date" placeholder="MM/DD/YYYY" type="text" />
                 </div>
 
                 <!-- Message -->
                 <div class="form-group">
-                  <label class="control-label">Notes</label>
+                  <label class="control-label" style="color: black;">Notes</label>
                   <textarea class="form-control rounded-0" id="productInfo" rows="3" placeholder="Notes..."></textarea>
                 </div>
 

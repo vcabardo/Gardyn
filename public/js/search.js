@@ -300,6 +300,19 @@ function getFormattedDate(date) {
   return month + '/' + day + '/' + year;
 }
 
+function addYourOwn(){
+  var element = document.getElementById("addYourOwn");
+  element.classList.add("card");
+  element.innerHTML = "Add Your Own Item"
+  element.style.backgroundImage = "url('img/veggieMix.png')"; 
+  element.style.fontWeight = "900"; 
+  element.setAttribute("data-toggle", "modal");
+  element.setAttribute("data-target", "#formModal");
+  
+
+}
+
 //TODO: Write the function for searching the list
 
 getAllElementsOfChild_search("AllItems/", "allitems");
+addYourOwn();
