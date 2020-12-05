@@ -1,6 +1,3 @@
-//global for quanity for myList
-var quantity = 0;
-
 //Inserts user data into Realtime database Users>Collected
 function writeUserData() {
   var pName = document.getElementById("productName").value;
@@ -28,7 +25,8 @@ function writeUserData() {
         productCategory: pCat,
         productPurchaseDate: pPurDate,
         productExperationDate: pExpDate,
-        productInfo: pInfo
+        productInfo: pInfo,
+        quantity: 1
       }, (error) => {
         if (error) {
           console.log("Error: Did not insert into database.");
@@ -82,16 +80,21 @@ function getAllElementsOfChild_myList(childName, id) {
     firebase.initializeApp(config);
   }
 
+  document.getElementById("d1").innerHTML = "";
+
   var db = firebase.database();
   var ref = db.ref(childName);
 
   ref.on("value", function (snapshot) {
+    document.getElementById("d1").innerHTML = "";
     snapshot.forEach((child) => {
       var pE = child.val().productExperationDate;
       var pN = child.val().productName;
       var pC = child.val().productCategory;
       var pP = child.val().productPurchaseDate;
       var pNotes = child.val().productInfo;
+      var quantity = child.val().quantity;
+
 
       if (pN != undefined) {
         var card = document.createElement("div");
@@ -105,7 +108,7 @@ function getAllElementsOfChild_myList(childName, id) {
         //Add image for random
         const path = './img/' + pN + '.jpg';
         var result = doesFileExist(path);
- 
+
         if (result == true) {
             // yay, file exists!
             cardImage.setAttribute("src", "./img/" + pN + ".jpg");
@@ -121,36 +124,67 @@ function getAllElementsOfChild_myList(childName, id) {
         var nameDiv = document.createElement("div")
         nameDiv.classList.add("col-sm-8");
         nameDiv.id = "number";
-        var nameText = document.createTextNode(pN + " x " + quantity);
+        var nameText = document.createTextNode(pN);
+
+        var quantityDiv = document.createElement("div");
+        quantityDiv.id = "quantityID" + pN;
+        var quantityText = document.createTextNode(" x " + quantity);
+        quantityDiv.appendChild(quantityText);
+
         nameDiv.appendChild(nameText);
+        nameDiv.appendChild(quantityDiv);
 
         var addButton = document.createElement("BUTTON");
         addButton.innerHTML = "+";
         addButton.onclick = function () {
-            document.getElementById("number").innerHTML = pN + " x " + (quantity + 1);
-            quantity = quantity + 1;
+          firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+              // User is signed in.
+              var updates = {};
+              updates[pN + '/quantity'] = quantity + 1;
+              ref.update(updates);
+
+              document.getElementById("quantityID" + pN).innerHTML = " x " + (quantity + 1);
+            } else {
+              // No user is signed in.
+            }
+          });
         };
         addButton.classList.add("btn");
         addButton.classList.add("btn-outline-light");
         addButton.classList.add("col-sm-2");
+        addButton.setAttribute("data-toggle", "tooltip");
+        addButton.setAttribute("data-placement", "top");
+        addButton.setAttribute("title", "Click to add another " + pN + " to your list");
 
         var removeButton = document.createElement("BUTTON");
         removeButton.innerHTML = "-";
         removeButton.onclick = function () {
-            document.getElementById("number").innerHTML = pN + " x " + (quantity - 1);
-            quantity = quantity - 1;
+            //Remove entry from myList
+            firebase.auth().onAuthStateChanged(function (user) {
+              if (user) {
+                // User is signed in.
+                var updates = {};
+                updates[pN + '/quantity'] = quantity - 1;
+                ref.update(updates);
+
+                  document.getElementById("quantityID" + pN).innerHTML = " x " + (quantity - 1);
+              } else {
+                // No user is signed in.
+              }
+            });
         };
         removeButton.classList.add("btn");
         removeButton.classList.add("btn-outline-light");
         removeButton.classList.add("col-sm-2");
-
-
-
+        removeButton.setAttribute("data-toggle", "tooltip");
+        removeButton.setAttribute("data-placement", "top");
+        removeButton.setAttribute("title", "Click to remove a(n) " + pN + " from your list");
 
         var removeEntryButton = document.createElement("BUTTON");
         removeEntryButton.innerHTML = "Remove";
         removeEntryButton.onclick = function () {
-          //Remove entry from myList 
+          //Remove entry from myList
           firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
               // User is signed in.
@@ -160,17 +194,16 @@ function getAllElementsOfChild_myList(childName, id) {
               // No user is signed in.
             }
           });
-
         };
+
         removeEntryButton.classList.add("btn");
         removeEntryButton.classList.add("btn-outline-light");
         removeEntryButton.classList.add("col-sm-4");
-
+        removeEntryButton.classList.add("float-right");
 
         cardHeader.appendChild(nameDiv);
-        cardHeader.appendChild(addButton);
         cardHeader.appendChild(removeButton);
-        cardHeader.appendChild(removeEntryButton);
+        cardHeader.appendChild(addButton);
         cardHeader.style.backgroundColor = "#b3614b";
         card.classList.add("text-light");
 
@@ -178,14 +211,19 @@ function getAllElementsOfChild_myList(childName, id) {
         cardBody.classList.add("card-body");
         cardBody.style.backgroundColor = "#b3614b";
         cardBody.classList.add("text-light");
-
         var node = document.createTextNode("Product Category: " + chooseCategory(pC));
-
         cardBody.appendChild(node);
+
+        var cardFooter = document.createElement("div");
+        cardFooter.classList.add("card-body");
+        cardFooter.style.backgroundColor = "#b3614b";
+        cardFooter.classList.add("text-light");
+        cardFooter.appendChild(removeEntryButton);
 
         card.appendChild(cardImage);
         card.appendChild(cardHeader);
         card.appendChild(cardBody);
+        card.appendChild(cardFooter);
 
         var entry = document.createElement("div");
         entry.classList.add("col-12");
@@ -251,6 +289,9 @@ function getAllElementsOfChild_search(childName, id) {
         addButton.setAttribute("data-target", "#formModal");
         addButton.classList.add("btn");
         addButton.classList.add("btn-outline-light");
+        addButton.setAttribute("data-toggle", "tooltip");
+        addButton.setAttribute("data-placement", "top");
+        addButton.setAttribute("title", "Click to add " + name + " to your list");
 
         addButton.onclick = function () {
           document.getElementById("productName").value = name;
@@ -343,8 +384,12 @@ function addYourOwn() {
   var element = document.getElementById("addYourOwn");
   element.classList.add("card");
   element.innerHTML = "Add Your Own Item"
-  element.style.backgroundImage = "url('img/veggieMix.PNG')";
-  element.style.fontWeight = "900";
+  // element.style.backgroundImage = "url('img/background.PNG')";
+  element.style.backgroundColor = "#b3614b";
+  // element.style.fontWeight = "900";
+  element.style.width = "100%";
+  element.style.cursor = "pointer";
+  element.classList.add("text-center");
   element.setAttribute("data-toggle", "modal");
   element.setAttribute("data-target", "#formModal");
 }

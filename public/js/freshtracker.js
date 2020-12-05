@@ -92,16 +92,16 @@ function getAllElementsOfChildFT(childName) {
 
 
                     //TODO: Add image for random
-        const path = './img/' + pN + '.jpg';
-        var result = doesFileExist(path);
- 
-        if (result == true) {
-            // yay, file exists!
-            cardImage.setAttribute("src", "./img/" + pN + ".jpg");
-        } else {
-            // file does not exist!
-            cardImage.setAttribute("src", "./img/" + "veggieMix" + ".PNG");
-        }
+            const path = './img/' + pN + '.jpg';
+            var result = doesFileExist(path);
+
+            if (result == true) {
+                // yay, file exists!
+                cardImage.setAttribute("src", "./img/" + pN + ".jpg");
+            } else {
+                // file does not exist!
+                cardImage.setAttribute("src", "./img/" + "veggieMix" + ".PNG");
+            }
 
 
             var cardHeader = document.createElement("div");
