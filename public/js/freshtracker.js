@@ -10,6 +10,17 @@ function chooseCategory(input) {
   else return "null";
 }
 
+function doesFileExist(urlToFile) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('HEAD', urlToFile, false);
+  xhr.send();
+  if (xhr.status == "404") {
+      return false;
+  }
+  return true;
+}//end doesFileExist
+
+
 function getAllElementsOfChildFT(childName) {
   var config = {
     apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
@@ -38,17 +49,16 @@ function getAllElementsOfChildFT(childName) {
           var pP = child.val().productPurchaseDate;
           var pNotes = child.val().productInfo;
 
+          console.log(pE);
+          console.log(parseInt(pE.substring(6, 10)));
+          console.log(parseInt(pE.substring(0, 2)) - 1);
+          console.log(parseInt(pE.substring(3, 5)));
+
           if (pN != undefined) {
             var currentDate = new Date();
-            var expirationDate = new Date(
-              parseInt(pE.substring(6, 10)),
-              parseInt(pE.substring(0, 2)) - 1,
-              parseInt(pE.substring(3, 5)));
+            var expirationDate = new Date(pE);
 
-            var purchaseDate = new Date(
-              parseInt(pP.substring(6, 10)),
-              parseInt(pP.substring(0, 2)) - 1,
-              parseInt(pP.substring(3, 5)));
+            var purchaseDate = new Date(pP);
 
             const DAY_IN_MILLI = 1000 * 60 * 60 * 24;
             var timeUntilExpiration = Math.floor(Math.abs(expirationDate - currentDate) / DAY_IN_MILLI);
@@ -79,7 +89,20 @@ function getAllElementsOfChildFT(childName) {
 
             var cardImage = document.createElement("img");
             cardImage.classList.add("card-img-top");
+
+
+                    //TODO: Add image for random
+        const path = './img/' + pN + '.jpg';
+        var result = doesFileExist(path);
+ 
+        if (result == true) {
+            // yay, file exists!
             cardImage.setAttribute("src", "./img/" + pN + ".jpg");
+        } else {
+            // file does not exist!
+            cardImage.setAttribute("src", "./img/" + "veggieMix" + ".PNG");
+        }
+
 
             var cardHeader = document.createElement("div");
             cardHeader.classList.add("card-header");

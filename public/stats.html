@@ -7,8 +7,6 @@
   <title>Gardyn</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 
@@ -23,17 +21,19 @@
 
   <h4 class="display-4 text-light text-center">My Stats</h4>
 
+  <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+
+  <br>
+
   <div class="container">
     <div class="row">
 
       <div id="d1" class="col-md-6">
         <h6 class="display-6 text-light text-center">Used</h6>
-        <!-- Javascript should add here -->
       </div>
 
       <div id="d2" class="col-md-6">
         <h6 class="display-6 text-light text-center">Thrown Away</h6>
-        <!-- Javascript should add here -->
       </div>
     </div>
 
@@ -54,6 +54,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
   <!-- For Firebase -->
   <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
@@ -88,18 +90,6 @@
       $('#footer').load('reusablefooter.html');
     });
 
-
-    $(document).ready(function () {
-      var date_input = $('input[name="date"]'); //our date input has the name "date"
-      var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
-      var options = {
-        format: 'mm/dd/yyyy',
-        container: container,
-        todayHighlight: true,
-        autoclose: true,
-      };
-      date_input.datepicker(options);
-    })
   </script>
 
 </body>

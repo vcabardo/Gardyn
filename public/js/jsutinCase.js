@@ -101,7 +101,6 @@ function getAllElementsOfChild_myList(childName, id) {
         var cardImage = document.createElement("img");
         cardImage.classList.add("card-img-top");
 
-
         //Add image for random
         const path = './img/' + pN + '.jpg';
         var result = doesFileExist(path);
@@ -114,42 +113,27 @@ function getAllElementsOfChild_myList(childName, id) {
             cardImage.setAttribute("src", "./img/" + "veggieMix" + ".PNG");
         }
 
-
         var cardHeader = document.createElement("div");
         cardHeader.classList.add("card-header");
         cardHeader.classList.add("row");
         var nameDiv = document.createElement("div")
         nameDiv.classList.add("col-sm-8");
-        nameDiv.id = "number";
-        var nameText = document.createTextNode(pN + " x " + quantity);
+        var nameText = document.createTextNode(pN);
         nameDiv.appendChild(nameText);
 
-        var addButton = document.createElement("BUTTON");
-        addButton.innerHTML = "+";
-        addButton.onclick = function () {
-            document.getElementById("number").innerHTML = pN + " x " + (quantity + 1);
-            quantity = quantity + 1;
-        };
-        addButton.classList.add("btn");
-        addButton.classList.add("btn-outline-light");
-        addButton.classList.add("col-sm-2");
+        // var addButton = document.createElement("BUTTON");
+        // addButton.innerHTML = "+";
+        // addButton.onclick = function () {
+        //     document.getElementById("number").innerHTML = pN + " x " + (quantity + 1);
+        //     quantity = quantity + 1;
+        // };
+        // addButton.classList.add("btn");
+        // addButton.classList.add("btn-outline-light");
+        // addButton.classList.add("col-sm-2");
 
         var removeButton = document.createElement("BUTTON");
-        removeButton.innerHTML = "-";
+        removeButton.innerHTML = "Remove";
         removeButton.onclick = function () {
-            document.getElementById("number").innerHTML = pN + " x " + (quantity - 1);
-            quantity = quantity - 1;
-        };
-        removeButton.classList.add("btn");
-        removeButton.classList.add("btn-outline-light");
-        removeButton.classList.add("col-sm-2");
-
-
-
-
-        var removeEntryButton = document.createElement("BUTTON");
-        removeEntryButton.innerHTML = "Remove";
-        removeEntryButton.onclick = function () {
           //Remove entry from myList 
           firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
@@ -162,15 +146,13 @@ function getAllElementsOfChild_myList(childName, id) {
           });
 
         };
-        removeEntryButton.classList.add("btn");
-        removeEntryButton.classList.add("btn-outline-light");
-        removeEntryButton.classList.add("col-sm-4");
-
+        removeButton.classList.add("btn");
+        removeButton.classList.add("btn-outline-light");
+        removeButton.classList.add("col-sm-4");
 
         cardHeader.appendChild(nameDiv);
-        cardHeader.appendChild(addButton);
+        //cardHeader.appendChild(addButton);
         cardHeader.appendChild(removeButton);
-        cardHeader.appendChild(removeEntryButton);
         cardHeader.style.backgroundColor = "#b3614b";
         card.classList.add("text-light");
 
@@ -347,6 +329,8 @@ function addYourOwn() {
   element.style.fontWeight = "900";
   element.setAttribute("data-toggle", "modal");
   element.setAttribute("data-target", "#formModal");
+
+
 }
 
 //TODO: Write the function for searching the list
