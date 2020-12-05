@@ -17,7 +17,6 @@ function getAllElementsOfChild(childName, divName) {
 
       ref.on("value", function (snapshot) {
         snapshot.forEach((child) => {
-          console.log(child.val());
           var date = child.val().Date;
           var name = child.val().Name;
 

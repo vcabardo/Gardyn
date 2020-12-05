@@ -22,7 +22,10 @@ function getAllElementsOfChildFT(childName) {
     firebase.initializeApp(config);
   }
 
-  firebase.auth().onAuthStateChanged(function(user) {
+  var db = firebase.database();
+  var ref = db.ref(childName);
+
+  firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       var db = firebase.database();
       var ref = db.ref('Users/' + user.displayName + '/Collected/');
@@ -35,133 +38,133 @@ function getAllElementsOfChildFT(childName) {
           var pP = child.val().productPurchaseDate;
           var pNotes = child.val().productInfo;
 
-            if(pN != undefined){
-              var currentDate = new Date();
-              var expirationDate = new Date(
-                parseInt(pE.substring(6, 10)),
-                parseInt(pE.substring(0, 2)) - 1,
-                parseInt(pE.substring(3, 5)));
+          if (pN != undefined) {
+            var currentDate = new Date();
+            var expirationDate = new Date(
+              parseInt(pE.substring(6, 10)),
+              parseInt(pE.substring(0, 2)) - 1,
+              parseInt(pE.substring(3, 5)));
 
-              var purchaseDate = new Date(
-                parseInt(pP.substring(6, 10)),
-                parseInt(pP.substring(0, 2)) - 1,
-                parseInt(pP.substring(3, 5)));
+            var purchaseDate = new Date(
+              parseInt(pP.substring(6, 10)),
+              parseInt(pP.substring(0, 2)) - 1,
+              parseInt(pP.substring(3, 5)));
 
-              const DAY_IN_MILLI = 1000 * 60 * 60 * 24;
-              var timeUntilExpiration = Math.floor(Math.abs(expirationDate - currentDate) / DAY_IN_MILLI);
-              var totalTime = Math.floor(Math.abs(expirationDate - purchaseDate) / DAY_IN_MILLI);
+            const DAY_IN_MILLI = 1000 * 60 * 60 * 24;
+            var timeUntilExpiration = Math.floor(Math.abs(expirationDate - currentDate) / DAY_IN_MILLI);
+            var totalTime = Math.floor(Math.abs(expirationDate - purchaseDate) / DAY_IN_MILLI);
 
-              var progress = document.createElement("div");
-              progress.classList.add("progress");
+            var progress = document.createElement("div");
+            progress.classList.add("progress");
 
-              var progressBar = document.createElement("div");
-              progressBar.classList.add("progress-bar");
-              progressBar.setAttribute("role", "progressbar");
-              progressBar.setAttribute("aria-valuemin", 0);
-              progressBar.setAttribute("aria-valuemax", totalTime);
-              progressBar.setAttribute("aria-valuenow", 50);
-              progressBar.setAttribute('style','width:'+ ((timeUntilExpiration / totalTime) * 100) +'%');
+            var progressBar = document.createElement("div");
+            progressBar.classList.add("progress-bar");
+            progressBar.setAttribute("role", "progressbar");
+            progressBar.setAttribute("aria-valuemin", 0);
+            progressBar.setAttribute("aria-valuemax", totalTime);
+            progressBar.setAttribute("aria-valuenow", 50);
+            progressBar.setAttribute('style', 'width:' + ((timeUntilExpiration / totalTime) * 100) + '%');
 
-              if(timeUntilExpiration <= 3) {
-                progressBar.classList.add("bg-danger");
-              } else if (timeUntilExpiration <= 7) {
-                progressBar.classList.add("bg-warning");
-              } else {
-                progressBar.classList.add("bg-success");
-              }
+            if (timeUntilExpiration <= 3) {
+              progressBar.classList.add("bg-danger");
+            } else if (timeUntilExpiration <= 7) {
+              progressBar.classList.add("bg-warning");
+            } else {
+              progressBar.classList.add("bg-success");
+            }
 
-              var card = document.createElement("div");
-              card.classList.add("card");
-              card.style.backgroundColor = "#b3614b";
+            var card = document.createElement("div");
+            card.classList.add("card");
+            card.style.backgroundColor = "#b3614b";
 
-              var cardImage = document.createElement("img");
-              cardImage.classList.add("card-img-top");
-              cardImage.setAttribute("src", "./img/" + pN + ".jpg");
+            var cardImage = document.createElement("img");
+            cardImage.classList.add("card-img-top");
+            cardImage.setAttribute("src", "./img/" + pN + ".jpg");
 
-              var cardHeader = document.createElement("div");
-              cardHeader.classList.add("card-header");
-              cardHeader.classList.add("row");
-              cardHeader.style.backgroundColor = "#b3614b";
+            var cardHeader = document.createElement("div");
+            cardHeader.classList.add("card-header");
+            cardHeader.classList.add("row");
+            cardHeader.style.backgroundColor = "#b3614b";
 
-              var nameDiv = document.createElement("div")
-              nameDiv.classList.add("col-md-10");
-              nameDiv.classList.add("text-light");
-              var nameText = document.createTextNode(pN);
-              nameDiv.appendChild(nameText);
-              cardHeader.appendChild(nameDiv);
+            var nameDiv = document.createElement("div")
+            nameDiv.classList.add("col-md-10");
+            nameDiv.classList.add("text-light");
+            var nameText = document.createTextNode(pN);
+            nameDiv.appendChild(nameText);
+            cardHeader.appendChild(nameDiv);
 
-              var cardBody = document.createElement("div");
-              cardBody.classList.add("card-body");
-              cardBody.classList.add("text-light");
-              cardBody.style.backgroundColor = "#b3614b";
-              progress.appendChild(progressBar);
-              cardBody.appendChild(progress);
+            var cardBody = document.createElement("div");
+            cardBody.classList.add("card-body");
+            cardBody.classList.add("text-light");
+            cardBody.style.backgroundColor = "#b3614b";
+            progress.appendChild(progressBar);
+            cardBody.appendChild(progress);
 
 
-              var cardFooter = document.createElement("div");
-              cardFooter.classList.add("card-footer");
-              cardFooter.classList.add("container");
+            var cardFooter = document.createElement("div");
+            cardFooter.classList.add("card-footer");
+            cardFooter.classList.add("container");
 
-              var expirationDateDiv = document.createElement("div");
-              expirationDateDiv.classList.add("text-center");
-              var expirationDateNode = document.createTextNode(timeUntilExpiration + " Days Left!");
-              expirationDateDiv.appendChild(expirationDateNode);
-              cardBody.appendChild(expirationDateDiv);
+            var expirationDateDiv = document.createElement("div");
+            expirationDateDiv.classList.add("text-center");
+            var expirationDateNode = document.createTextNode(timeUntilExpiration + " Days Left!");
+            expirationDateDiv.appendChild(expirationDateNode);
+            cardBody.appendChild(expirationDateDiv);
 
-              //adding notes
-              var userNotes = document.createTextNode(pNotes);
-              var notesTitle = document.createTextNode("My Notes: ");
-              cardBody.appendChild(notesTitle);
-              cardBody.appendChild(userNotes);
+            //adding notes
+            var userNotes = document.createTextNode(pNotes);
+            var notesTitle = document.createTextNode("My Notes: ");
+            cardBody.appendChild(notesTitle);
+            cardBody.appendChild(userNotes);
 
-              //TODO: Access the freshtracker for a particular user and mark
-              //entries as thrown away or used - add to stat page
-              var usedButton = document.createElement("BUTTON");
-              usedButton.innerHTML = "Use";
-              usedButton.setAttribute("data-toggle", "modal");
-              usedButton.setAttribute("data-target", "#useItemModal");
+            //TODO: Access the freshtracker for a particular user and mark
+            //entries as thrown away or used - add to stat page
+            var usedButton = document.createElement("BUTTON");
+            usedButton.innerHTML = "Use";
+            usedButton.setAttribute("data-toggle", "modal");
+            usedButton.setAttribute("data-target", "#useItemModal");
 
-              usedButton.onclick = function() {
-                document.getElementById("productNameUse").value = pN;
-                document.getElementById("dateUsed").value = getFormattedDate(currentDate);
-                document.getElementById("useConfirm").setAttribute("onclick", "useItem(\"" + pN + "\", \"" + getFormattedDate(currentDate) + "\");");
-              };
+            usedButton.onclick = function () {
+              document.getElementById("productNameUse").value = pN;
+              document.getElementById("dateUsed").value = getFormattedDate(currentDate);
+              document.getElementById("useConfirm").setAttribute("onclick", "useItem(\"" + pN + "\", \"" + getFormattedDate(currentDate) + "\");");
+            };
 
-              usedButton.classList.add("col-sm-6");
-              usedButton.classList.add("btn");
-              usedButton.classList.add("btn-light");
+            usedButton.classList.add("col-sm-6");
+            usedButton.classList.add("btn");
+            usedButton.classList.add("btn-light");
 
-              var throwawayButton = document.createElement("BUTTON");
-              throwawayButton.innerHTML = "Thrown Away";
-              throwawayButton.setAttribute("data-toggle", "modal");
-              throwawayButton.setAttribute("data-target", "#throwAwayModal");
+            var throwawayButton = document.createElement("BUTTON");
+            throwawayButton.innerHTML = "Thrown Away";
+            throwawayButton.setAttribute("data-toggle", "modal");
+            throwawayButton.setAttribute("data-target", "#throwAwayModal");
 
-              throwawayButton.onclick = function() {
-                document.getElementById("productNameThrowAway").value = pN;
-                document.getElementById("dateThrownAway").value = getFormattedDate(currentDate);
-                document.getElementById("throwAwayConfirm").setAttribute("onclick", "throwAwayItem(\"" + pN + "\", \"" + getFormattedDate(currentDate) + "\");");
-                };
-              throwawayButton.classList.add("col-sm-6");
-              throwawayButton.classList.add("btn");
-              throwawayButton.classList.add("btn-light");
+            throwawayButton.onclick = function () {
+              document.getElementById("productNameThrowAway").value = pN;
+              document.getElementById("dateThrownAway").value = getFormattedDate(currentDate);
+              document.getElementById("throwAwayConfirm").setAttribute("onclick", "throwAwayItem(\"" + pN + "\", \"" + getFormattedDate(currentDate) + "\");");
+            };
+            throwawayButton.classList.add("col-sm-6");
+            throwawayButton.classList.add("btn");
+            throwawayButton.classList.add("btn-light");
 
-              //TODO: space buttons evenly and style buttons
-              cardFooter.appendChild(usedButton);
-              cardFooter.appendChild(throwawayButton);
+            //TODO: space buttons evenly and style buttons
+            cardFooter.appendChild(usedButton);
+            cardFooter.appendChild(throwawayButton);
 
-              card.appendChild(cardImage);
-              card.appendChild(cardHeader);
-              card.appendChild(cardBody);
-              card.appendChild(cardFooter);
+            card.appendChild(cardImage);
+            card.appendChild(cardHeader);
+            card.appendChild(cardBody);
+            card.appendChild(cardFooter);
 
-              var entry = document.createElement("div");
-              entry.classList.add("col-sm-6");
-              entry.classList.add("my-sm-3");
-              entry.appendChild(card);
+            var entry = document.createElement("div");
+            entry.classList.add("col-sm-6");
+            entry.classList.add("my-sm-3");
+            entry.appendChild(card);
 
-              var element = document.getElementById("d1");
-              element.appendChild(entry);
-          }//end if
+            var element = document.getElementById("d1");
+            element.appendChild(entry);
+          } //end if
         });
       });
 
@@ -179,14 +182,14 @@ function getAllElementsOfChildFT(childName) {
     }
   });
 
-  // Attach an asynchronous callback to read the data at our posts reference
-  ref.on("value", function (snapshot) {
-    console.log(snapshot.val());
-  }, function (errorObject) {
-    console.log("The read failed: " + errorObject.code);
-  });
+      // Attach an asynchronous callback to read the data at our posts reference
+      ref.on("value", function (snapshot) {
+        console.log(snapshot.val());
+      }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      });
 
-}
+}// end getAllElementsOfChildFT
 
 // https://stackoverflow.com/questions/11591854/format-date-to-mm-dd-yyyy-in-javascript
 function getFormattedDate(date) {
@@ -201,49 +204,9 @@ function getFormattedDate(date) {
   return month + '/' + day + '/' + year;
 }
 
-function writeUserData() {
-    var pName = document.getElementById("productName").value;
-    var pCat = document.getElementById("productCategory").value;
-    var pPurDate = document.getElementById("datePurchased").value;
-    var pExpDate = document.getElementById("dateExpire").value;
-    var pInfo = document.getElementById("productInfo").value;
-
-    var config = {
-      apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
-      authDomin: "gardynapp.firebaseapp.com",
-      databaseURL: "https://gardynapp.firebaseio.com/",
-      storageBucket: "gardynapp.appspot.com"
-    };
-
-    if (!firebase.apps.length) {
-      firebase.initializeApp(config);
-    }
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        firebase.database().ref('Users/' + user.displayName + '/Collected/' + pName).set({
-          productName: pName,
-          productCategory: pCat,
-          productPurchaseDate: pPurDate,
-          productExperationDate: pExpDate,
-          productInfo: pInfo
-        }, (error) => {
-          if (error) {
-            console.log("Error: Did not insert into database.");
-          } else {
-            console.log("Success");
-            resetForm();
-          }
-        });
-      } else {
-        // No user is signed in.
-      }
-    });
-}
 
 function useItem(name, date) {
-  firebase.auth().onAuthStateChanged(function(user) {
+  firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       // User is signed in.
       firebase.database().ref('Users/' + user.displayName + '/Collected/' + name).remove();
@@ -265,7 +228,7 @@ function useItem(name, date) {
 }
 
 function throwAwayItem(name, date) {
-  firebase.auth().onAuthStateChanged(function(user) {
+  firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       // User is signed in.
       firebase.database().ref('Users/' + user.displayName + '/Collected/' + name).remove();
@@ -286,7 +249,7 @@ function throwAwayItem(name, date) {
   });
 }
 
-function resetForm(){
+function resetForm() {
   location.reload();
 }
 

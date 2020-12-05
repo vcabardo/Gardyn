@@ -173,6 +173,7 @@
 
   <!-- Initialize Firebase -->
   <script src="js/init-firebase.js"></script>
+  <script src="js/headerfooter.js"></script>
 
   <!-- Our Javascript -->
   <script src="js/authentication.js"></script>
@@ -189,14 +190,6 @@
     if (!firebase.apps.length) {
       firebase.initializeApp(config);
     }
-
-    $(document).ready(function () {
-      $('#header').load("reusableheader.html");
-    });
-
-    $(document).ready(function () {
-      $('#footer').load("reusablefooter.html");
-    });
 
     //for counters
     $('.counter-count').each(function () {

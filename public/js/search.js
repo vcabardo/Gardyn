@@ -1,3 +1,6 @@
+//global for quanity for myList
+var quantity = 0;
+
 //Inserts user data into Realtime database Users>Collected
 function writeUserData() {
   var pName = document.getElementById("productName").value;
@@ -36,12 +39,6 @@ function writeUserData() {
       });
     } else {
       // No user is signed in.
-      localStorage.setItem("name", pName);
-      localStorage.setItem("category", pCat);
-      localStorage.setItem("purDate", pPurDate);
-      localStorage.setItem("expDate", pExpDate);
-      localStorage.setItem("notes", pInfo);
-      resetForm();
     }
   });
 } //end writeUserData
@@ -103,28 +100,37 @@ function getAllElementsOfChild_myList(childName, id) {
         var nameText = document.createTextNode(pN);
         nameDiv.appendChild(nameText);
 
-        var addButton = document.createElement("BUTTON");
-        addButton.innerHTML = "+";
-        addButton.onclick = function () {
-          //TODO: set a listener to add the entry to the users list
-          //TODO: style button
-        };
-        addButton.classList.add("btn");
-        addButton.classList.add("btn-outline-light");
-        addButton.classList.add("col-sm-2");
+        // var addButton = document.createElement("BUTTON");
+        // addButton.innerHTML = "+";
+        // addButton.onclick = function () {
+        //     document.getElementById("number").innerHTML = pN + " x " + (quantity + 1);
+        //     quantity = quantity + 1;
+        // };
+        // addButton.classList.add("btn");
+        // addButton.classList.add("btn-outline-light");
+        // addButton.classList.add("col-sm-2");
 
         var removeButton = document.createElement("BUTTON");
-        removeButton.innerHTML = "-";
+        removeButton.innerHTML = "Remove";
         removeButton.onclick = function () {
-          //TODO: set a listener to remove the entry from the users list
-          //TODO: style button
+            //Remove entry from myList 
+            firebase.auth().onAuthStateChanged(function (user) {
+              if (user) {
+                // User is signed in.
+                firebase.database().ref('Users/' + user.displayName + '/Collected/' + pN).remove();
+                location.reload();
+              } else {
+                // No user is signed in.
+              }
+            });
+            
         };
         removeButton.classList.add("btn");
         removeButton.classList.add("btn-outline-light");
-        removeButton.classList.add("col-sm-2");
+        removeButton.classList.add("col-sm-4");
 
         cardHeader.appendChild(nameDiv);
-        cardHeader.appendChild(addButton);
+        //cardHeader.appendChild(addButton);
         cardHeader.appendChild(removeButton);
         cardHeader.style.backgroundColor = "#b3614b";
         card.classList.add("text-light");
@@ -209,7 +215,7 @@ function getAllElementsOfChild_search(childName, id) {
 
         addButton.onclick = function () {
           document.getElementById("productName").value = name;
-          //DONT NEED after local storage is working
+
           firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
               //user is signed in
@@ -217,9 +223,12 @@ function getAllElementsOfChild_search(childName, id) {
             } else {
               //guest signed in
               console.log("Guest signed in.");
+              alert("Please sign in/sign up to use this feature.");
+              window.location.reload();
             }
           });
         };
+
         addButton.classList.add("col-md-2");
 
         cardHeader.appendChild(nameDiv);
@@ -264,23 +273,17 @@ firebase.auth().onAuthStateChanged(function (user) {
     // User is signed in.
     getAllElementsOfChild_myList('Users/' + user.displayName + '/Collected/', "d1");
   } else {
-    // No user is signed in.
-    var entry = getAllElementsOfChild_localGuest();
-    var id = "d1";
-    var element = document.getElementById(id);
-    element.appendChild(entry);
-
-    // document.getElementById("d1").innerHTML = "";
-    // document.getElementById("d1").innerHTML = "";
-    // var messageDiv = document.createElement("div");
-    // messageDiv.classList.add("text-white");
-    // messageDiv.classList.add("col");
-    // var messageDivChild = document.createElement("div");
-    // messageDiv.classList.add("text-center");
-    // var messageNode = document.createTextNode("Please sign into an account to add items to your list");
-    // messageDivChild.appendChild(messageNode);
-    // messageDiv.appendChild(messageDivChild);
-    // document.getElementById("d1").appendChild(messageDiv);
+    document.getElementById("d1").innerHTML = "";
+    document.getElementById("d1").innerHTML = "";
+    var messageDiv = document.createElement("div");
+    messageDiv.classList.add("text-white");
+    messageDiv.classList.add("col");
+    var messageDivChild = document.createElement("div");
+    messageDiv.classList.add("text-center");
+    var messageNode = document.createTextNode("Please sign into an account to add items to your list");
+    messageDivChild.appendChild(messageNode);
+    messageDiv.appendChild(messageDivChild);
+    document.getElementById("d1").appendChild(messageDiv);
   }
 });
 
@@ -295,89 +298,6 @@ function getFormattedDate(date) {
   day = day.length > 1 ? day : '0' + day;
 
   return month + '/' + day + '/' + year;
-}
-
-
-//add to list local storage for guest
-function getAllElementsOfChild_localGuest() {
-
-
-  var pN = localStorage.getItem("name");
-  var pC = localStorage.getItem("category");
-  var pP = localStorage.getItem("purDate");
-  var pE = localStorage.getItem("expDate");
-  var pNotes = localStorage.getItem("notes");
-
-    if (pN != undefined) {
-
-      var card = document.createElement("div");
-      card.classList.add("card");
-      card.style.backgroundColor = "#b3614b";
-
-      var cardImage = document.createElement("img");
-      cardImage.classList.add("card-img-top");
-      cardImage.setAttribute("src", "./img/" + pN + ".jpg");
-
-      var cardHeader = document.createElement("div");
-      cardHeader.classList.add("card-header");
-      cardHeader.classList.add("row");
-      var nameDiv = document.createElement("div")
-      nameDiv.classList.add("col-sm-8");
-      var nameText = document.createTextNode(pN);
-      nameDiv.appendChild(nameText);
-
-      var addButton = document.createElement("BUTTON");
-      addButton.innerHTML = "+";
-      addButton.onclick = function () {
-        //TODO: set a listener to add the entry to the users list
-        //TODO: style button
-      };
-      addButton.classList.add("btn");
-      addButton.classList.add("btn-outline-light");
-      addButton.classList.add("col-sm-2");
-
-      var removeButton = document.createElement("BUTTON");
-      removeButton.innerHTML = "-";
-      removeButton.onclick = function () {
-        //TODO: set a listener to remove the entry from the users list
-        //TODO: style button
-      };
-      removeButton.classList.add("btn");
-      removeButton.classList.add("btn-outline-light");
-      removeButton.classList.add("col-sm-2");
-
-      cardHeader.appendChild(nameDiv);
-      cardHeader.appendChild(addButton);
-      cardHeader.appendChild(removeButton);
-      cardHeader.style.backgroundColor = "#b3614b";
-      card.classList.add("text-light");
-
-      var cardBody = document.createElement("div");
-      cardBody.classList.add("card-body");
-      cardBody.style.backgroundColor = "#b3614b";
-      cardBody.classList.add("text-light");
-
-      var node = document.createTextNode("Product Category: " + chooseCategory(pC));
-
-      cardBody.appendChild(node);
-
-      card.appendChild(cardImage);
-      card.appendChild(cardHeader);
-      card.appendChild(cardBody);
-
-      var entry = document.createElement("div");
-      entry.classList.add("col-12");
-      entry.classList.add("my-sm-3");
-      entry.appendChild(card);
-
-      return entry;
-
-    }
-} //end getAllElementsOfChild_localGuest
-
-function clearList(){
-  localStorage.clear();
-  location.reload();
 }
 
 //TODO: Write the function for searching the list
