@@ -49,10 +49,6 @@ function getAllElementsOfChildFT(childName) {
           var pP = child.val().productPurchaseDate;
           var pNotes = child.val().productInfo;
 
-          console.log(pE);
-          console.log(parseInt(pE.substring(6, 10)));
-          console.log(parseInt(pE.substring(0, 2)) - 1);
-          console.log(parseInt(pE.substring(3, 5)));
 
           if (pN != undefined) {
             var currentDate = new Date();

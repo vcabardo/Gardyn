@@ -112,6 +112,7 @@ function getAllElementsOfChild_myList(childName, id) {
         if (result == true) {
             // yay, file exists!
             cardImage.setAttribute("src", "./img/" + pN + ".jpg");
+            console.log(pN);
         } else {
             // file does not exist!
             cardImage.setAttribute("src", "./img/" + "veggieMix" + ".PNG");
@@ -211,7 +212,7 @@ function getAllElementsOfChild_myList(childName, id) {
         cardBody.classList.add("card-body");
         cardBody.style.backgroundColor = "#b3614b";
         cardBody.classList.add("text-light");
-        var node = document.createTextNode("Product Category: " + chooseCategory(pC));
+        var node = document.createTextNode("Purchase Date: " + pP);
         cardBody.appendChild(node);
 
         var cardFooter = document.createElement("div");
@@ -272,7 +273,19 @@ function getAllElementsOfChild_search(childName, id) {
 
         var cardImage = document.createElement("img");
         cardImage.classList.add("card-img-top");
-        cardImage.setAttribute("src", "./img/" + name + ".jpg");
+
+
+                  //Add image for random
+                  const path = './img/' + name + '.jpg';
+                  var result = doesFileExist(path);
+          
+                  if (result == true) {
+                      // yay, file exists!
+                      cardImage.setAttribute("src", "./img/" + name + ".jpg");
+                  } else {
+                      // file does not exist!
+                      cardImage.setAttribute("src", "./img/" + "veggieMix" + ".PNG");
+                  }
 
         var cardHeader = document.createElement("div");
         cardHeader.classList.add("card-header");

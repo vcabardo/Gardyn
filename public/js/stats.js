@@ -1,8 +1,5 @@
 //help: https://canvasjs.com/html5-javascript-pie-chart/
 
-//'Users/' + user.displayName + '/Stats/Used/'
-//'Users/' + user.displayName + '/Stats/ThrownAway/'
-
 function getAllElementsOfChild(childName, divName) {
   var config = {
     apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
@@ -19,6 +16,7 @@ function getAllElementsOfChild(childName, divName) {
     if (user) {
       var db = firebase.database();
       var ref = db.ref(childName);
+      var numChildren = 0;
 
       ref.on("value", function (snapshot) {
         snapshot.forEach((child) => {
@@ -73,19 +71,12 @@ function getAllElementsOfChild(childName, divName) {
 }
 
 
-function loadPieChart(usedCount) {
-
-  console.log("++++++" + usedCount);
-  //console.log("-----" + taCount);
-
- // var total = usedCount + taCount;
-  //var usedT = usedCount / total;
- // var thrownT = taCount / total;
-
+function loadPieChart() {
+  //TODO: Get number of elements in used and thrown away to display here
   var chart = new CanvasJS.Chart("chartContainer", {
     animationEnabled: true,
     title: {
-      text: "Total Food Used and Thrown Away"
+      text: "Total Food Used versus Thrown Away"
     },
     data: [{
       type: "pie",
@@ -97,21 +88,25 @@ function loadPieChart(usedCount) {
           label: "Used"
         },
         {
-          y: 10,
+          y: 3,
           label: "Thrown Away"
         }
       ]
     }]
   });
   chart.render();
-}
+} //end loadPieChart
+
+
 
 firebase.auth().onAuthStateChanged(function (user) {
+  var input1 = 0;
+
   if (user) {
     // User is signed in.
     getAllElementsOfChild('Users/' + user.displayName + '/Stats/Used/', "d1");
     getAllElementsOfChild('Users/' + user.displayName + '/Stats/ThrownAway/', "d2");
-    loadPieChart();
+    //loadPieChart();
   } else {
     document.getElementById("d1").innerHTML = "";
     document.getElementById("d2").innerHTML = "";
