@@ -289,9 +289,6 @@ function getAllElementsOfChild_search(childName, id) {
         addButton.setAttribute("data-target", "#formModal");
         addButton.classList.add("btn");
         addButton.classList.add("btn-outline-light");
-        addButton.setAttribute("data-toggle", "tooltip");
-        addButton.setAttribute("data-placement", "top");
-        addButton.setAttribute("title", "Click to add " + name + " to your list");
 
         addButton.onclick = function () {
           document.getElementById("productName").value = name;
