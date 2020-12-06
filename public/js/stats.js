@@ -1,42 +1,7 @@
 //help: https://canvasjs.com/html5-javascript-pie-chart/
-function numUsedElements() {
-  var usedCount = 0;
 
-  var config = {
-    apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
-    authDomin: "gardynapp.firebaseapp.com",
-    databaseURL: "https://gardynapp.firebaseio.com/",
-    storageBucket: "gardynapp.appspot.com"
-  };
-
-  if (!firebase.apps.length) {
-    firebase.initializeApp(config);
-  }
-
-  firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-      var db = firebase.database();
-      var childName = 'Users/' + user.displayName + '/Stats/Used/';
-      var ref = db.ref(childName);
-
-      ref.on("value", function (snapshot) {
-        snapshot.forEach((child) => {
-            usedCount = usedCount + 1;
-        });
-      });
-    } else {
-      // No user is signed in.
-    }
-  });
-
-  return usedCount;
-
-}//end get used
-
-  //'Users/' + user.displayName + '/Stats/Used/'
+//'Users/' + user.displayName + '/Stats/Used/'
 //'Users/' + user.displayName + '/Stats/ThrownAway/'
-
-
 
 function getAllElementsOfChild(childName, divName) {
   var config = {
@@ -108,12 +73,10 @@ function getAllElementsOfChild(childName, divName) {
 }
 
 
-function loadPieChart() {
+function loadPieChart(usedCount) {
 
-
-
-  var used = numUsedElements();
-  console.log(used);
+  console.log("++++++" + usedCount);
+  //console.log("-----" + taCount);
 
  // var total = usedCount + taCount;
   //var usedT = usedCount / total;
@@ -130,11 +93,11 @@ function loadPieChart() {
       yValueFormatString: "##0\"\"",
       indexLabel: "{label} {y}",
       dataPoints: [{
-          y: 13,
+          y: 3,
           label: "Used"
         },
         {
-          y: 3,
+          y: 10,
           label: "Thrown Away"
         }
       ]
@@ -142,9 +105,6 @@ function loadPieChart() {
   });
   chart.render();
 }
-
-
-
 
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {

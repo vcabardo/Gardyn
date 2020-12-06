@@ -66,6 +66,7 @@
   <script src="js/init-firebase.js"></script>
 
   <!-- Our Javascript -->
+  <script src="js/headerfooter.js"></script>
   <script src="js/authentication.js"></script>
   <script src="js/stats.js"></script>
 
@@ -81,15 +82,6 @@
     if (!firebase.apps.length) {
       firebase.initializeApp(config);
     }
-
-    $(document).ready(function () {
-      $('#header').load('reusableheader.html');
-    });
-
-    $(document).ready(function () {
-      $('#footer').load('reusablefooter.html');
-    });
-
   </script>
 
 </body>
