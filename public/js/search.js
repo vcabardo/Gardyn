@@ -384,9 +384,9 @@ function addYourOwn() {
   var element = document.getElementById("addYourOwn");
   element.classList.add("card");
   element.innerHTML = "Add Your Own Item"
-  // element.style.backgroundImage = "url('img/background.PNG')";
+  element.style.backgroundImage = "url('img/veggieMix.PNG')";
   element.style.backgroundColor = "#b3614b";
-  // element.style.fontWeight = "900";
+  element.style.fontWeight = "900";
   element.style.width = "100%";
   element.style.cursor = "pointer";
   element.classList.add("text-center");
