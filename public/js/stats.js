@@ -1,4 +1,74 @@
+var used = 0, thrownaway = 0;
 //help: https://canvasjs.com/html5-javascript-pie-chart/
+function numUsedElements() {
+  return new Promise(function(resolve, reject) {
+    var usedCount = 0;
+    var config = {
+      apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
+      authDomin: "gardynapp.firebaseapp.com",
+      databaseURL: "https://gardynapp.firebaseio.com/",
+      storageBucket: "gardynapp.appspot.com"
+    };
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+    }
+
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        var db = firebase.database();
+        var childName = 'Users/' + user.displayName + '/Stats/Used/';
+        var ref = db.ref(childName);
+
+        ref.on("value", function (snapshot) {
+          used = snapshot.numChildren();
+          return resolve();
+        });
+
+      } else {
+        // No user is signed in.
+        return reject();
+      }
+    });
+
+    return usedCount;
+  });
+}//end get used
+
+function numThrownawayElements() {
+  return new Promise(function(resolve, reject) {
+    var usedCount = 0;
+    var config = {
+      apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
+      authDomin: "gardynapp.firebaseapp.com",
+      databaseURL: "https://gardynapp.firebaseio.com/",
+      storageBucket: "gardynapp.appspot.com"
+    };
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+    }
+
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        var db = firebase.database();
+        var childName = 'Users/' + user.displayName + '/Stats/ThrownAway/';
+        var ref = db.ref(childName);
+
+        ref.on("value", function (snapshot) {
+          thrownaway = snapshot.numChildren();
+          return resolve();
+        });
+
+      } else {
+        // No user is signed in.
+        return reject();
+      }
+    });
+
+    return usedCount;
+  });
+}//end get used
 
 function getAllElementsOfChild(childName, divName) {
   var config = {
@@ -29,6 +99,21 @@ function getAllElementsOfChild(childName, divName) {
             card.classList.add("card");
             card.classList.add("bg-secondary");
 
+            var cardImage = document.createElement("img");
+            cardImage.classList.add("card-img-top");
+
+            //Add image for random
+            const path = './img/' + name + '.jpg';
+            var result = doesFileExist(path);
+
+            if (result == true) {
+                // yay, file exists!
+                cardImage.setAttribute("src", "./img/" +  name + ".jpg");
+            } else {
+                // file does not exist!
+                cardImage.setAttribute("src", "./img/" + "veggieMix" + ".PNG");
+            }
+
             var cardHeader = document.createElement("div");
             cardHeader.classList.add("card-header");
             cardHeader.classList.add("text-light");
@@ -44,6 +129,7 @@ function getAllElementsOfChild(childName, divName) {
             var dateNode = document.createTextNode("Date: " + date);
             cardBody.appendChild(dateNode);
 
+            card.appendChild(cardImage);
             card.appendChild(cardHeader);
             card.appendChild(cardBody);
 
@@ -61,34 +147,24 @@ function getAllElementsOfChild(childName, divName) {
       // No user is signed in.
     }
   });
-
-  // Attach an asynchronous callback to read the data at our posts reference
-  // ref.on("value", function (snapshot) {
-  //   console.log(snapshot.val());
-  // }, function (errorObject) {
-  //   console.log("The read failed: " + errorObject.code);
-  // });
 }
 
 
-function loadPieChart() {
-  //TODO: Get number of elements in used and thrown away to display here
+function loadPieChart(numUsed, numThrownaway) {
   var chart = new CanvasJS.Chart("chartContainer", {
     animationEnabled: true,
-    title: {
-      text: "Total Food Used versus Thrown Away"
-    },
+    backgroundColor: "#4f734f",
     data: [{
       type: "pie",
       startAngle: 240,
       yValueFormatString: "##0\"\"",
       indexLabel: "{label} {y}",
       dataPoints: [{
-          y: 3,
+          y: numUsed,
           label: "Used"
         },
         {
-          y: 3,
+          y: numThrownaway,
           label: "Thrown Away"
         }
       ]
@@ -97,6 +173,15 @@ function loadPieChart() {
   chart.render();
 } //end loadPieChart
 
+function doesFileExist(urlToFile) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('HEAD', urlToFile, false);
+  xhr.send();
+  if (xhr.status == "404") {
+      return false;
+  }
+  return true;
+}//end doesFileExist
 
 
 firebase.auth().onAuthStateChanged(function (user) {
@@ -106,7 +191,12 @@ firebase.auth().onAuthStateChanged(function (user) {
     // User is signed in.
     getAllElementsOfChild('Users/' + user.displayName + '/Stats/Used/', "d1");
     getAllElementsOfChild('Users/' + user.displayName + '/Stats/ThrownAway/', "d2");
-    //loadPieChart();
+
+    numUsedElements()
+      .then(numThrownawayElements()
+              .then(function(){loadPieChart(used, thrownaway);})
+      .catch(function() {console.log("error");}));
+
   } else {
     document.getElementById("d1").innerHTML = "";
     document.getElementById("d2").innerHTML = "";

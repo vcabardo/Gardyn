@@ -104,7 +104,6 @@ function getAllElementsOfChild_myList(childName, id) {
         var cardImage = document.createElement("img");
         cardImage.classList.add("card-img-top");
 
-
         //Add image for random
         const path = './img/' + pN + '.jpg';
         var result = doesFileExist(path);
@@ -278,7 +277,7 @@ function getAllElementsOfChild_search(childName, id) {
                   //Add image for random
                   const path = './img/' + name + '.jpg';
                   var result = doesFileExist(path);
-          
+
                   if (result == true) {
                       // yay, file exists!
                       cardImage.setAttribute("src", "./img/" + name + ".jpg");
