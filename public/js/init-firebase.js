@@ -1,4 +1,4 @@
-
+//initializes the firebase database (TODO: probably repeat this too often)
 var config = {
     apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
     authDomin: "gardynapp.firebaseapp.com",

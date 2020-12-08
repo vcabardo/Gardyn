@@ -92,6 +92,7 @@ function signOutUser() {
     });
 }
 
+//edits header for when user is signed in or not
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     document.getElementById("loginlinks").style.display = "none";

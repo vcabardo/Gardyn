@@ -1,7 +1,9 @@
+//global variables to track number of used and number of thrown away elements
 var used = 0, thrownaway = 0;
-//help: https://canvasjs.com/html5-javascript-pie-chart/
+
+//gets number of used elements
 function numUsedElements() {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     var usedCount = 0;
     var config = {
       apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
@@ -33,10 +35,12 @@ function numUsedElements() {
 
     return usedCount;
   });
-}//end get used
+} //end get used
 
+
+//gets number of thrown away elements
 function numThrownawayElements() {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     var usedCount = 0;
     var config = {
       apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
@@ -68,8 +72,9 @@ function numThrownawayElements() {
 
     return usedCount;
   });
-}//end get used
+} //end get used
 
+//populates the list of all elements stored in users RTDB under used, and thrown away
 function getAllElementsOfChild(childName, divName) {
   var config = {
     apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
@@ -107,11 +112,11 @@ function getAllElementsOfChild(childName, divName) {
             var result = doesFileExist(path);
 
             if (result == true) {
-                // yay, file exists!
-                cardImage.setAttribute("src", "./img/" +  name + ".jpg");
+              // yay, file exists!
+              cardImage.setAttribute("src", "./img/" + name + ".jpg");
             } else {
-                // file does not exist!
-                cardImage.setAttribute("src", "./img/" + "veggieMix" + ".PNG");
+              // file does not exist!
+              cardImage.setAttribute("src", "./img/" + "veggieMix" + ".PNG");
             }
 
             var cardHeader = document.createElement("div");
@@ -149,7 +154,7 @@ function getAllElementsOfChild(childName, divName) {
   });
 }
 
-
+//displays the users stats in the form of a pie chart
 function loadPieChart(numUsed, numThrownaway) {
   var chart = new CanvasJS.Chart("chartContainer", {
     animationEnabled: true,
@@ -173,17 +178,19 @@ function loadPieChart(numUsed, numThrownaway) {
   chart.render();
 } //end loadPieChart
 
+//checks if files exist in the working directory, primarily used for fetching images in search.html
 function doesFileExist(urlToFile) {
   var xhr = new XMLHttpRequest();
   xhr.open('HEAD', urlToFile, false);
   xhr.send();
   if (xhr.status == "404") {
-      return false;
+    return false;
   }
   return true;
-}//end doesFileExist
+} //end doesFileExist
 
 
+//main: displays all elements and loads pie chart
 firebase.auth().onAuthStateChanged(function (user) {
   var input1 = 0;
 
@@ -194,10 +201,15 @@ firebase.auth().onAuthStateChanged(function (user) {
 
     numUsedElements()
       .then(numThrownawayElements()
-              .then(function(){loadPieChart(used, thrownaway);})
-      .catch(function() {console.log("error");}));
+        .then(function () {
+          loadPieChart(used, thrownaway);
+        })
+        .catch(function () {
+          console.log("error");
+        }));
 
   } else {
+    //user not signed in
     document.getElementById("d1").innerHTML = "";
     document.getElementById("d2").innerHTML = "";
     var messageDiv = document.createElement("div");

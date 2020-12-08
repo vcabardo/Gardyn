@@ -41,13 +41,13 @@ function writeUserData() {
   });
 } //end writeUserData
 
+//resets add item form and reloads page
 function resetForm() {
   document.getElementById("myForm").reset();
   location.reload();
 }
 
-//Populate the DOM with a dynamic list of Bootstrap card elements,
-//with data taken from the RTDB
+//assists populating the DOM
 function chooseCategory(input) {
   if (input == 1) return "Fruits & Veggies";
   else if (input == 2) return "Meat & Protein";
@@ -58,16 +58,19 @@ function chooseCategory(input) {
   else return "null";
 }
 
+//checks if files exist in the working directory, primarily used for fetching images in search.html
 function doesFileExist(urlToFile) {
   var xhr = new XMLHttpRequest();
   xhr.open('HEAD', urlToFile, false);
   xhr.send();
   if (xhr.status == "404") {
-      return false;
+    return false;
   }
   return true;
-}//end doesFileExist
+} //end doesFileExist
 
+//Populate the DOM with a dynamic list of Bootstrap card elements,
+//with data taken from the RTDB
 function getAllElementsOfChild_myList(childName, id) {
   var config = {
     apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
@@ -97,6 +100,7 @@ function getAllElementsOfChild_myList(childName, id) {
 
 
       if (pN != undefined) {
+        //start populating HTML
         var card = document.createElement("div");
         card.classList.add("card");
         card.style.backgroundColor = "#b3614b";
@@ -104,17 +108,17 @@ function getAllElementsOfChild_myList(childName, id) {
         var cardImage = document.createElement("img");
         cardImage.classList.add("card-img-top");
 
-        //Add image for random
+        //Add images for elements
         const path = './img/' + pN + '.jpg';
         var result = doesFileExist(path);
 
         if (result == true) {
-            // yay, file exists!
-            cardImage.setAttribute("src", "./img/" + pN + ".jpg");
-            console.log(pN);
+          //file exists!
+          cardImage.setAttribute("src", "./img/" + pN + ".jpg");
+          console.log(pN);
         } else {
-            // file does not exist!
-            cardImage.setAttribute("src", "./img/" + "veggieMix" + ".PNG");
+          //file does not exist!
+          cardImage.setAttribute("src", "./img/" + "veggieMix" + ".PNG");
         }
 
 
@@ -160,19 +164,18 @@ function getAllElementsOfChild_myList(childName, id) {
         var removeButton = document.createElement("BUTTON");
         removeButton.innerHTML = "-";
         removeButton.onclick = function () {
-            //Remove entry from myList
-            firebase.auth().onAuthStateChanged(function (user) {
-              if (user) {
-                // User is signed in.
-                var updates = {};
-                updates[pN + '/quantity'] = quantity - 1;
-                ref.update(updates);
+          firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+              // User is signed in.
+              var updates = {};
+              updates[pN + '/quantity'] = quantity - 1;
+              ref.update(updates);
 
-                  document.getElementById("quantityID" + pN).innerHTML = " x " + (quantity - 1);
-              } else {
-                // No user is signed in.
-              }
-            });
+              document.getElementById("quantityID" + pN).innerHTML = " x " + (quantity - 1);
+            } else {
+              // No user is signed in.
+            }
+          });
         };
         removeButton.classList.add("btn");
         removeButton.classList.add("btn-outline-light");
@@ -267,24 +270,23 @@ function getAllElementsOfChild_search(childName, id) {
       if (name != undefined) {
         var card = document.createElement("div");
         card.classList.add("card");
-        // card.classList.add("bg-secondary");
         card.style.backgroundColor = "#b3614b";
 
         var cardImage = document.createElement("img");
         cardImage.classList.add("card-img-top");
 
 
-                  //Add image for random
-                  const path = './img/' + name + '.jpg';
-                  var result = doesFileExist(path);
+        //Add image for random
+        const path = './img/' + name + '.jpg';
+        var result = doesFileExist(path);
 
-                  if (result == true) {
-                      // yay, file exists!
-                      cardImage.setAttribute("src", "./img/" + name + ".jpg");
-                  } else {
-                      // file does not exist!
-                      cardImage.setAttribute("src", "./img/" + "veggieMix" + ".PNG");
-                  }
+        if (result == true) {
+          // file exists!
+          cardImage.setAttribute("src", "./img/" + name + ".jpg");
+        } else {
+          // file does not exist!
+          cardImage.setAttribute("src", "./img/" + "veggieMix" + ".PNG");
+        }
 
         var cardHeader = document.createElement("div");
         cardHeader.classList.add("card-header");
@@ -376,7 +378,7 @@ firebase.auth().onAuthStateChanged(function (user) {
   }
 });
 
-// https://stackoverflow.com/questions/11591854/format-date-to-mm-dd-yyyy-in-javascript
+//formats date
 function getFormattedDate(date) {
   var year = date.getFullYear();
 
@@ -389,6 +391,7 @@ function getFormattedDate(date) {
   return month + '/' + day + '/' + year;
 }
 
+//styleizes the add your own button
 function addYourOwn() {
   var element = document.getElementById("addYourOwn");
   element.classList.add("card");
@@ -403,7 +406,6 @@ function addYourOwn() {
   element.setAttribute("data-target", "#formModal");
 }
 
-//TODO: Write the function for searching the list
 
 getAllElementsOfChild_search("AllItems/", "allitems");
 addYourOwn();

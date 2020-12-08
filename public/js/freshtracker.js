@@ -10,6 +10,7 @@ function chooseCategory(input) {
   else return "null";
 }
 
+//checks if files exist in the working directory, primarily used for fetching images in search.html
 function doesFileExist(urlToFile) {
   var xhr = new XMLHttpRequest();
   xhr.open('HEAD', urlToFile, false);
@@ -20,7 +21,7 @@ function doesFileExist(urlToFile) {
   return true;
 }//end doesFileExist
 
-
+//populates the freshtracker with signed in users added items
 function getAllElementsOfChildFT(childName) {
   var config = {
     apiKey: " AIzaSyAxfhLzaQgDEY-QFO8dc7LZ2aQTXc2fg3k ",
@@ -36,6 +37,7 @@ function getAllElementsOfChildFT(childName) {
   var db = firebase.database();
   var ref = db.ref(childName);
 
+  //checks if user is signed in
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       var db = firebase.database();
@@ -51,6 +53,7 @@ function getAllElementsOfChildFT(childName) {
 
 
           if (pN != undefined) {
+            //start populating freshtracker HTML
             var currentDate = new Date();
             var expirationDate = new Date(pE);
 
@@ -86,19 +89,16 @@ function getAllElementsOfChildFT(childName) {
             var cardImage = document.createElement("img");
             cardImage.classList.add("card-img-top");
 
-
-                    //TODO: Add image for random
             const path = './img/' + pN + '.jpg';
             var result = doesFileExist(path);
 
             if (result == true) {
-                // yay, file exists!
+                //file exists!
                 cardImage.setAttribute("src", "./img/" + pN + ".jpg");
             } else {
-                // file does not exist!
+                //file does not exist!
                 cardImage.setAttribute("src", "./img/" + "veggieMix" + ".PNG");
             }
-
 
             var cardHeader = document.createElement("div");
             cardHeader.classList.add("card-header");
@@ -130,14 +130,11 @@ function getAllElementsOfChildFT(childName) {
             expirationDateDiv.appendChild(expirationDateNode);
             cardBody.appendChild(expirationDateDiv);
 
-            //adding notes
             var userNotes = document.createTextNode(pNotes);
             var notesTitle = document.createTextNode("My Notes: ");
             cardBody.appendChild(notesTitle);
             cardBody.appendChild(userNotes);
 
-            //TODO: Access the freshtracker for a particular user and mark
-            //entries as thrown away or used - add to stat page
             var usedButton = document.createElement("BUTTON");
             usedButton.innerHTML = "Use";
             usedButton.setAttribute("data-toggle", "modal");
@@ -167,7 +164,6 @@ function getAllElementsOfChildFT(childName) {
             throwawayButton.classList.add("btn");
             throwawayButton.classList.add("btn-light");
 
-            //TODO: space buttons evenly and style buttons
             cardFooter.appendChild(usedButton);
             cardFooter.appendChild(throwawayButton);
 
@@ -188,6 +184,7 @@ function getAllElementsOfChildFT(childName) {
       });
 
     } else {
+      //no user is signed in
       document.getElementById("d1").innerHTML = "";
       var messageDiv = document.createElement("div");
       messageDiv.classList.add("text-white");
@@ -210,7 +207,7 @@ function getAllElementsOfChildFT(childName) {
 
 }// end getAllElementsOfChildFT
 
-// https://stackoverflow.com/questions/11591854/format-date-to-mm-dd-yyyy-in-javascript
+//format date
 function getFormattedDate(date) {
   var year = date.getFullYear();
 
@@ -223,7 +220,7 @@ function getFormattedDate(date) {
   return month + '/' + day + '/' + year;
 }
 
-
+//remove item from users list and add to users "Used database
 function useItem(name, date) {
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
@@ -246,6 +243,7 @@ function useItem(name, date) {
   });
 }
 
+//remove item from users list and add to users "ThrownAway" database
 function throwAwayItem(name, date) {
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
@@ -268,8 +266,10 @@ function throwAwayItem(name, date) {
   });
 }
 
+//reloads the html page
 function resetForm() {
   location.reload();
 }
 
+//populates freshtracker
 getAllElementsOfChildFT("addItem/");
